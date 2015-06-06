@@ -11,6 +11,7 @@ public class usuario {
 	private String email;
 	private String fono;
 	private String fechaIngreso;
+	private String password;
 	private int status;
 	
 	public int getCodUser() {
@@ -92,10 +93,18 @@ public class usuario {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	public String getPass() {
+		return nameUser;
+	}
+
+	public void setPass(String password) {
+		this.password = password;
+	}
 //Constructor de usuario
 	public usuario(int codUser, String nameUser, String lastnameUser, int codDocUser,
 					int dniUser, int area, String email, String fono,
-					String fechaIngreso, int status) {
+					String fechaIngreso, int status, String password) {
 		
 		this.codUser = codUser;
 		this.nameUser = nameUser;
@@ -107,6 +116,7 @@ public class usuario {
 		this.fono = fono;
 		this.fechaIngreso = fechaIngreso;
 		this.status = status;
+		this.password = password;
 	}
 	
 }
