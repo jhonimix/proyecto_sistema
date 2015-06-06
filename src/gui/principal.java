@@ -45,8 +45,8 @@ public class principal extends JFrame {
 		JMenu mnSistema = new JMenu("Sistema");
 		mnPrincipal.add(mnSistema);
 		
-		JMenuItem mntmIniciarSesin = new JMenuItem("Iniciar sesi\u00F3n");
-		mnSistema.add(mntmIniciarSesin);
+		JMenuItem mntmOpenSession = new JMenuItem("Iniciar sesi\u00F3n");
+		mnSistema.add(mntmOpenSession);
 		
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mntmSalir.addActionListener(new ActionListener() {
@@ -59,17 +59,17 @@ public class principal extends JFrame {
 		JMenu mnMantenimiento = new JMenu("Mantenimiento");
 		mnPrincipal.add(mnMantenimiento);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Usuario");
-		mnMantenimiento.add(mntmNewMenuItem);
+		JMenuItem mntmUser = new JMenuItem("Usuario");
+		mnMantenimiento.add(mntmUser);
 		
 		JMenuItem mntmArea = new JMenuItem("\u00C1rea");
 		mnMantenimiento.add(mntmArea);
 		
-		JMenuItem mntmTipoDeIncidencia = new JMenuItem("Tipo de incidencia");
-		mnMantenimiento.add(mntmTipoDeIncidencia);
+		JMenuItem mntmTipoIncidencia = new JMenuItem("Tipo de incidencia");
+		mnMantenimiento.add(mntmTipoIncidencia);
 		
-		JMenuItem mntmTipoDeDocumento = new JMenuItem("Tipo de documento");
-		mnMantenimiento.add(mntmTipoDeDocumento);
+		JMenuItem mntmTipoDocumento = new JMenuItem("Tipo de documento");
+		mnMantenimiento.add(mntmTipoDocumento);
 		
 		JMenuItem mntmEspecialista = new JMenuItem("Especialista");
 		mnMantenimiento.add(mntmEspecialista);
@@ -83,23 +83,23 @@ public class principal extends JFrame {
 		JMenuItem mntmListado = new JMenuItem("Listado");
 		mnIncidencia.add(mntmListado);
 		
-		JMenuItem mntmActualizacin = new JMenuItem("Actualizaci\u00F3n");
-		mnIncidencia.add(mntmActualizacin);
+		JMenuItem mntmUpdate = new JMenuItem("Actualizaci\u00F3n");
+		mnIncidencia.add(mntmUpdate);
 		
 		JMenu mnReportes = new JMenu("Reportes");
 		mnPrincipal.add(mnReportes);
 		
-		JMenuItem mntmBsquedaDeIncidencias = new JMenuItem("Incidencias por Area");
-		mnReportes.add(mntmBsquedaDeIncidencias);
+		JMenuItem mntmInciArea = new JMenuItem("Incidencias por Area");
+		mnReportes.add(mntmInciArea);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Incidencia por tipo");
-		mnReportes.add(mntmNewMenuItem_1);
+		JMenuItem mntmInciTipo = new JMenuItem("Incidencia por tipo");
+		mnReportes.add(mntmInciTipo);
 		
-		JMenuItem mntmBusquedaDeIncidencia = new JMenuItem("Incidencia por rango de fecha");
-		mnReportes.add(mntmBusquedaDeIncidencia);
+		JMenuItem mntmInciFecha = new JMenuItem("Incidencia por rango de fecha");
+		mnReportes.add(mntmInciFecha);
 		
-		JMenuItem mntmIncenciasFalladas = new JMenuItem("Incencias falladas");
-		mnReportes.add(mntmIncenciasFalladas);
+		JMenuItem mntmInciFalla = new JMenuItem("Incencias falladas");
+		mnReportes.add(mntmInciFalla);
 		
 		JMenu mnAyuda = new JMenu("Ayuda");
 		mnPrincipal.add(mnAyuda);
