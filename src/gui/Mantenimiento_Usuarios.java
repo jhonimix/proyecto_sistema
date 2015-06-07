@@ -50,7 +50,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		tabla.addColumn("Estado");
 
 		tabla_usuarios.setModel(tabla);
-
+		/* cometario */
 	}
 
 	public void llenar_tabla() {
