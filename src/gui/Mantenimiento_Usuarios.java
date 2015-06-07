@@ -69,6 +69,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 					x.getLastnameUser(), x.getCodDocUser(), x.getDniUser(),
 					x.getArea(), x.getEmail(), x.getFono(),
 					x.getFechaIngreso(), x.getStatus() });
+			
 		}
 		tabla_usuarios.setModel(tabla);
 	}
@@ -340,8 +341,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 					getTelefono(), getFechaIng(), getEstado());
 			a.adicionar(x);
 		} else {
-			JOptionPane
-					.showMessageDialog(null, "El Usuario ya existe...!! NJD");
+			JOptionPane.showMessageDialog(null, "El Usuario ya existe...!! NJD");
 		}
 		llenar_tabla();
 		a.grabar();

@@ -187,10 +187,5 @@ public class Usuario {
 		this.fechaIngreso = fechaIngreso;
 		//this.pass = pass;
 		this.status = status;
-	}
-	public Usuario(){
-		
-	}
-	
-	
+	}	
 }
