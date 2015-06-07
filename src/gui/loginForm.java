@@ -16,6 +16,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.Window.Type;
+import java.awt.Frame;
+import javax.swing.SwingConstants;
 
 public class loginForm extends JFrame {
 	ArrayUsuario a = new ArrayUsuario();
@@ -32,6 +35,8 @@ public class loginForm extends JFrame {
 				try {
 					loginForm frame = new loginForm();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,7 +48,11 @@ public class loginForm extends JFrame {
 	 * Create the frame.
 	 */
 	public loginForm() {
+		setName("LoginForm");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Ingreso al sistema");
+		setResizable(false);
+		
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,7 +73,9 @@ public class loginForm extends JFrame {
 		txtUser.setColumns(10);
 		
 		JLabel lblSession = new JLabel("");
-		lblSession.setBounds(123, 202, 238, 14);
+		lblSession.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblSession.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSession.setBounds(65, 213, 323, 43);
 		contentPane.add(lblSession);
 		
 		JButton btnIngresar = new JButton("Ingresar");
@@ -72,14 +83,20 @@ public class loginForm extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String username = txtUser.getText();
 		        String password = new String(passUser.getPassword());
-				if(IngresoUsuario(username,password)){
-					lblSession.setText("Ingresaste");
-				}else{
-					lblSession.setText("Error");
-				}
+		        
+			        if(IngresoUsuario(username,password)){
+						//lblSession.setText("Ingresaste");
+						gui.principalForm nueva = new gui.principalForm();
+						nueva.setVisible(true);
+						nueva.setLocationRelativeTo(null);
+						dispose();
+					}else{
+						lblSession.setText("Error: Contraseña o Password Incorrecto");
+					}
+				
 			}
 		});
-		btnIngresar.setBounds(318, 74, 89, 23);
+		btnIngresar.setBounds(154, 167, 140, 35);
 		contentPane.add(btnIngresar);
 		
 		
@@ -123,4 +140,5 @@ public class loginForm extends JFrame {
 			}
 			return false;
 		}
+		
 }
