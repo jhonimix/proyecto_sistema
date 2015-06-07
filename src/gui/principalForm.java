@@ -80,8 +80,8 @@ public class principalForm extends JFrame {
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				login.setVisible(true);
-				login.setLocationRelativeTo(null);
+				principalForm.this.login.setVisible(true);
+				principalForm.this.login.setLocationRelativeTo(null);
 				dispose();
 			}
 		});
