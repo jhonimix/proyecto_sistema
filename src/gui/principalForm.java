@@ -65,6 +65,14 @@ public class principalForm extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
+		btnCerrarSesin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gui.loginForm login = new gui.loginForm();
+				login.setVisible(true);
+				login.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
 		btnCerrarSesin.setBounds(540, 11, 122, 23);
 		contentPane.add(btnCerrarSesin);
 		
