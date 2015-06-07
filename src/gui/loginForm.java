@@ -11,13 +11,18 @@ import controlador.ArrayUsuario;
 import entidades.Usuario;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JPasswordField;
+
 import java.awt.Window.Type;
 import java.awt.Frame;
+
 import javax.swing.SwingConstants;
 
 public class loginForm extends JFrame {
@@ -72,12 +77,6 @@ public class loginForm extends JFrame {
 		contentPane.add(txtUser);
 		txtUser.setColumns(10);
 		
-		JLabel lblSession = new JLabel("");
-		lblSession.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblSession.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSession.setBounds(65, 213, 323, 43);
-		contentPane.add(lblSession);
-		
 		JButton btnIngresar = new JButton("Ingresar");
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -88,11 +87,8 @@ public class loginForm extends JFrame {
 						//lblSession.setText("Ingresaste");
 						gui.principalForm nueva = new gui.principalForm();
 						nueva.setVisible(true);
-						
 						nueva.setLocationRelativeTo(null);
 						dispose();
-					}else{
-						lblSession.setText("Error: Contraseña o Password Incorrecto");
 					}
 				
 			}
@@ -132,14 +128,29 @@ public class loginForm extends JFrame {
 	
 	//Metodo para ingresar con el usuario email y pass
 		public boolean IngresoUsuario(String user, String pass){
-			
+			String msg;
 	        //buscamos los items de los usuarios email y pass
 			for(int i = 0; i < a.tamaño() ; i++){				
 				if(a.obtener(i).getEmail().compareTo(user) == 0 && a.obtener(i).getDniUser().compareTo(pass)==0){
-				 return true;
+					//Verificamos si el usuario no esta activo
+					if(a.obtener(i).getStatus()==1){
+						return true;
+					}
+					else{
+						//Enviamos un mensaje
+						msg="Tu usuario esta no activo";
+						mensaje(msg);
+						return false;
+						//imprimir(text);
+					}
+					
 				}
 			}
+			msg = "Usuario o contraseña incorrectos";
+			mensaje(msg);
 			return false;
 		}
-		
+		void mensaje(String s){
+			JOptionPane.showMessageDialog(null,s);
+		}
 }

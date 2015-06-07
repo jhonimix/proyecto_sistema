@@ -59,6 +59,8 @@ public class principalForm extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		gui.loginForm login = new gui.loginForm();
+		
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(44, 15, 265, 14);
@@ -67,7 +69,7 @@ public class principalForm extends JFrame {
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				gui.loginForm login = new gui.loginForm();
+				
 				login.setVisible(true);
 				login.setLocationRelativeTo(null);
 				dispose();
