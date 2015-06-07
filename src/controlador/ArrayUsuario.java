@@ -71,19 +71,9 @@ public class ArrayUsuario {
 			BufferedReader br = new BufferedReader(fr);
 			String linea = null;
 			while((linea = br.readLine())!=null){
-				String[] row = linea.split(",");
-				Usuario x = new Usuario();
-				x.setCodDocUser(Integer.parseInt(row[0].trim()));
-				x.setNameUser(row[1].trim());
-				x.setLastnameUser(row[2].trim());
-				x.setCodDocUser(Integer.parseInt(row[3].trim()));
-				x.setDniUser(row[4].trim());
-				x.setArea(Integer.parseInt(row[5].trim()));
-				x.setEmail(row[6].trim());
-				x.setFono(row[7].trim());
-				x.setFechaIngreso(row[8].trim());
-				//x.setPass(row[9].trim());
-				x.setStatus(Integer.parseInt(row[9].trim()));
+				String[] row = linea.split(",");				
+				Usuario x=new Usuario(Integer.parseInt(row[0]), row[1], row[2], Integer.parseInt(row[3]),
+						row[4], Integer.parseInt(row[5]), row[6], row[7], row[8], Integer.parseInt(row[9]));				
 				user.add(x);
 			}
 			fr.close();
