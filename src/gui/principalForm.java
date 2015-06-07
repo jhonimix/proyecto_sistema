@@ -10,14 +10,19 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
 
+
 import entidades.Usuario;
+import gui.Mantenimiento_Usuarios;
 import controlador.ArrayUsuario;
+
 
 
 
@@ -59,6 +64,9 @@ public class principalForm extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		//Creo el constructor del formulario login
+		
 		gui.loginForm login = new gui.loginForm();
 		
 		
@@ -109,6 +117,12 @@ public class principalForm extends JFrame {
 		mnPrincipal.add(mnMantenimiento);
 		
 		JMenuItem mntmUser = new JMenuItem("Usuario");
+		mntmUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Mantenimiento_Usuarios frm1=new Mantenimiento_Usuarios();
+				frm1.setVisible(true);
+			}
+		});
 		mnMantenimiento.add(mntmUser);
 		
 		mntmUser.setIcon(getIcon("user.png",null));

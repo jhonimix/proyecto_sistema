@@ -71,13 +71,17 @@ public class ArrayTipoIncidencia {
 			//graba del archivo de texto a la memoria(Arraylist)
 			public void cargar(){
 				try {
-					BufferedReader br = new BufferedReader(new FileReader("Tipo_Incidencia.txt"));
+					BufferedReader br = new BufferedReader(new FileReader("tipoincidencia.txt"));
 					String linea;			
 					while((linea=br.readLine())!=null){
 						//crear un arreglo del tipo string separando losca mpos
 						String row[]= linea.split(",");
 						//creamos el objeto
-						
+						TipoIncidencia x=new TipoIncidencia();
+						x.setCodTipoInc(Integer.parseInt(row[0]));
+						x.setDesTipoInc(row[1]);
+						x.setAbTipoInc(row[2]);
+						x.setEstTipoInc(Integer.parseInt(row[3]));
 						//enviar objeto "e" al arreglo "emp"
 									
 					}

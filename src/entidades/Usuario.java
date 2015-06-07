@@ -11,7 +11,7 @@ public class Usuario {
 	private String email;
 	private String fono;
 	private String fechaIngreso;
-	private String pass;
+	//private String pass;
 	private int status;
 	
 	
@@ -143,7 +143,7 @@ public class Usuario {
 
 
 
-	public String getPass() {
+	/*public String getPass() {
 		return pass;
 	}
 
@@ -155,7 +155,7 @@ public class Usuario {
 	}
 
 
-
+*/
 
 	public int getStatus() {
 		return status;
@@ -174,7 +174,7 @@ public class Usuario {
 	
 	public Usuario(int codUser, String nameUser, String lastnameUser,
 			int codDocUser, String dniUser, int area, String email, String fono,
-			String fechaIngreso, String pass, int status) {
+			String fechaIngreso,int status) {
 		
 		this.codUser = codUser;
 		this.nameUser = nameUser;
@@ -185,7 +185,7 @@ public class Usuario {
 		this.email = email;
 		this.fono = fono;
 		this.fechaIngreso = fechaIngreso;
-		this.pass = pass;
+		//this.pass = pass;
 		this.status = status;
 	}
 	public Usuario(){

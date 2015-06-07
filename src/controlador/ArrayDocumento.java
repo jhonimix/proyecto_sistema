@@ -55,17 +55,19 @@ public class ArrayDocumento {
 				
 				try {
 
-					PrintWriter pw = new PrintWriter(new FileWriter("Documento.txt"));
-					String linea;
+					FileReader fr = new FileReader("tipodocumento.txt");
+					BufferedReader br = new BufferedReader(fr);
+					String linea = null;
+					while((linea = br.readLine())!=null){
+						String[] row = linea.split(",");
+						TipoDocumento x = new TipoDocumento();
+						x.setCodDoc(Integer.parseInt(row[0]));
+						x.setDesDoc(row[1]);
+						//x.s
 					
-					/*for(){
-						//la variable linea almacena el registro actual
-						linea =
-						//grabar el registro actual en el archivo "empleado.txt"
-						pw.println(linea);
-					}*/
+					}
 					//cerrar el archivo
-					pw.close();
+					fr.close();
 					
 				} catch (Exception e) {
 					// TODO: handle exception

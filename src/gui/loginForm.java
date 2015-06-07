@@ -120,7 +120,7 @@ public class loginForm extends JFrame {
 				     x.getEmail()+"\t"+
 			         x.getFono()+"\t"+
 				     x.getFechaIngreso()+"\t"+
-			         x.getPass()+"\t"+
+			         //x.getPass()+"\t"+
 				     x.getStatus()
 				     );
 		}

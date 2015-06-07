@@ -14,7 +14,9 @@ public class ArrayUsuario {
 	private ArrayList<Usuario> user;
 	
 	
-	
+	public ArrayList<Usuario> ListarUsuario(){
+		return user;
+	}
 	
 	//creamos los metodos del arrayList para el objeto Usuario
 	public ArrayUsuario(){
@@ -44,6 +46,19 @@ public class ArrayUsuario {
 		return null;
 	}
 	
+	//GENERAR CODIGO
+	public int GeneraCodigo(){
+			int cod=0;
+			
+			if(tamaño()==0){
+				cod=1;
+			}else{
+				cod=user.get(tamaño()-1).getCodUser()+1;
+			}
+			return cod;
+			
+	}
+	
 	//metodo para obtener el tamaño del array usuario
 	public int tamaño(){
 		return user.size();
@@ -67,7 +82,7 @@ public class ArrayUsuario {
 				x.setEmail(row[6].trim());
 				x.setFono(row[7].trim());
 				x.setFechaIngreso(row[8].trim());
-				x.setPass(row[9].trim());
+				//x.setPass(row[9].trim());
 				x.setStatus(Integer.parseInt(row[10].trim()));
 				user.add(x);
 			}
@@ -76,8 +91,28 @@ public class ArrayUsuario {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		//public usuario(int codUser, String nameUser, String lastnameUser, int codDocUser,
-		//int dniUser, int area, String email, String fono,
-		//String fechaIngreso, int status) {
+		
 	}
+	//GRABAR EN UN ARCHIVO TXT
+			public void grabar() {
+
+				try {
+					PrintWriter pw = new PrintWriter(new FileWriter("usuarios.txt"));
+					String linea;
+					for (Usuario u : user) {
+						// La variable linea almacena el registro actual
+						linea = u.getCodUser() + "," + u.getNameUser()+","+u.getLastnameUser()+","+
+						u.getCodDocUser()+","+u.getDniUser()+","+u.getArea()+","+
+						u.getEmail()+","+u.getFono()+","+u.getFechaIngreso()+","+u.getStatus();
+						// Grabar el registro actual en el archivo Empleado.txt
+						pw.println(linea);
+					}
+					// Cerrar el archivo
+					pw.close();
+				} catch (Exception e) {
+					// Mostrar el mensaje de error
+					e.printStackTrace();
+				}
+
+			}
 }
