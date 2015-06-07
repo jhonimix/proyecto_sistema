@@ -18,15 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 
-
-
-import entidades.Usuario;
 import gui.Mantenimiento_Usuarios;
 import controlador.ArrayUsuario;
-
-
-
-
 
 import javax.swing.border.BevelBorder;
 
