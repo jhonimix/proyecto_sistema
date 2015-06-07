@@ -3,75 +3,91 @@ package entidades;
 public class Especialista {
 
 	//DECLARAMOS ATRIBUTOS
-	private int cod_esp;			// Autogenerado
-	private String nom_esp;
-	private String ape_esp;
-	private String esp_esp;
-	private String ane_esp;
-	private String fec_ing_esp;		// DD/MM/AAAA
-	private int est_esp;			// 0 = No activo
+	private int codEsp;			// Autogenerado
+	private String nomEsp;
+	private String apeEsp;
+	private String espEsp;
+	private String anexoEsp;
+	private String fecIngEsp;		// DD/MM/AAAA
+	private int statusEsp;			// 0 = No activo
 									// 1 = Activo
 	
 	//DECLARAMOS METODOS GET/SET
-	public int getCod_esp() {
-		return cod_esp;
+	public int getCodEsp() {
+		return codEsp;
 	}
-	public void setCod_esp(int cod_esp) {
-		this.cod_esp = cod_esp;
+
+	public void setCodEsp(int codEsp) {
+		this.codEsp = codEsp;
 	}
-	public String getNom_esp() {
-		return nom_esp;
+
+	public String getNomEsp() {
+		return nomEsp;
 	}
-	public void setNom_esp(String nom_esp) {
-		this.nom_esp = nom_esp;
+
+	public void setNomEsp(String nomEsp) {
+		this.nomEsp = nomEsp;
 	}
-	public String getApe_esp() {
-		return ape_esp;
+
+	public String getApeEsp() {
+		return apeEsp;
 	}
-	public void setApe_esp(String ape_esp) {
-		this.ape_esp = ape_esp;
+
+	public void setApeEsp(String apeEsp) {
+		this.apeEsp = apeEsp;
 	}
-	public String getEsp_esp() {
-		return esp_esp;
+
+	public String getEspEsp() {
+		return espEsp;
 	}
-	public void setEsp_esp(String esp_esp) {
-		this.esp_esp = esp_esp;
+
+	public void setEspEsp(String espEsp) {
+		this.espEsp = espEsp;
 	}
-	public String getAne_esp() {
-		return ane_esp;
+
+	public String getAnexoEsp() {
+		return anexoEsp;
 	}
-	public void setAne_esp(String ane_esp) {
-		this.ane_esp = ane_esp;
+
+	public void setAnexoEsp(String anexoEsp) {
+		this.anexoEsp = anexoEsp;
 	}
-	public String getFec_ing_esp() {
-		return fec_ing_esp;
+
+	public String getFecIngEsp() {
+		return fecIngEsp;
 	}
-	public void setFec_ing_esp(String fec_ing_esp) {
-		this.fec_ing_esp = fec_ing_esp;
+
+	public void setFecIngEsp(String fecIngEsp) {
+		this.fecIngEsp = fecIngEsp;
 	}
-	public int getEst_esp() {
-		return est_esp;
+
+	public int getStatusEsp() {
+		return statusEsp;
 	}
-	public void setEst_esp(int est_esp) {
-		this.est_esp = est_esp;
+
+	public void setStatusEsp(int statusEsp) {
+		this.statusEsp = statusEsp;
 	}
 	
 	//DECLARAMOS CONSTRUCTOR CON ATRIBUTOS
-	public Especialista(int cod_esp, String nom_esp, String ape_esp,
-			String esp_esp, String ane_esp, String fec_ing_esp, int est_esp) {
+	public Especialista(int codEsp, String nomEsp, String apeEsp,
+			String espEsp, String anexoEsp, String fecIngEsp, int statusEsp) {
 		super();
-		this.cod_esp = cod_esp;
-		this.nom_esp = nom_esp;
-		this.ape_esp = ape_esp;
-		this.esp_esp = esp_esp;
-		this.ane_esp = ane_esp;
-		this.fec_ing_esp = fec_ing_esp;
-		this.est_esp = est_esp;
+		this.codEsp = codEsp;
+		this.nomEsp = nomEsp;
+		this.apeEsp = apeEsp;
+		this.espEsp = espEsp;
+		this.anexoEsp = anexoEsp;
+		this.fecIngEsp = fecIngEsp;
+		this.statusEsp = statusEsp;
 	}
 	
+	
+
 	//DECLARAMOS CONSTRUCTOR SIN ATRIBUTOS
 	public Especialista() {
 		super();
 	}
+	
 	
 }

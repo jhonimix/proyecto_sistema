@@ -3,51 +3,62 @@ package entidades;
 public class TipoDocumento {
 	
 	//DECLARAMOS ATRIBUTOS
-	private int cod_doc;	//Autogenerado
-	private String des_doc;
-	private String abr_doc;
-	private int est_doc;	// 0 = No Activo
+	private int codDoc;	//Autogenerado
+	private String desDoc;
+	private String abrDoc;
+	private int statusDoc;	// 0 = No Activo
 							// 1 = ACtivo
 	
 	//DECLARAMOS METODOS GET/SET
-	public int getCod_doc() {
-		return cod_doc;
+	
+	public int getCodDoc() {
+		return codDoc;
 	}
-	public void setCod_doc(int cod_doc) {
-		this.cod_doc = cod_doc;
+
+	public void setCodDoc(int codDoc) {
+		this.codDoc = codDoc;
 	}
-	public String getDes_doc() {
-		return des_doc;
+
+	public String getDesDoc() {
+		return desDoc;
 	}
-	public void setDes_doc(String des_doc) {
-		this.des_doc = des_doc;
+
+	public void setDesDoc(String desDoc) {
+		this.desDoc = desDoc;
 	}
-	public String getAbr_doc() {
-		return abr_doc;
+
+	public String getAbrDoc() {
+		return abrDoc;
 	}
-	public void setAbr_doc(String abr_doc) {
-		this.abr_doc = abr_doc;
+
+	public void setAbrDoc(String abrDoc) {
+		this.abrDoc = abrDoc;
 	}
-	public int getEst_doc() {
-		return est_doc;
+
+	public int getStatusDoc() {
+		return statusDoc;
 	}
-	public void setEst_doc(int est_doc) {
-		this.est_doc = est_doc;
+
+	public void setStatusDoc(int statusDoc) {
+		this.statusDoc = statusDoc;
 	}
 	
 	//DECLARAMOS CONSTRUCTOR CON ATRIBUTOS
-	public TipoDocumento(int cod_doc, String des_doc, String abr_doc,
-			int est_doc) {
+	public TipoDocumento(int codDoc, String desDoc, String abrDoc, int statusDoc) {
 		super();
-		this.cod_doc = cod_doc;
-		this.des_doc = des_doc;
-		this.abr_doc = abr_doc;
-		this.est_doc = est_doc;
+		this.codDoc = codDoc;
+		this.desDoc = desDoc;
+		this.abrDoc = abrDoc;
+		this.statusDoc = statusDoc;
 	}
 	
+	
+
 	//DECLARAMOS CONSTRUCTOR SIN ATRIBUTOS
 	public TipoDocumento() {
 		super();
 	}
+
+	
 	
 }
