@@ -62,13 +62,13 @@ public class ArrayUsuario {
 				x.setNameUser(row[1].trim());
 				x.setLastnameUser(row[2].trim());
 				x.setCodDocUser(Integer.parseInt(row[3].trim()));
-				x.setDniUser(Integer.parseInt(row[4].trim()));
+				x.setDniUser(row[4].trim());
 				x.setArea(Integer.parseInt(row[5].trim()));
 				x.setEmail(row[6].trim());
 				x.setFono(row[7].trim());
 				x.setFechaIngreso(row[8].trim());
 				x.setPass(row[9].trim());
-				//x.setStatus(Integer.parseInt(row[10].trim()));
+				x.setStatus(Integer.parseInt(row[10].trim()));
 				user.add(x);
 			}
 			fr.close();

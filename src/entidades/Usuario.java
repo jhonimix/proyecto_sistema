@@ -6,7 +6,7 @@ public class Usuario {
 	private String nameUser;
 	private String lastnameUser;
 	private int codDocUser;
-	private int dniUser;
+	private String dniUser;
 	private int area;
 	private String email;
 	private String fono;
@@ -73,14 +73,14 @@ public class Usuario {
 
 
 
-	public int getDniUser() {
+	public String getDniUser() {
 		return dniUser;
 	}
 
 
 
 
-	public void setDniUser(int dniUser) {
+	public void setDniUser(String dniUser) {
 		this.dniUser = dniUser;
 	}
 
@@ -173,7 +173,7 @@ public class Usuario {
 	//Constructor de usuario
 	
 	public Usuario(int codUser, String nameUser, String lastnameUser,
-			int codDocUser, int dniUser, int area, String email, String fono,
+			int codDocUser, String dniUser, int area, String email, String fono,
 			String fechaIngreso, String pass, int status) {
 		
 		this.codUser = codUser;

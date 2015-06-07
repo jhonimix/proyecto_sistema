@@ -1,0 +1,3 @@
+1,Sistemas,Soporte Técnico,Area Sistemas, Area de Sistemas y Informatica,1
+2,RR.HH,Personal,Area RR.HH, Area de Recursos Humanos,1
+3,Finazas,Contabilidad,Area Contabilidad, Area de Recursos Contables,1

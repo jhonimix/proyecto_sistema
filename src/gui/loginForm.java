@@ -88,6 +88,7 @@ public class loginForm extends JFrame {
 						//lblSession.setText("Ingresaste");
 						gui.principalForm nueva = new gui.principalForm();
 						nueva.setVisible(true);
+						
 						nueva.setLocationRelativeTo(null);
 						dispose();
 					}else{
@@ -134,7 +135,7 @@ public class loginForm extends JFrame {
 			
 	        //buscamos los items de los usuarios email y pass
 			for(int i = 0; i < a.tamaño() ; i++){				
-				if(a.obtener(i).getEmail().compareTo(user) == 0 && a.obtener(i).getPass().compareTo(pass)==0){
+				if(a.obtener(i).getEmail().compareTo(user) == 0 && a.obtener(i).getDniUser().compareTo(pass)==0){
 				 return true;
 				}
 			}

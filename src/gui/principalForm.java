@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,12 +12,26 @@ import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+
+import entidades.Usuario;
+import controlador.ArrayUsuario;
+
+
+
+import javax.swing.border.BevelBorder;
+
 
 
 public class principalForm extends JFrame {
-
+	ArrayUsuario a = new ArrayUsuario();
 	private JPanel contentPane;
-
+	
+	gui.loginForm login = new gui.loginForm(); 
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -43,8 +57,21 @@ public class principalForm extends JFrame {
 		setBounds(100, 100, 720, 431);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setBounds(44, 15, 265, 14);
+		contentPane.add(lblUsuario);
+		
+		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
+		btnCerrarSesin.setBounds(540, 11, 122, 23);
+		contentPane.add(btnCerrarSesin);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel.setBounds(44, 55, 600, 177);
+		contentPane.add(panel);
 		
 		
 		JMenuBar mnPrincipal = new JMenuBar();
@@ -139,6 +166,4 @@ public class principalForm extends JFrame {
 			}
 			return null;
 		}
-		
-
 }

@@ -1,0 +1,4 @@
+1,Soporte Software, Soporte Técnico de Software,SPTESOFT,1
+2,Mantenimiento Hardware, Mantenimiento de Hardware,MANTHARD,1
+3,Documentación, Documentación de reportes,SPTESOFT,1
+4,Descargas,Descarga de software, DESCSOFT,1
