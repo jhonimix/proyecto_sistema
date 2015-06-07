@@ -55,7 +55,7 @@ public class ArrayEspecialidad {
 				
 				try {
 
-					PrintWriter pw = new PrintWriter(new FileWriter("Especialista.txt"));
+					PrintWriter pw = new PrintWriter(new FileWriter("data/Especialista.txt"));
 					String linea;
 					
 					
@@ -71,7 +71,7 @@ public class ArrayEspecialidad {
 			//graba del archivo de texto a la memoria(Arraylist)
 			public void cargar(){
 				try {
-					BufferedReader br = new BufferedReader(new FileReader("Especialista.txt"));
+					BufferedReader br = new BufferedReader(new FileReader("data/Especialista.txt"));
 					String linea;			
 					while((linea=br.readLine())!=null){
 						//crear un arreglo del tipo string separando losca mpos

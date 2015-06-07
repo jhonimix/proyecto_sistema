@@ -67,7 +67,7 @@ public class ArrayUsuario {
 	
 	public void cargarDatos(){
 		try {
-			FileReader fr = new FileReader("usuarios.txt");
+			FileReader fr = new FileReader("data/usuarios.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String linea = null;
 			while((linea = br.readLine())!=null){
@@ -87,7 +87,7 @@ public class ArrayUsuario {
 			public void grabar() {
 
 				try {
-					PrintWriter pw = new PrintWriter(new FileWriter("usuarios.txt"));
+					PrintWriter pw = new PrintWriter(new FileWriter("data/usuarios.txt"));
 					String linea;
 					for (Usuario u : user) {
 						// La variable linea almacena el registro actual

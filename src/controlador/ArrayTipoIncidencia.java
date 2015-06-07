@@ -55,7 +55,7 @@ public class ArrayTipoIncidencia {
 				
 				try {
 
-					PrintWriter pw = new PrintWriter(new FileWriter("Tipo_Incidencia.txt"));
+					PrintWriter pw = new PrintWriter(new FileWriter("data/tipoincidencia.txt"));
 					String linea;
 					
 					
@@ -71,7 +71,7 @@ public class ArrayTipoIncidencia {
 			//graba del archivo de texto a la memoria(Arraylist)
 			public void cargar(){
 				try {
-					BufferedReader br = new BufferedReader(new FileReader("tipoincidencia.txt"));
+					BufferedReader br = new BufferedReader(new FileReader("data/tipoincidencia.txt"));
 					String linea;			
 					while((linea=br.readLine())!=null){
 						//crear un arreglo del tipo string separando losca mpos

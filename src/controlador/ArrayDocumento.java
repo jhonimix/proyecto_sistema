@@ -55,7 +55,7 @@ public class ArrayDocumento {
 				
 				try {
 
-					FileReader fr = new FileReader("tipodocumento.txt");
+					FileReader fr = new FileReader("data/tipodocumento.txt");
 					BufferedReader br = new BufferedReader(fr);
 					String linea = null;
 					while((linea = br.readLine())!=null){

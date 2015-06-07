@@ -55,7 +55,7 @@ public class ArrayArea {
 				
 				try {
 
-					PrintWriter pw = new PrintWriter(new FileWriter("Area.txt"));
+					PrintWriter pw = new PrintWriter(new FileWriter("data/areas.txt"));
 					String linea;
 					
 					for(Area b: are){
@@ -76,7 +76,7 @@ public class ArrayArea {
 			//graba del archivo de texto a la memoria(Arraylist)
 			public void cargar(){
 				try {
-					BufferedReader br = new BufferedReader(new FileReader("Area.txt"));
+					BufferedReader br = new BufferedReader(new FileReader("data/areas.txt"));
 					String linea;			
 					while((linea=br.readLine())!=null){
 						//crear un arreglo del tipo string separando losca mpos
