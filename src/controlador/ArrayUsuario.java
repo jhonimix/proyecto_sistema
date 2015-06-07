@@ -6,7 +6,7 @@ import java.io.*;
 //importamos la utilidad de array list
 import java.util.ArrayList;
 
-import javax.print.attribute.IntegerSyntax;
+
 
 public class ArrayUsuario {
 	
@@ -83,7 +83,7 @@ public class ArrayUsuario {
 				x.setFono(row[7].trim());
 				x.setFechaIngreso(row[8].trim());
 				//x.setPass(row[9].trim());
-				x.setStatus(Integer.parseInt(row[10].trim()));
+				x.setStatus(Integer.parseInt(row[9].trim()));
 				user.add(x);
 			}
 			fr.close();
