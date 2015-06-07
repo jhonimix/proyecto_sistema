@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,17 +9,19 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.ArrayUsuario;
 import entidades.Usuario;
-import javax.swing.JSeparator;
-import javax.swing.JLayeredPane;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class loginForm extends JFrame {
 	ArrayUsuario a = new ArrayUsuario();
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtUser;
+	private JPasswordField passUser;
 
 	/**
 	 * Launch the application.
@@ -56,30 +58,42 @@ public class loginForm extends JFrame {
 		lblPassword.setBounds(68, 129, 76, 14);
 		contentPane.add(lblPassword);
 		
-		textField = new JTextField();
-		textField.setBounds(154, 75, 140, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(154, 126, 140, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JButton btnIngresar = new JButton("Ingresar");
-		btnIngresar.setBounds(318, 74, 89, 23);
-		contentPane.add(btnIngresar);
+		txtUser = new JTextField();
+		txtUser.setBounds(154, 75, 140, 20);
+		contentPane.add(txtUser);
+		txtUser.setColumns(10);
 		
 		JLabel lblSession = new JLabel("");
 		lblSession.setBounds(123, 202, 238, 14);
 		contentPane.add(lblSession);
-		listar();
+		
+		JButton btnIngresar = new JButton("Ingresar");
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String username = txtUser.getText();
+		        String password = new String(passUser.getPassword());
+				if(IngresoUsuario(username,password)){
+					lblSession.setText("Ingresaste");
+				}else{
+					lblSession.setText("Error");
+				}
+			}
+		});
+		btnIngresar.setBounds(318, 74, 89, 23);
+		contentPane.add(btnIngresar);
+		
+		
+		
+		passUser = new JPasswordField();
+		passUser.setBounds(154, 126, 140, 20);
+		contentPane.add(passUser);
+		//listar();
 	}
 	void imprimir(String s){
 		System.out.println( s + "\n");
 	}
-	void listar(){
-	    
+		
+	void listar(){ 
 		imprimir("--------------------------------------------------------");
 		for(int i=0; i<a.tamaño(); i++){
 			Usuario x=a.obtener(i);
@@ -96,5 +110,17 @@ public class loginForm extends JFrame {
 				     x.getStatus()
 				     );
 		}
-	}	
+	}
+	
+	//Metodo para ingresar con el usuario email y pass
+		public boolean IngresoUsuario(String user, String pass){
+			
+	        //buscamos los items de los usuarios email y pass
+			for(int i = 0; i < a.tamaño() ; i++){				
+				if(a.obtener(i).getEmail().compareTo(user) == 0 && a.obtener(i).getPass().compareTo(pass)==0){
+				 return true;
+				}
+			}
+			return false;
+		}
 }
