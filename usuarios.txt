@@ -1,0 +1,2 @@
+1,Alex,Aragon,1,44197172,1,aragcar@gmail.com,954189939,20-02-2015,pass,1
+2,Ricardo,Moran,1,441345172,1,ricardito@gmail.com,956189939,10-04-2015,pass,1
