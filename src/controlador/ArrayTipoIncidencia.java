@@ -17,30 +17,30 @@ public class ArrayTipoIncidencia {
 	
 	}	
 		
-	//método que retorna la cantidad de objetos ingresados
-	public int tamaño(){
+	//mï¿½todo que retorna la cantidad de objetos ingresados
+	public int size(){
 		return tip_inci.size();
 	}
 		
-	//método que reciba un objeto de la clase Empleado y lo adicione al
+	//mï¿½todo que reciba un objeto de la clase Empleado y lo adicione al
 	//Arreglo de objetos "emp"
 	public void adicionar(TipoIncidencia e){
 		tip_inci.add(e);
 	}
 	
-	//método que reciba un objeto de la clase Empleado y elimine el objeto
+	//mï¿½todo que reciba un objeto de la clase Empleado y elimine el objeto
 	//dentro del Arreglo "emp"
 	public void eliminar(TipoIncidencia e){
 		tip_inci.remove(e);
 	}
 	
-	//método que reciba una posición y retorne el objeto que se encuentra en
+	//mï¿½todo que reciba una posiciï¿½n y retorne el objeto que se encuentra en
 	//el Arreglo "emp"
 	public TipoIncidencia obtener(int pos){
 		return tip_inci.get(pos);
 	}
 	
-	//método que reciba un código a buscar y retorne el objeto que se encuentra en
+	//mï¿½todo que reciba un cï¿½digo a buscar y retorne el objeto que se encuentra en
 	//el Arreglo "emp" caso contrario retorne null
 	public TipoIncidencia buscar(int cod){
 		//usando for "foreach"

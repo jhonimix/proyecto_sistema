@@ -50,17 +50,17 @@ public class ArrayUsuario {
 	public int GeneraCodigo(){
 			int cod=0;
 			
-			if(tamaño()==0){
+			if(size()==0){
 				cod=1;
 			}else{
-				cod=user.get(tamaño()-1).getCodUser()+1;
+				cod=user.get(size()-1).getCodUser()+1;
 			}
 			return cod;
 			
 	}
 	
-	//metodo para obtener el tamaño del array usuario
-	public int tamaño(){
+	//metodo para obtener el tamaï¿½o del array usuario
+	public int size(){
 		return user.size();
 	}
 	//metodo para cargar los datos del archivo usuarios.txt

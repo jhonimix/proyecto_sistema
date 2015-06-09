@@ -17,30 +17,30 @@ public class ArrayDocumento {
 		
 	}
 	
-	//método que retorna la cantidad de objetos ingresados
-	public int tamaño(){
+	//mï¿½todo que retorna la cantidad de objetos ingresados
+	public int size(){
 		return doc.size();
 	}
 	
-	//método que reciba un objeto de la clase Empleado y lo adicione al
+	//mï¿½todo que reciba un objeto de la clase Empleado y lo adicione al
 	//Arreglo de objetos "emp"
 	public void adicionar(TipoDocumento e){
 		doc.add(e);
 	}
 	
-	//método que reciba un objeto de la clase Empleado y elimine el objeto
+	//mï¿½todo que reciba un objeto de la clase Empleado y elimine el objeto
 	//dentro del Arreglo "emp"
 	public void eliminar(TipoDocumento e){
 		doc.remove(e);
 	}
 	
-	//método que reciba una posición y retorne el objeto que se encuentra en
+	//mï¿½todo que reciba una posiciï¿½n y retorne el objeto que se encuentra en
 	//el Arreglo "emp"
 	public TipoDocumento obtener(int pos){
 		return doc.get(pos);
 	}
 	
-	//método que reciba un código a buscar y retorne el objeto que se encuentra en
+	//mï¿½todo que reciba un cï¿½digo a buscar y retorne el objeto que se encuentra en
 	//el Arreglo "emp" caso contrario retorne null
 	public TipoDocumento buscar(int cod){
 		//usando for "foreach"
