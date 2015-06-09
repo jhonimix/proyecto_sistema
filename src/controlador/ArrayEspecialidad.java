@@ -18,7 +18,7 @@ public class ArrayEspecialidad {
 	}
 	
 	//m�todo que retorna la cantidad de objetos ingresados
-	public int size(){
+	public int tamaño(){
 		return esp.size();
 	}
 	

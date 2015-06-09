@@ -109,7 +109,7 @@ public class loginForm extends JFrame {
 		
 	void listar(){ 
 		imprimir("--------------------------------------------------------");
-		for(int i=0; i<a.size(); i++){
+		for(int i=0; i<a.tamaño(); i++){
 			Usuario x=a.obtener(i);
 			imprimir(x.getCodDocUser()+"\t\t" + 
 			         x.getNameUser()+"\t\t"+
@@ -130,7 +130,7 @@ public class loginForm extends JFrame {
 		public boolean IngresoUsuario(String user, String pass){
 			String msg;
 	        //buscamos los items de los usuarios email y pass
-			for(int i = 0; i < a.size() ; i++){				
+			for(int i = 0; i < a.tamaño() ; i++){				
 				if(a.obtener(i).getEmail().compareTo(user) == 0 && a.obtener(i).getDniUser().compareTo(pass)==0){
 					//Verificamos si el usuario no esta activo
 					if(a.obtener(i).getStatus()==1){

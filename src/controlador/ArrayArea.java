@@ -18,29 +18,29 @@ public class ArrayArea {
 	}
 
 	// METODO QUE RETORNA LA CANTIDAD DE AREAS REGISTRADOS
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return are.size();
 	}
 
-	// método que reciba un objeto de la clase Empleado y lo adicione al
+	// mï¿½todo que reciba un objeto de la clase Empleado y lo adicione al
 	// Arreglo de objetos "emp"
 	public void adicionar(Area e) {
 		are.add(e);
 	}
 
-	// método que reciba un objeto de la clase Empleado y elimine el objeto
+	// mï¿½todo que reciba un objeto de la clase Empleado y elimine el objeto
 	// dentro del Arreglo "emp"
 	public void eliminar(Area e) {
 		are.remove(e);
 	}
 
-	// método que reciba una posición y retorne el objeto que se encuentra en
+	// mï¿½todo que reciba una posiciï¿½n y retorne el objeto que se encuentra en
 	// el Arreglo "emp"
 	public Area obtener(int pos) {
 		return are.get(pos);
 	}
 
-	// método que reciba un código a buscar y retorne el objeto que se encuentra
+	// mï¿½todo que reciba un cï¿½digo a buscar y retorne el objeto que se encuentra
 	// en
 	// el Arreglo "emp" caso contrario retorne null
 	public Area buscar(int cod) {
@@ -57,7 +57,7 @@ public class ArrayArea {
 
 		try {
 
-			PrintWriter pw = new PrintWriter(new FileWriter("areas.txt"));
+			PrintWriter pw = new PrintWriter(new FileWriter("data/areas.txt"));
 			String linea;
 
 			for (Area b : are) {
@@ -80,7 +80,7 @@ public class ArrayArea {
 	// CARGA LOS ARCHIVOS DE TEXTO A LA MEMORIA
 	public void cargar() {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("areas.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("data/areas.txt"));
 			String linea;
 			while ((linea = br.readLine()) != null) {
 				// crear un arreglo del tipo string separando los campos

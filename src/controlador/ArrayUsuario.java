@@ -31,7 +31,7 @@ public class ArrayUsuario {
 		user.remove(x);
 	}
 
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return user.size();
 	}
 
@@ -54,10 +54,10 @@ public class ArrayUsuario {
 	public int GeneraCodigo() {
 		int cod = 0;
 
-		if (tamaño() == 0) {
+		if (tamaÃ±o() == 0) {
 			cod = 1;
 		} else {
-			cod = user.get(tamaño() - 1).getCodUser() + 1;
+			cod = user.get(tamaÃ±o() - 1).getCodUser() + 1;
 		}
 		return cod;
 
@@ -67,7 +67,7 @@ public class ArrayUsuario {
 
 	public void cargarDatos() {
 		try {
-			FileReader fr = new FileReader("usuarios.txt");
+			FileReader fr = new FileReader("data/usuarios.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String linea = null;
 			while ((linea = br.readLine()) != null) {
@@ -89,7 +89,7 @@ public class ArrayUsuario {
 	// GRABAR EN UN ARCHIVO TXT
 	public void grabar() {
 		try {
-			PrintWriter pw = new PrintWriter(new FileWriter("usuarios.txt"));
+			PrintWriter pw = new PrintWriter(new FileWriter("data/usuarios.txt"));
 			String linea;
 			for (Usuario u : user) {
 				// La variable linea almacena el registro actual

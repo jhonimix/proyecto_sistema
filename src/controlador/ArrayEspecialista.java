@@ -20,30 +20,30 @@ public class ArrayEspecialista {
 		cargar();
 	}
 
-	// método que retorna la cantidad de objetos ingresados
-	public int tamaño() {
+	// mï¿½todo que retorna la cantidad de objetos ingresados
+	public int tamaÃ±o() {
 		return esp.size();
 	}
 
-	// método que reciba un objeto de la clase Empleado y lo adicione al
+	// mï¿½todo que reciba un objeto de la clase Empleado y lo adicione al
 	// Arreglo de objetos "emp"
 	public void adicionar(Especialista e) {
 		esp.add(e);
 	}
 
-	// método que reciba un objeto de la clase Empleado y elimine el objeto
+	// mï¿½todo que reciba un objeto de la clase Empleado y elimine el objeto
 	// dentro del Arreglo "emp"
 	public void eliminar(Especialista e) {
 		esp.remove(e);
 	}
 
-	// método que reciba una posición y retorne el objeto que se encuentra en
+	// mï¿½todo que reciba una posiciï¿½n y retorne el objeto que se encuentra en
 	// el Arreglo "emp"
 	public Especialista obtener(int pos) {
 		return esp.get(pos);
 	}
 
-	// método que reciba un código a buscar y retorne el objeto que se encuentra
+	// mï¿½todo que reciba un cï¿½digo a buscar y retorne el objeto que se encuentra
 	// en
 	// el Arreglo "emp" caso contrario retorne null
 	public Especialista buscar(int cod) {
@@ -60,7 +60,7 @@ public class ArrayEspecialista {
 
 		try {
 
-			PrintWriter pw = new PrintWriter(new FileWriter("especialista.txt"));
+			PrintWriter pw = new PrintWriter(new FileWriter("data/especialista.txt"));
 			String linea;
 
 			for (Especialista d : esp) {
@@ -86,7 +86,7 @@ public class ArrayEspecialista {
 	public void cargar() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(
-					"especialista.txt"));
+					"data/especialista.txt"));
 			String linea;
 			while ((linea = br.readLine()) != null) {
 				// crear un arreglo del tipo string separando losca mpos

@@ -21,30 +21,30 @@ public class ArrayTipoIncidencia {
 		cargar();
 	}
 
-	// método que retorna la cantidad de objetos ingresados
-	public int tamaño() {
+	// mï¿½todo que retorna la cantidad de objetos ingresados
+	public int tamaÃ±o() {
 		return tipoInc.size();
 	}
 
-	// método que reciba un objeto de la clase Empleado y lo adicione al
+	// metodo que reciba un objeto de la clase Empleado y lo adicione al
 	// Arreglo de objetos "emp"
 	public void adicionar(TipoIncidencia e) {
 		tipoInc.add(e);
 	}
 
-	// método que reciba un objeto de la clase Empleado y elimine el objeto
+	// metodo que reciba un objeto de la clase Empleado y elimine el objeto
 	// dentro del Arreglo "emp"
 	public void eliminar(TipoIncidencia e) {
 		tipoInc.remove(e);
 	}
 
-	// método que reciba una posición y retorne el objeto que se encuentra en
+	// metodo que reciba una posiciÃ³n y retorne el objeto que se encuentra en
 	// el Arreglo "emp"
 	public TipoIncidencia obtener(int pos) {
 		return tipoInc.get(pos);
 	}
 
-	// método que reciba un código a buscar y retorne el objeto que se encuentra
+	// mï¿½todo que reciba un cï¿½digo a buscar y retorne el objeto que se encuentra
 	// en
 	// el Arreglo "emp" caso contrario retorne null
 	public TipoIncidencia buscar(int cod) {
@@ -62,7 +62,7 @@ public class ArrayTipoIncidencia {
 		try {
 
 			PrintWriter pw = new PrintWriter(new FileWriter(
-					"tipoincidencia.txt"));
+					"data/tipoincidencia.txt"));
 			String linea;
 
 			for (TipoIncidencia e : tipoInc) {
@@ -86,7 +86,7 @@ public class ArrayTipoIncidencia {
 	public void cargar() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(
-					"tipoincidencia.txt"));
+					"data/tipoincidencia.txt"));
 			String linea;
 			while ((linea = br.readLine()) != null) {
 				// crear un arreglo del tipo string separando losca mpos
