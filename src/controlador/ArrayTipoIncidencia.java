@@ -7,88 +7,101 @@ import java.util.ArrayList;
 import entidades.TipoIncidencia;
 
 public class ArrayTipoIncidencia {
-	
-	
-	private ArrayList<TipoIncidencia> tip_inci = new ArrayList<TipoIncidencia>();
 
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	//Constructor del Arreglo	
+	// CREAMOS EL ARRAY TIPO INCIDENCIA
+	private ArrayList<TipoIncidencia> tipoInc;
+
+	public ArrayList<TipoIncidencia> ListarTipoIncidencia() {
+		return tipoInc;
+	}
+
+	// Constructor del Arreglo
 	public ArrayTipoIncidencia() {
-	
-	}	
-		
-	//mï¿½todo que retorna la cantidad de objetos ingresados
-	public int size(){
-		return tip_inci.size();
+		tipoInc = new ArrayList<TipoIncidencia>();
+		cargar();
 	}
-		
-	//mï¿½todo que reciba un objeto de la clase Empleado y lo adicione al
-	//Arreglo de objetos "emp"
-	public void adicionar(TipoIncidencia e){
-		tip_inci.add(e);
+
+	// método que retorna la cantidad de objetos ingresados
+	public int tamaño() {
+		return tipoInc.size();
 	}
-	
-	//mï¿½todo que reciba un objeto de la clase Empleado y elimine el objeto
-	//dentro del Arreglo "emp"
-	public void eliminar(TipoIncidencia e){
-		tip_inci.remove(e);
+
+	// método que reciba un objeto de la clase Empleado y lo adicione al
+	// Arreglo de objetos "emp"
+	public void adicionar(TipoIncidencia e) {
+		tipoInc.add(e);
 	}
-	
-	//mï¿½todo que reciba una posiciï¿½n y retorne el objeto que se encuentra en
-	//el Arreglo "emp"
-	public TipoIncidencia obtener(int pos){
-		return tip_inci.get(pos);
+
+	// método que reciba un objeto de la clase Empleado y elimine el objeto
+	// dentro del Arreglo "emp"
+	public void eliminar(TipoIncidencia e) {
+		tipoInc.remove(e);
 	}
-	
-	//mï¿½todo que reciba un cï¿½digo a buscar y retorne el objeto que se encuentra en
-	//el Arreglo "emp" caso contrario retorne null
-	public TipoIncidencia buscar(int cod){
-		//usando for "foreach"
-		for(TipoIncidencia x:tip_inci){
-			if(x.getCodTipoInc()==cod)
+
+	// método que reciba una posición y retorne el objeto que se encuentra en
+	// el Arreglo "emp"
+	public TipoIncidencia obtener(int pos) {
+		return tipoInc.get(pos);
+	}
+
+	// método que reciba un código a buscar y retorne el objeto que se encuentra
+	// en
+	// el Arreglo "emp" caso contrario retorne null
+	public TipoIncidencia buscar(int cod) {
+		// usando for "foreach"
+		for (TipoIncidencia x : tipoInc) {
+			if (x.getCodTipoInc() == cod)
 				return x;
 		}
 		return null;
 	}
-	//Grabar de la memoria al archivo de texto
-			public void grabar(){
-				
-				try {
 
-					PrintWriter pw = new PrintWriter(new FileWriter("data/tipoincidencia.txt"));
-					String linea;
-					
-					
-					//cerrar el archivo
-					pw.close();
-					
-				} catch (Exception e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}
+	// Grabar de la memoria al archivo de texto
+	public void grabar() {
+
+		try {
+
+			PrintWriter pw = new PrintWriter(new FileWriter(
+					"tipoincidencia.txt"));
+			String linea;
+
+			for (TipoIncidencia e : tipoInc) {
+				// la variable linea almacena el registro actual
+				linea = e.getCodTipoInc() + "," + e.getDesTipoInc() + ","
+						+ e.getAbTipoInc() + "," + e.getEstTipoInc();
+				// grabar el registro actual en el archivo "tipoincidencia.txt"
+				pw.println(linea);
 			}
 
-			//graba del archivo de texto a la memoria(Arraylist)
-			public void cargar(){
-				try {
-					BufferedReader br = new BufferedReader(new FileReader("data/tipoincidencia.txt"));
-					String linea;			
-					while((linea=br.readLine())!=null){
-						//crear un arreglo del tipo string separando losca mpos
-						String row[]= linea.split(",");
-						//creamos el objeto
-						TipoIncidencia x=new TipoIncidencia();
-						x.setCodTipoInc(Integer.parseInt(row[0]));
-						x.setDesTipoInc(row[1]);
-						x.setAbTipoInc(row[2]);
-						x.setEstTipoInc(Integer.parseInt(row[3]));
-						//enviar objeto "e" al arreglo "emp"
-									
-					}
-					
-				} catch (Exception e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}
+			// cerrar el archivo
+			pw.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	// graba del archivo de texto a la memoria(Arraylist)
+	public void cargar() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(
+					"tipoincidencia.txt"));
+			String linea;
+			while ((linea = br.readLine()) != null) {
+				// crear un arreglo del tipo string separando losca mpos
+				String row[] = linea.split(",");
+				// creamos el objeto
+				TipoIncidencia e = new TipoIncidencia(Integer.parseInt(row[0]),
+						row[1], row[2], Integer.parseInt(row[3]));
+				// enviar objeto "e" al arreglo "tipoInc"
+				tipoInc.add(e);
+
 			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 }
