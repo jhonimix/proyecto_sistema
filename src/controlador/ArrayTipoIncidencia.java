@@ -89,8 +89,7 @@ public class ArrayTipoIncidencia {
 				// CREAR UN ARREGLO DEL TIPO STRING SEPARANDO LOS CAMPOS
 				String row[] = linea.split(",");
 				// CREAMOS EL OBJETO "e"
-				TipoIncidencia e = new TipoIncidencia(Integer.parseInt(row[0]),
-						row[1], row[2], Integer.parseInt(row[3]));
+				TipoIncidencia e = new TipoIncidencia(Integer.parseInt(row[0]),row[1], row[2],Integer.parseInt(row[3]));
 				// ENVIAR EL OBJETO "e" AL ARREGLO "tipoInc"
 				tipoInc.add(e);
 			}
