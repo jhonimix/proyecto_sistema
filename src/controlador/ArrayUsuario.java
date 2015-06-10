@@ -31,7 +31,7 @@ public class ArrayUsuario {
 		user.remove(x);
 	}
 
-	public int tamaÃ±o() {
+	public int tamaño() {
 		return user.size();
 	}
 
@@ -54,10 +54,10 @@ public class ArrayUsuario {
 	public int GeneraCodigo() {
 		int cod = 0;
 
-		if (tamaÃ±o() == 0) {
+		if (tamaño() == 0) {
 			cod = 1;
 		} else {
-			cod = user.get(tamaÃ±o() - 1).getCodUser() + 1;
+			cod = user.get(tamaño() - 1).getCodUser() + 1;
 		}
 		return cod;
 
@@ -80,7 +80,6 @@ public class ArrayUsuario {
 			}
 			fr.close();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 
@@ -92,19 +91,15 @@ public class ArrayUsuario {
 			PrintWriter pw = new PrintWriter(new FileWriter("data/usuarios.txt"));
 			String linea;
 			for (Usuario u : user) {
-				// La variable linea almacena el registro actual
 				linea = u.getCodUser() + "," + u.getNameUser() + ","
 						+ u.getLastnameUser() + "," + u.getCodDocUser() + ","
 						+ u.getDniUser() + "," + u.getArea() + ","
 						+ u.getEmail() + "," + u.getFono() + ","
 						+ u.getFechaIngreso() + "," + u.getStatus();
-				// Grabar el registro actual en el archivo Empleado.txt
 				pw.println(linea);
 			}
-			// Cerrar el archivo
 			pw.close();
 		} catch (Exception e) {
-			// Mostrar el mensaje de error
 			e.printStackTrace();
 		}
 	}

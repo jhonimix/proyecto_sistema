@@ -1,50 +1,44 @@
 package controlador;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import entidades.Area;
 
 public class ArrayArea {
 
+	//CREAMOS NUESTRA VARIABLE ARRAYLIST
+	private ArrayList<Area> are;
 
-	private ArrayList<Area> are = new ArrayList<Area>();
-
-	// CONSTRUCTOR DEL ARREGLO
+	//CONSTRUCTOR DEL ARREGLO
 	public ArrayArea() {
 		are = new ArrayList<Area>();
 		cargar();
 	}
 
-	// METODO QUE RETORNA LA CANTIDAD DE AREAS REGISTRADOS
-	public int tamaÃ±o() {
+	//METODO QUE RETORNA LA CANTIDAD DE AREAS REGISTRADOS
+	public int tamaño() {
 		return are.size();
 	}
 
-	// mï¿½todo que reciba un objeto de la clase Empleado y lo adicione al
-	// Arreglo de objetos "emp"
+	//METODO QUE RECIBA UN OBJETO DE LA CLASE EMPLEADO Y LO ADICIONE AL ARREGLO DE OBJETOS "are"
 	public void adicionar(Area e) {
 		are.add(e);
 	}
 
-	// mï¿½todo que reciba un objeto de la clase Empleado y elimine el objeto
-	// dentro del Arreglo "emp"
+	//METODO QUE RECIBA UN OBJETO DE LA CLASE EMPLEADO Y LO ELIMINE DENTRO DEL ARREGLO "are"
 	public void eliminar(Area e) {
 		are.remove(e);
 	}
 
-	// mï¿½todo que reciba una posiciï¿½n y retorne el objeto que se encuentra en
-	// el Arreglo "emp"
+	//METODO QUE RECIBA UNA POSICION Y RETORNE EL OBJETO QUE SE ENCUENTRA EN EL ARREGLO "are"
 	public Area obtener(int pos) {
 		return are.get(pos);
 	}
 
-	// mï¿½todo que reciba un cï¿½digo a buscar y retorne el objeto que se encuentra
-	// en
-	// el Arreglo "emp" caso contrario retorne null
-	public Area buscar(int cod) {
-		// usando for "foreach"
+	//METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL OBJETO QUE SE ENCUENTRA EN EL ARREGLO "are" 
+	//CASO CONTRARIO RETORNA NULL
+	public Area buscar(int cod) {		
 		for (Area x : are) {
 			if (x.getCodArea() == cod)
 				return x;
@@ -52,7 +46,7 @@ public class ArrayArea {
 		return null;
 	}
 
-	// GRABA DE LA MEMORIA AL ARCHIVO DE TEXTO
+	//GRABA DE LA MEMORIA AL ARCHIVO DE TEXTO
 	public void grabar() {
 
 		try {
@@ -61,14 +55,14 @@ public class ArrayArea {
 			String linea;
 
 			for (Area b : are) {
-				// la variable linea almacena el registro actual
+				// LA VARIABLE LINEA ALMACENA EL REGISTRO ACTUAL
 				linea = b.getCodArea() + "," + b.getNameArea() + ","
 						+ b.getDescArea() + "," + b.getNameSmallArea() + ","
 						+ b.getNameLargeArea() + "," + b.getStatus();
-				// grabar el registro actual en el archivo "areas.txt"
+				// GRABAR EL REGISTRO ACTUAL EN EL ARCHIVO "areas.txt"
 				pw.println(linea);
 			}
-			// cerrar el archivo
+			// CERRAR EL ARCHIVO
 			pw.close();
 
 		} catch (Exception e) {
@@ -77,20 +71,21 @@ public class ArrayArea {
 		}
 	}
 
-	// CARGA LOS ARCHIVOS DE TEXTO A LA MEMORIA
+	//CARGA LOS ARCHIVOS DE TEXTO A LA MEMORIA
 	public void cargar() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("data/areas.txt"));
 			String linea;
 			while ((linea = br.readLine()) != null) {
-				// crear un arreglo del tipo string separando los campos
+				// CREAR UN ARREGLO DEL TIPO STRING SEPARANDO LOS CAMPOS
 				String row[] = linea.split(",");
-				// creamos el objeto
+				// CREAMOS EL OBJETO
 				Area b = new Area(Integer.parseInt(row[0]), row[1], row[2],
 						row[3], row[4], Integer.parseInt(row[5]));
-				// enviar objeto "b" al arreglo "are"
+				// ENVIAR EL OBJETO "b" AL ARREGLO "are"
 				are.add(b);
 			}
+			br.close();
 
 		} catch (Exception e) {
 			// TODO: handle exception

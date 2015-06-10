@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,20 +16,52 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-
-import gui.Mantenimiento_Usuarios;
-import controlador.ArrayUsuario;
+import controlador.*;
 
 import javax.swing.border.BevelBorder;
 
-
-
-public class principalForm extends JFrame {
+public class principalForm extends JFrame implements ActionListener {
+	
+	//DECLARAMOS AREGLOS COMO VARIABLES GLOBALES
 	ArrayUsuario a = new ArrayUsuario();
+	ArrayArea b = new ArrayArea();
+	ArrayDocumento c = new ArrayDocumento();
+	ArrayEspecialista d = new ArrayEspecialista();
+	ArrayTipoIncidencia e = new ArrayTipoIncidencia();
+	
+	gui.loginForm login = new gui.loginForm();
+
+	//DECLARAMOS GLOBALES LAS VARIABLES DEL FORMULARIO
 	private JPanel contentPane;
 	
-	gui.loginForm login = new gui.loginForm(); 
+	private JButton btnCerrarSesin;
+	private JMenuBar mnPrincipal;
 	
+	/* MENU SISTEMA */
+	private JMenu mnSistema;
+	private JMenuItem mntmOpenSession;
+	private JMenuItem mntmSalir;
+	/* MENU MANTENIMIENTO */
+	private JMenu mnMantenimiento;
+	private JMenuItem mntmUser;
+	private JMenuItem mntmArea;
+	private JMenuItem mntmTipoIncidencia;
+	private JMenuItem mntmTipoDocumento;
+	private JMenuItem mntmEspecialista;
+	/* MENU INCIDENCIA */
+	private JMenu mnIncidencia;
+	private JMenuItem mntmIngreso;
+	private JMenuItem mntmListado;
+	private JMenuItem mntmUpdate;
+	/* MENU REPORTES */
+	private JMenu mnReportes;
+	private JMenuItem mntmInciArea;
+	private JMenuItem mntmInciTipo;
+	private JMenuItem mntmInciFecha;
+	private JMenuItem mntmInciFalla;
+	/* MENU AYUDA */
+	private JMenu mnAyuda;
+	private JMenuItem mntmAyuda;
 	
 	/**
 	 * Launch the application.
@@ -59,130 +90,135 @@ public class principalForm extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		//Creo el constructor del formulario login
-		
-		gui.loginForm login = new gui.loginForm();
-		
-		
+
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(44, 15, 265, 14);
 		contentPane.add(lblUsuario);
-		
-		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
-		btnCerrarSesin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				principalForm.this.login.setVisible(true);
-				principalForm.this.login.setLocationRelativeTo(null);
-				dispose();
-			}
-		});
+
+		btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
+		btnCerrarSesin.addActionListener(this);
 		btnCerrarSesin.setBounds(540, 11, 122, 23);
 		contentPane.add(btnCerrarSesin);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(44, 55, 600, 177);
 		contentPane.add(panel);
-		
-		
-		JMenuBar mnPrincipal = new JMenuBar();
+
+		mnPrincipal = new JMenuBar();
 		setJMenuBar(mnPrincipal);
-		
-		JMenu mnSistema = new JMenu("Sistema");
+
+		mnSistema = new JMenu("Sistema");
 		mnPrincipal.add(mnSistema);
-		
-		JMenuItem mntmOpenSession = new JMenuItem("Iniciar sesi\u00F3n");
+
+		mntmOpenSession = new JMenuItem("Iniciar sesi\u00F3n");
 		mnSistema.add(mntmOpenSession);
-		mntmOpenSession.setIcon(getIcon("login.png",null));
-		
-		JMenuItem mntmSalir = new JMenuItem("Salir");
-		mntmSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
-		
-		mnSistema.add(mntmSalir);	    
-		
-		mntmSalir.setIcon(getIcon("exit.png",null));
-			
-		JMenu mnMantenimiento = new JMenu("Mantenimiento");
+		mntmOpenSession.setIcon(getIcon("login.png", null));
+
+		mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(this);
+
+		mnSistema.add(mntmSalir);
+
+		mntmSalir.setIcon(getIcon("exit.png", null));
+
+		mnMantenimiento = new JMenu("Mantenimiento");
 		mnPrincipal.add(mnMantenimiento);
-		
-		JMenuItem mntmUser = new JMenuItem("Usuario");
-		mntmUser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Mantenimiento_Usuarios frm1=new Mantenimiento_Usuarios();
-				frm1.setVisible(true);
-			}
-		});
+
+		mntmUser = new JMenuItem("Usuario");
+		mntmUser.addActionListener(this);
 		mnMantenimiento.add(mntmUser);
-		
-		mntmUser.setIcon(getIcon("user.png",null));
-		
-		JMenuItem mntmArea = new JMenuItem("\u00C1rea");
+
+		mntmUser.setIcon(getIcon("user.png", null));
+
+		mntmArea = new JMenuItem("\u00C1rea");
 		mnMantenimiento.add(mntmArea);
-		mntmArea.setIcon(getIcon("house.png",null));
-		
-		JMenuItem mntmTipoIncidencia = new JMenuItem("Tipo de incidencia");
+		mntmArea.setIcon(getIcon("house.png", null));
+
+		mntmTipoIncidencia = new JMenuItem("Tipo de incidencia");
 		mnMantenimiento.add(mntmTipoIncidencia);
 		mntmTipoIncidencia.setIcon(getIcon("report_add.png", null));
-		
-		JMenuItem mntmTipoDocumento = new JMenuItem("Tipo de documento");
+
+		mntmTipoDocumento = new JMenuItem("Tipo de documento");
 		mnMantenimiento.add(mntmTipoDocumento);
-		mntmTipoDocumento.setIcon(getIcon("document.png",null));
-		
-		JMenuItem mntmEspecialista = new JMenuItem("Especialista");
+		mntmTipoDocumento.setIcon(getIcon("document.png", null));
+
+		mntmEspecialista = new JMenuItem("Especialista");
 		mnMantenimiento.add(mntmEspecialista);
-		mntmEspecialista.setIcon(getIcon("new.png",null));
-		
-		JMenu mnIncidencia = new JMenu("Incidencia");
+		mntmEspecialista.setIcon(getIcon("new.png", null));
+
+		mnIncidencia = new JMenu("Incidencia");
 		mnPrincipal.add(mnIncidencia);
-		
-		JMenuItem mntmIngreso = new JMenuItem("Ingreso");
+
+		mntmIngreso = new JMenuItem("Ingreso");
 		mnIncidencia.add(mntmIngreso);
-		
-		JMenuItem mntmListado = new JMenuItem("Listado");
+
+		mntmListado = new JMenuItem("Listado");
 		mnIncidencia.add(mntmListado);
-		
-		JMenuItem mntmUpdate = new JMenuItem("Actualizaci\u00F3n");
+
+		mntmUpdate = new JMenuItem("Actualizaci\u00F3n");
 		mnIncidencia.add(mntmUpdate);
-		
-		JMenu mnReportes = new JMenu("Reportes");
+
+		mnReportes = new JMenu("Reportes");
 		mnPrincipal.add(mnReportes);
-		
-		JMenuItem mntmInciArea = new JMenuItem("Incidencias por Area");
+
+		mntmInciArea = new JMenuItem("Incidencias por Area");
 		mnReportes.add(mntmInciArea);
-		
-		JMenuItem mntmInciTipo = new JMenuItem("Incidencia por tipo");
+
+		mntmInciTipo = new JMenuItem("Incidencia por tipo");
 		mnReportes.add(mntmInciTipo);
-		
-		JMenuItem mntmInciFecha = new JMenuItem("Incidencia por rango de fecha");
+
+		mntmInciFecha = new JMenuItem("Incidencia por rango de fecha");
 		mnReportes.add(mntmInciFecha);
-		
-		JMenuItem mntmInciFalla = new JMenuItem("Incencias falladas");
+
+		mntmInciFalla = new JMenuItem("Incencias falladas");
 		mnReportes.add(mntmInciFalla);
-		
-		JMenu mnAyuda = new JMenu("Ayuda");
+
+		mnAyuda = new JMenu("Ayuda");
 		mnPrincipal.add(mnAyuda);
-		
-		JMenuItem mntmAyuda = new JMenuItem("Acerca del programa");
+
+		mntmAyuda = new JMenuItem("Acerca del programa");
 		mnAyuda.add(mntmAyuda);
-		mntmAyuda.setIcon(getIcon("help.png",null));
+		mntmAyuda.setIcon(getIcon("help.png", null));
 	}
-	//Metodos para sacar las imagenes
-	
-		public ImageIcon getIcon (String icono, String size){
-			size="16";
-			java.net.URL imgUrl = getClass().getResource("img/"+size+"/" + icono);
-			if(imgUrl!=null){
-				ImageIcon imgIcon = new ImageIcon(imgUrl);
-				return imgIcon;
-			}else{
-				System.out.println("Error no se encontro el archivo "+ icono);
-			}
-			return null;
+
+	// METODOS PARA SACAR LAS IMAGENES
+
+	public ImageIcon getIcon(String icono, String size) {
+		size = "16";
+		java.net.URL imgUrl = getClass().getResource(
+				"img/" + size + "/" + icono);
+		if (imgUrl != null) {
+			ImageIcon imgIcon = new ImageIcon(imgUrl);
+			return imgIcon;
+		} else {
+			System.out.println("Error no se encontro el archivo " + icono);
 		}
+		return null;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		Object obj = e.getSource();
+		
+		if(obj==btnCerrarSesin){
+			principalForm.this.login.setVisible(true);
+			principalForm.this.login.setLocationRelativeTo(null);
+			dispose();	
+		}
+		
+		else if(obj == mntmSalir){
+			dispose();
+		}
+		
+		else if(obj == mntmUser){
+			Mantenimiento_Usuarios frm1 = new Mantenimiento_Usuarios();
+			frm1.setVisible(true);
+		}		
+		
+	
+	}
+	
+	
 }

@@ -36,8 +36,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 
 	DefaultTableModel tabla = new DefaultTableModel();
 
-	public void campos() {
-		// imprimir("Codigo \t Nombres \t Apellidos \t CodDoc \t Documento \t Area \t Correo \t Telefono \t Fecha \t Estado")
+	public void campos() {		
 		tabla.addColumn("Codigo");
 		tabla.addColumn("Nombres");
 		tabla.addColumn("Apellidos");
@@ -50,7 +49,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		tabla.addColumn("Estado");
 
 		tabla_usuarios.setModel(tabla);
-		/* cometario */
+		/* Comentario */
 	}
 
 	public void llenar_tabla() {

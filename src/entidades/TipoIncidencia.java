@@ -2,14 +2,14 @@ package entidades;
 
 public class TipoIncidencia {
 
-	//DECLARAMOS ATRIBUTOS
+	// DECLARAMOS ATRIBUTOS
 	private int codTipoInc; 		// Autogenerado
 	private String desTipoInc;
 	private String abTipoInc;
-	private int estTipoInc;		// 0 = No Activo
-								// 1 = Activo
-	
-	//DECLARAMOS METODOS GET/SET
+	private int estTipoInc; 		// 0 = No Activo
+									// 1 = Activo
+
+	// DECLARAMOS METODOS GET/SET
 	public int getCodTipoInc() {
 		return codTipoInc;
 	}
@@ -41,24 +41,14 @@ public class TipoIncidencia {
 	public void setEstTipoInc(int estTipoInc) {
 		this.estTipoInc = estTipoInc;
 	}
-	
-	//DECLARAMOS CONSTRUCTOR CON ATRIBUTOS
+
+	// DECLARAMOS CONSTRUCTOR CON ATRIBUTOS
 	public TipoIncidencia(int codTipoInc, String desTipoInc, String abTipoInc,
 			int estTipoInc) {
-		super();
 		this.codTipoInc = codTipoInc;
 		this.desTipoInc = desTipoInc;
 		this.abTipoInc = abTipoInc;
 		this.estTipoInc = estTipoInc;
 	}
-	
-	
 
-	//DECLARAMOS CONSTRUCTOR SIN ATRIBUTOS
-	public TipoIncidencia() {
-		super();
-	}
-
-	
-	
 }

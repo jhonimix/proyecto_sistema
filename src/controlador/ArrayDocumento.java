@@ -1,7 +1,6 @@
 package controlador;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import entidades.TipoDocumento;
@@ -21,34 +20,33 @@ public class ArrayDocumento {
 		cargar();
 	}
 
-	// METODO QUE DEVUELVE LA CANTIDAD DE DOCUMENTOS INGRESADOS 
-	public int tamaÃ±o() {
+	// METODO QUE DEVUELVE LA CANTIDAD DE DOCUMENTOS INGRESADOS
+	public int tamaño() {
 		return doc.size();
 	}
 
-	// mï¿½todo que reciba un objeto de la clase Empleado y lo adicione al
-	// Arreglo de objetos "emp"
+	// METODO QUE RECIBA UN OBJETO DE LA CLASE TIPODOCUMENTO Y LO ADICIONE AL
+	// ARREGLO "doc"
 	public void adicionar(TipoDocumento e) {
 		doc.add(e);
 	}
 
-	// mï¿½todo que reciba un objeto de la clase Empleado y elimine el objeto
-	// dentro del Arreglo "emp"
+	// METODO QUE RECIBA UN OBJETO DE LA CLASE TIPODOCUMENTO Y ELIMINE EL OBJETO
+	// DENTRO DEL ARREGLO "doc"
 	public void eliminar(TipoDocumento e) {
 		doc.remove(e);
 	}
 
-	// mï¿½todo que reciba una posiciï¿½n y retorne el objeto que se encuentra en
-	// el Arreglo "emp"
+	// METODO QUE RECIBA UNA POSICION Y RETORNE EL OBJETO QUE SE ENCUENTRA EN EL
+	// ARREGLO "doc"
 	public TipoDocumento obtener(int pos) {
 		return doc.get(pos);
 	}
 
-	// mï¿½todo que reciba un cï¿½digo a buscar y retorne el objeto que se encuentra
-	// en
-	// el Arreglo "emp" caso contrario retorne null
+	// METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL OBJETO QUE SE ENCUENTRA
+	// DENTRO DEL ARREGLO "doc"
+	// CASO CONTRARIO DEVUELVE NULL
 	public TipoDocumento buscar(int cod) {
-		// usando for "foreach"
 		for (TipoDocumento x : doc) {
 			if (x.getCodDoc() == cod)
 				return x;
@@ -56,23 +54,23 @@ public class ArrayDocumento {
 		return null;
 	}
 
-	// Grabar de la memoria al archivo de texto
+	// GRABAR DE LA MEMORIA AL ARCHIVO DE TEXTO
 	public void grabar() {
 
 		try {
 
-			PrintWriter pw = new PrintWriter(
-					new FileWriter("data/tipodocumento.txt"));
+			PrintWriter pw = new PrintWriter(new FileWriter(
+					"data/tipodocumento.txt"));
 			String linea;
 
 			for (TipoDocumento c : doc) {
-				// la variable linea almacena el registro actual
+				// LA VARIABLE LINEA ALMACENA EL REGISTRO ACTUAL
 				linea = c.getCodDoc() + "," + c.getDesDoc() + ","
 						+ c.getAbrDoc() + "," + c.getStatusDoc();
-				// grabar el registro actual en el archivo "tipodocumento.txt"
+				// GRABAR EL REGISTRO ACTUAL EN EL ARCHIVO "tipodocumento.txt"
 				pw.println(linea);
 			}
-			// cerrar el archivo
+			// CERRAR EL ARCHIVO
 			pw.close();
 
 		} catch (Exception e) {
@@ -81,24 +79,24 @@ public class ArrayDocumento {
 		}
 	}
 
-	// graba del archivo de texto a la memoria(Arraylist)
+	// GRABA DEL ARCHIVO DE TEXTO A LA MEMORIA(ARRAYLIST)
 	public void cargar() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(
 					"data/tipodocumento.txt"));
 			String linea;
 			while ((linea = br.readLine()) != null) {
-				// crear un arreglo del tipo string separando losca mpos
+				// CREAR UN ARREGLO DEL TIPO STRING SEPARANDO LOS CAMPOS
 				String row[] = linea.split(",");
-				// creamos el objeto
+				// CREAMOS EL OBJETO "c"
 				TipoDocumento c = new TipoDocumento(Integer.parseInt(row[0]),
 						row[1], row[2], Integer.parseInt(row[3]));
-				// enviar objeto "c" al arreglo "doc"
+				// ENVIAR EL OBJETO "c" AL ARREGLO "doc"
 				doc.add(c);
 			}
+			br.close();
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}

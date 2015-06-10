@@ -1,16 +1,16 @@
 package entidades;
 
 public class TipoDocumento {
-	
-	//DECLARAMOS ATRIBUTOS
-	private int codDoc;	//Autogenerado
+
+	// DECLARAMOS ATRIBUTOS
+	private int codDoc; 		// Autogenerado
 	private String desDoc;
 	private String abrDoc;
-	private int statusDoc;	// 0 = No Activo
-							// 1 = ACtivo
-	
-	//DECLARAMOS METODOS GET/SET
-	
+	private int statusDoc; 		// 0 = No Activo
+								// 1 = ACtivo
+
+	// DECLARAMOS METODOS GET/SET
+
 	public int getCodDoc() {
 		return codDoc;
 	}
@@ -42,23 +42,13 @@ public class TipoDocumento {
 	public void setStatusDoc(int statusDoc) {
 		this.statusDoc = statusDoc;
 	}
-	
-	//DECLARAMOS CONSTRUCTOR CON ATRIBUTOS
+
+	// DECLARAMOS CONSTRUCTOR CON ATRIBUTOS
 	public TipoDocumento(int codDoc, String desDoc, String abrDoc, int statusDoc) {
-		super();
 		this.codDoc = codDoc;
 		this.desDoc = desDoc;
 		this.abrDoc = abrDoc;
 		this.statusDoc = statusDoc;
 	}
-	
-	
 
-	//DECLARAMOS CONSTRUCTOR SIN ATRIBUTOS
-	public TipoDocumento() {
-		super();
-	}
-
-	
-	
 }

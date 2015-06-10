@@ -2,17 +2,17 @@ package entidades;
 
 public class Especialista {
 
-	//DECLARAMOS ATRIBUTOS
-	private int codEsp;			// Autogenerado
+	// DECLARAMOS ATRIBUTOS
+	private int codEsp; 			// Autogenerado
 	private String nomEsp;
 	private String apeEsp;
 	private String espEsp;
 	private String anexoEsp;
-	private String fecIngEsp;		// DD/MM/AAAA
-	private int statusEsp;			// 0 = No activo
+	private String fecIngEsp; 		// DD/MM/AAAA
+	private int statusEsp; 			// 0 = No activo
 									// 1 = Activo
-	
-	//DECLARAMOS METODOS GET/SET
+
+	// DECLARAMOS METODOS GET/SET
 	public int getCodEsp() {
 		return codEsp;
 	}
@@ -68,11 +68,11 @@ public class Especialista {
 	public void setStatusEsp(int statusEsp) {
 		this.statusEsp = statusEsp;
 	}
-	
-	//DECLARAMOS CONSTRUCTOR CON ATRIBUTOS
+
+	// DECLARAMOS CONSTRUCTOR CON ATRIBUTOS
 	public Especialista(int codEsp, String nomEsp, String apeEsp,
 			String espEsp, String anexoEsp, String fecIngEsp, int statusEsp) {
-		super();
+		
 		this.codEsp = codEsp;
 		this.nomEsp = nomEsp;
 		this.apeEsp = apeEsp;
@@ -81,13 +81,5 @@ public class Especialista {
 		this.fecIngEsp = fecIngEsp;
 		this.statusEsp = statusEsp;
 	}
-	
-	
 
-	//DECLARAMOS CONSTRUCTOR SIN ATRIBUTOS
-	public Especialista() {
-		super();
-	}
-	
-	
 }
