@@ -16,18 +16,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-import controlador.*;
-
 import javax.swing.border.BevelBorder;
 
-public class principalForm extends JFrame implements ActionListener {
-	
-	//DECLARAMOS AREGLOS COMO VARIABLES GLOBALES
-	ArrayUsuario a = new ArrayUsuario();
-	ArrayArea b = new ArrayArea();
-	ArrayDocumento c = new ArrayDocumento();
-	ArrayEspecialista d = new ArrayEspecialista();
-	ArrayTipoIncidencia e = new ArrayTipoIncidencia();
+public class principalForm extends JFrame implements ActionListener {	
 	
 	gui.loginForm login = new gui.loginForm();
 
@@ -140,6 +131,7 @@ public class principalForm extends JFrame implements ActionListener {
 		mntmTipoIncidencia.setIcon(getIcon("report_add.png", null));
 
 		mntmTipoDocumento = new JMenuItem("Tipo de documento");
+		mntmTipoDocumento.addActionListener(this);
 		mnMantenimiento.add(mntmTipoDocumento);
 		mntmTipoDocumento.setIcon(getIcon("document.png", null));
 
@@ -215,7 +207,11 @@ public class principalForm extends JFrame implements ActionListener {
 		else if(obj == mntmUser){
 			Mantenimiento_Usuarios frm1 = new Mantenimiento_Usuarios();
 			frm1.setVisible(true);
-		}		
+		}	
+		else if (obj == mntmTipoDocumento) {
+			MantenimientoDocumento frm2 = new MantenimientoDocumento();
+			frm2.setVisible(true);
+		}
 		
 	
 	}

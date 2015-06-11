@@ -1,12 +1,7 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTable;
@@ -15,12 +10,10 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import entidades.Usuario;
 import controlador.ArrayUsuario;
-
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,60 +22,22 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.border.BevelBorder;
 
-public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
-		MouseListener {
+public class Mantenimiento_Usuarios extends JDialog implements ActionListener, MouseListener {
 
+	//DECLARAMOS VARIABLES GLOBALES
 	ArrayUsuario a = new ArrayUsuario();
-
 	DefaultTableModel tabla = new DefaultTableModel();
-
-	public void campos() {		
-		tabla.addColumn("Codigo");
-		tabla.addColumn("Nombres");
-		tabla.addColumn("Apellidos");
-		tabla.addColumn("CodDoc");
-		tabla.addColumn("Documento");
-		tabla.addColumn("Area");
-		tabla.addColumn("Correo");
-		tabla.addColumn("Telefono");
-		tabla.addColumn("Fecha");
-		tabla.addColumn("Estado");
-
-		tabla_usuarios.setModel(tabla);
-		/* Comentario */
-	}
-
-	public void llenar_tabla() {
-		tabla.addRow(new Object[] { getCodigo(), getNombre(), getApellidos(),
-				getCodDocum(), getDocumento(), getArea(), getCorreo(),
-				getTelefono(), getFechaIng(), getEstado() });
-		tabla_usuarios.setModel(tabla);
-	}
-
-	public void mostrar_usuarios() {
-		ArrayList<Usuario> lista = new ArrayList<Usuario>();
-		lista = a.ListarUsuario();
-		tabla.setRowCount(0);
-		for (Usuario x : lista) {
-			tabla.addRow(new Object[] { x.getCodUser(), x.getNameUser(),
-					x.getLastnameUser(), x.getCodDocUser(), x.getDniUser(),
-					x.getArea(), x.getEmail(), x.getFono(),
-					x.getFechaIngreso(), x.getStatus() });
-			
-		}
-		tabla_usuarios.setModel(tabla);
-	}
-
-	private JLabel lblCdigoDeUsuario;
+	
+	private JLabel lblCodigo;
 	private JLabel lblNombres;
 	private JLabel lblApellidos;
-	private JLabel lblCdigoDeTipo;
+	private JLabel lblCodigoDoc;
 	private JTextField txtNombres;
 	private JTextField txtApellidos;
 	private JTextField txtCodDoc;
 	private JTextField txtCodigo;
 	private JLabel lblDocumentoDeIndentidad;
-	private JLabel lblrea;
+	private JLabel lblArea;
 	private JLabel lblCorreo;
 	private JLabel lblTelfono;
 	private JTextField txtDocumento;
@@ -103,6 +58,42 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 	private JTable tabla_usuarios;
 	private JLabel lblNewLabel;
 	private JButton btnBuscar;
+	private JComboBox cboDocUsu,cboAreaUsu,cboStatusUsu;
+
+	public void campos() {
+		tabla.addColumn("Codigo");
+		tabla.addColumn("Nombres");
+		tabla.addColumn("Apellidos");
+		tabla.addColumn("CodDoc");
+		tabla.addColumn("Documento");
+		tabla.addColumn("Area");
+		tabla.addColumn("Correo");
+		tabla.addColumn("Telefono");
+		tabla.addColumn("Fecha");
+		tabla.addColumn("Estado");
+		//MOSTRAMOS LOS CAMPOS EN TABLA
+		tabla_usuarios.setModel(tabla);
+	}
+
+	public void llenar_tabla() {
+		tabla.addRow(new Object[] { getCodigo(), getNombre(), getApellidos(), getCodDocum(), getDocumento(), 
+									getArea(), getCorreo(), getTelefono(), getFechaIng(), getEstado() });
+		tabla_usuarios.setModel(tabla);
+	}
+
+	public void mostrar_usuarios() {
+		ArrayList<Usuario> lista = new ArrayList<Usuario>();
+		lista = a.ListarUsuario();
+		tabla.setRowCount(0);
+		for (Usuario x : lista) {
+			tabla.addRow(new Object[] { x.getCodUser(), x.getNameUser(), x.getLastnameUser(), x.getCodDocUser(), x.getDniUser(),
+										x.getArea(), x.getEmail(), x.getFono(), x.getFechaIngreso(), x.getStatus() });
+
+		}
+		tabla_usuarios.setModel(tabla);
+	}
+
+	
 
 	/**
 	 * Launch the application.
@@ -122,9 +113,9 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		setBounds(100, 100, 981, 711);
 		getContentPane().setLayout(null);
 
-		lblCdigoDeUsuario = new JLabel("C\u00F3digo de Usuario :");
-		lblCdigoDeUsuario.setBounds(10, 90, 130, 25);
-		getContentPane().add(lblCdigoDeUsuario);
+		lblCodigo = new JLabel("Codigo de Usuario :");
+		lblCodigo.setBounds(10, 90, 130, 25);
+		getContentPane().add(lblCodigo);
 
 		lblNombres = new JLabel("Nombres :");
 		lblNombres.setBounds(10, 126, 130, 25);
@@ -134,18 +125,18 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		lblApellidos.setBounds(10, 162, 130, 25);
 		getContentPane().add(lblApellidos);
 
-		lblCdigoDeTipo = new JLabel("C\u00F3digo de Tipo Documento :");
-		lblCdigoDeTipo.setBounds(10, 198, 157, 25);
-		getContentPane().add(lblCdigoDeTipo);
+		lblCodigoDoc = new JLabel("Codigo de Tipo Documento :");
+		lblCodigoDoc.setBounds(10, 198, 157, 25);
+		getContentPane().add(lblCodigoDoc);
 
 		txtNombres = new JTextField();
-		txtNombres.setBounds(177, 126, 106, 25);
+		txtNombres.setBounds(177, 126, 157, 25);
 		getContentPane().add(txtNombres);
 		txtNombres.setColumns(10);
 
 		txtApellidos = new JTextField();
 		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(177, 162, 106, 25);
+		txtApellidos.setBounds(177, 162, 157, 25);
 		getContentPane().add(txtApellidos);
 
 		txtCodDoc = new JTextField();
@@ -163,15 +154,15 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		lblDocumentoDeIndentidad.setBounds(10, 234, 168, 25);
 		getContentPane().add(lblDocumentoDeIndentidad);
 
-		lblrea = new JLabel("\u00C1rea :");
-		lblrea.setBounds(367, 90, 89, 25);
-		getContentPane().add(lblrea);
+		lblArea = new JLabel("Area :");
+		lblArea.setBounds(367, 90, 89, 25);
+		getContentPane().add(lblArea);
 
 		lblCorreo = new JLabel("Correo :");
 		lblCorreo.setBounds(367, 126, 97, 25);
 		getContentPane().add(lblCorreo);
 
-		lblTelfono = new JLabel("Tel\u00E9fono :");
+		lblTelfono = new JLabel("Telefono :");
 		lblTelfono.setBounds(367, 162, 97, 25);
 		getContentPane().add(lblTelfono);
 
@@ -197,8 +188,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 
 		lblMantenimientoDeUsuarios = new JLabel("MANTENIMIENTO DE USUARIOS");
 		lblMantenimientoDeUsuarios.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblMantenimientoDeUsuarios
-				.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMantenimientoDeUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMantenimientoDeUsuarios.setBounds(10, 11, 948, 40);
 		getContentPane().add(lblMantenimientoDeUsuarios);
 
@@ -231,7 +221,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		getContentPane().add(btnEliminar);
 
 		label = new JLabel(
-				"---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		"---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		label.setBounds(10, 54, 959, 25);
 		getContentPane().add(label);
 
@@ -256,8 +246,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		getContentPane().add(btnRegistrar);
 
 		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null,
-				null, null));
+		lblNewLabel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		lblNewLabel.setBounds(716, 95, 211, 214);
 		getContentPane().add(lblNewLabel);
 
@@ -265,6 +254,28 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		btnBuscar.addActionListener(this);
 		btnBuscar.setBounds(307, 302, 89, 23);
 		getContentPane().add(btnBuscar);
+
+		cboAreaUsu = new JComboBox();
+		cboAreaUsu.setBounds(541, 92, 137, 20);
+		cboAreaUsu.addItem("");
+		cboAreaUsu.addItem("SISTEMAS");
+		cboAreaUsu.addItem("LOGISTICA");
+		cboAreaUsu.addItem("RRHH");
+		getContentPane().add(cboAreaUsu);
+
+		cboStatusUsu = new JComboBox();
+		cboStatusUsu.setBounds(541, 236, 137, 20);
+		cboStatusUsu.addItem("ACTIVO");
+		cboStatusUsu.addItem("INACTIVO");
+		getContentPane().add(cboStatusUsu);
+
+		cboDocUsu = new JComboBox();
+		cboDocUsu.setBounds(237, 200, 97, 20);
+		cboDocUsu.addItem("");
+		cboDocUsu.addItem("DNI");
+		cboDocUsu.addItem("LIBRETA MILITAR");
+		cboDocUsu.addItem("PASAPORTE");
+		getContentPane().add(cboDocUsu);
 
 	}
 
@@ -282,17 +293,17 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		return txtApellidos.getText();
 	}
 
-	int getCodDocum() {
+	/*int getCodDocum() {	//TEXTBOX
 		return Integer.parseInt(txtCodDoc.getText());
-	}
+	}*/
 
 	String getDocumento() {
 		return txtDocumento.getText();
 	}
 
-	int getArea() {
+	/*int getArea() {		//TEXTBOX
 		return Integer.parseInt(txtArea.getText());
-	}
+	}*/
 
 	String getCorreo() {
 		return txtCorreo.getText();
@@ -306,10 +317,21 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		return txtFechaIng.getText();
 	}
 
-	int getEstado() {
+	/*int getEstado() {		//TEXTBOX
 		return Integer.parseInt(txtEstado.getText());
+	}*/
+	int getEstado() {		//COMBOBOX
+		return cboStatusUsu.getSelectedIndex();
 	}
 
+	int getArea() {			//COMBOBOX
+		return cboAreaUsu.getSelectedIndex();
+	}
+	
+	int getCodDocum() {		//COMBOBOX
+		return cboDocUsu.getSelectedIndex();
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnBuscar) {
 			do_btnBuscar_actionPerformed(e);
@@ -330,14 +352,22 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 
 	protected void do_btnNuevo_actionPerformed(ActionEvent e) {
 		txtCodigo.setText("" + a.GeneraCodigo());
+		txtNombres.setText("");
+		txtApellidos.setText("");
+		txtDocumento.setText("");
+		txtCorreo.setText("");
+		txtFechaIng.setText("");
+		txtTelefono.setText("");
+		cboAreaUsu.setSelectedIndex(0);
+		cboDocUsu.setSelectedIndex(0);
+		cboStatusUsu.setSelectedIndex(0);
 	}
 
 	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {
 		Usuario x = a.buscar(getCodigo());
 		if (x == null) {
-			x = new Usuario(getCodigo(), getNombre(), getApellidos(),
-					getCodDocum(), getDocumento(), getArea(), getCorreo(),
-					getTelefono(), getFechaIng(), getEstado());
+			x = new Usuario(getCodigo(), getNombre(), getApellidos(), getCodDocum(), getDocumento(), 
+							getArea(), getCorreo(), getTelefono(), getFechaIng(), getEstado());
 			a.adicionar(x);
 		} else {
 			JOptionPane.showMessageDialog(null, "El Usuario ya existe...!! NJD");
@@ -365,10 +395,9 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 
 	public void mouseReleased(MouseEvent arg0) {
 	}
-
-	protected void do_tabla_usuarios_mouseClicked(MouseEvent arg0) {
-		int fila = tabla_usuarios.getSelectedRow();
-
+	
+	public void LlenarTextBox(int fila){
+		
 		txtCodigo.setText(tabla.getValueAt(fila, 0).toString());
 		txtNombres.setText(tabla.getValueAt(fila, 1).toString());
 		txtApellidos.setText(tabla.getValueAt(fila, 2).toString());
@@ -379,7 +408,15 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 		txtTelefono.setText(tabla.getValueAt(fila, 7).toString());
 		txtFechaIng.setText(tabla.getValueAt(fila, 8).toString());
 		txtEstado.setText(tabla.getValueAt(fila, 9).toString());
+		
+		cboStatusUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,9).toString()));
+		cboAreaUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,5).toString()));
+		cboDocUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
+	}
 
+	protected void do_tabla_usuarios_mouseClicked(MouseEvent arg0) {
+		int fila = tabla_usuarios.getSelectedRow();		
+		LlenarTextBox(fila);
 	}
 
 	protected void do_btnModificar_actionPerformed(ActionEvent e) {
@@ -408,8 +445,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 			JOptionPane.showMessageDialog(null, "El usuario no existe..!!");
 		} else {
 			a.eliminar(z);
-			JOptionPane.showMessageDialog(null,
-					"La operación se realizo con éxtio");
+			JOptionPane.showMessageDialog(null,	"La operación se realizo con éxtio");
 
 		}
 		a.grabar();
@@ -419,28 +455,35 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener,
 
 	protected void do_btnBuscar_actionPerformed(ActionEvent e) {
 
-		int codigo = Integer.parseInt(JOptionPane
-				.showInputDialog("Ingrese el número de código"));
+		//MUESTRA VENTANA PARA COLOCAR EL CODIGO A BUSCAR
+		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de código"));
+		
+		//BUSCA EL OBJETO EN EL ARREGLO Y GUARDA LA INFORMACION EN EL OBJETO "x"
 		Usuario x = a.buscar(codigo);
 
-		int fila = x.getCodUser() - 1;
-
-		if (x == null)
+		if (x == null){
 			JOptionPane.showMessageDialog(null, "El usuario no existe..!!");
-		else {
-
-			txtCodigo.setText(tabla.getValueAt(fila, 0).toString());
-			txtNombres.setText(tabla.getValueAt(fila, 1).toString());
-			txtApellidos.setText(tabla.getValueAt(fila, 2).toString());
-			txtCodDoc.setText(tabla.getValueAt(fila, 3).toString());
-			txtDocumento.setText(tabla.getValueAt(fila, 4).toString());
-			txtArea.setText(tabla.getValueAt(fila, 5).toString());
-			txtCorreo.setText(tabla.getValueAt(fila, 6).toString());
-			txtTelefono.setText(tabla.getValueAt(fila, 7).toString());
-			txtFechaIng.setText(tabla.getValueAt(fila, 8).toString());
-			txtEstado.setText(tabla.getValueAt(fila, 9).toString());
-
+			return;
 		}
-
+		else {
+			
+			//FILA ALMACENA EL CODIGO DEL OBJETO
+			int fila = x.getCodUser();
+			
+			for(int i=0; i<=tabla.getRowCount();i++){
+				if(tabla.getValueAt(i,0).equals(fila)){		
+					LlenarTextBox(i);
+					break;
+				}
+			}
+			
+		}
+		
 	}
+	
+	
+	
+	
+	
+	
 }
