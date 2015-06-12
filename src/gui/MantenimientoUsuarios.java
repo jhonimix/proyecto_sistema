@@ -27,7 +27,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.border.BevelBorder;
 
-public class Mantenimiento_Usuarios extends JDialog implements ActionListener, MouseListener {
+public class MantenimientoUsuarios extends JDialog implements ActionListener, MouseListener {
 
 	//DECLARAMOS VARIABLES GLOBALES
 	ArrayUsuario a = new ArrayUsuario();
@@ -86,7 +86,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 	 */
 	public static void main(String[] args) {
 		try {
-			Mantenimiento_Usuarios dialog = new Mantenimiento_Usuarios();
+			MantenimientoUsuarios dialog = new MantenimientoUsuarios();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -94,7 +94,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		}
 	}
 
-	public Mantenimiento_Usuarios() {
+	public MantenimientoUsuarios() {
 
 		setBounds(100, 100, 981, 711);
 		getContentPane().setLayout(null);

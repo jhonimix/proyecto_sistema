@@ -205,7 +205,7 @@ public class principalForm extends JFrame implements ActionListener {
 		}
 		
 		else if(obj == mntmUser){
-			Mantenimiento_Usuarios frm1 = new Mantenimiento_Usuarios();
+			MantenimientoUsuarios frm1 = new MantenimientoUsuarios();
 			frm1.setVisible(true);
 		}	
 		else if (obj == mntmTipoDocumento) {
