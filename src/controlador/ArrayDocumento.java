@@ -1,4 +1,5 @@
 package controlador;
+
 import entidades.TipoDocumento;
 
 import java.io.*;

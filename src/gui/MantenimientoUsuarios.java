@@ -26,6 +26,13 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.SoftBevelBorder;
 
 public class MantenimientoUsuarios extends JDialog implements ActionListener, MouseListener {
 
@@ -56,7 +63,6 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	private JTextField txtFechaIng;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	private JLabel label;
 	private JScrollPane scrollPane;
 	private JButton btnNuevo;
 	private JButton btnRegistrar;
@@ -64,6 +70,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	private JLabel lblNewLabel;
 	private JButton btnBuscar;
 	private JComboBox<String> cboDocUsu,cboAreaUsu,cboStatusUsu;
+	private JSeparator separator;
 
 	public void campos() {
 		tabla.addColumn("Codigo");
@@ -191,12 +198,8 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		btnEliminar.setBounds(406, 302, 89, 23);
 		getContentPane().add(btnEliminar);
 
-		label = new JLabel(
-		"---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		label.setBounds(10, 54, 959, 25);
-		getContentPane().add(label);
-
 		scrollPane = new JScrollPane();
+		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scrollPane.setBounds(10, 359, 948, 271);
 		getContentPane().add(scrollPane);
 
@@ -233,14 +236,18 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 
 		cboStatusUsu = new JComboBox<String>();
 		cboStatusUsu.setBounds(483, 236, 140, 20);
+		cboStatusUsu.addItem("NO ACTIVO");
 		cboStatusUsu.addItem("ACTIVO");
-		cboStatusUsu.addItem("INACTIVO");
 		getContentPane().add(cboStatusUsu);
 
 		cboDocUsu = new JComboBox<String>();
 		cboDocUsu.setBounds(177, 200, 120, 20);
 		cboDocUsu.addItem("");
 		getContentPane().add(cboDocUsu);
+		
+		separator = new JSeparator();
+		separator.setBounds(10, 62, 948, 7);
+		getContentPane().add(separator);
 		
 		
 		llenarCombos();
@@ -262,7 +269,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 			
 			for(int i=0;i<c.tamaño();i++){
 				cboDocUsu.addItem(n[i]);		
-				System.out.print(n[i]+"\n");
+				//System.out.print(n[i]+"\n");
 			}
 			
 			//COMBO AREA
@@ -278,7 +285,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 			
 			for(int i=0;i<b.tamaño();i++){
 				cboAreaUsu.addItem(n2[i]);		
-				System.out.print(n2[i]+",");
+				//System.out.print(n2[i]+",");
 			}
 		}
 

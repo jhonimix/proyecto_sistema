@@ -1,6 +1,11 @@
 package gui;
 
+import gui.MantenimientoDocumento;
+import gui.MantenimientoIncidencia;
+
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,8 +20,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
-
-import javax.swing.border.BevelBorder;
+import javax.swing.JSeparator;
 
 public class principalForm extends JFrame implements ActionListener {	
 	
@@ -75,6 +79,7 @@ public class principalForm extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public principalForm() {
+				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 431);
 		contentPane = new JPanel();
@@ -92,9 +97,12 @@ public class principalForm extends JFrame implements ActionListener {
 		contentPane.add(btnCerrarSesin);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(44, 55, 600, 177);
+		panel.setBounds(44, 71, 618, 274);
 		contentPane.add(panel);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(44, 44, 618, 14);
+		contentPane.add(separator);
 
 		mnPrincipal = new JMenuBar();
 		setJMenuBar(mnPrincipal);
@@ -127,6 +135,7 @@ public class principalForm extends JFrame implements ActionListener {
 		mntmArea.setIcon(getIcon("house.png", null));
 
 		mntmTipoIncidencia = new JMenuItem("Tipo de incidencia");
+		mntmTipoIncidencia.addActionListener(this);
 		mnMantenimiento.add(mntmTipoIncidencia);
 		mntmTipoIncidencia.setIcon(getIcon("report_add.png", null));
 
@@ -136,6 +145,7 @@ public class principalForm extends JFrame implements ActionListener {
 		mntmTipoDocumento.setIcon(getIcon("document.png", null));
 
 		mntmEspecialista = new JMenuItem("Especialista");
+		mntmEspecialista.addActionListener(this);
 		mnMantenimiento.add(mntmEspecialista);
 		mntmEspecialista.setIcon(getIcon("new.png", null));
 
@@ -205,16 +215,22 @@ public class principalForm extends JFrame implements ActionListener {
 		}
 		
 		else if(obj == mntmUser){
-			MantenimientoUsuarios frm1 = new MantenimientoUsuarios();
-			frm1.setVisible(true);
+			MantenimientoUsuarios frmUsuario = new MantenimientoUsuarios();
+			frmUsuario.setVisible(true);
 		}	
 		else if (obj == mntmTipoDocumento) {
-			MantenimientoDocumento frm2 = new MantenimientoDocumento();
-			frm2.setVisible(true);
+			MantenimientoDocumento frmDocumento = new MantenimientoDocumento();
+			frmDocumento.setVisible(true);
 		}
-		
+		else if (obj == mntmTipoIncidencia) {
+			MantenimientoIncidencia frmTipoIncidencia = new MantenimientoIncidencia();
+			frmTipoIncidencia.setVisible(true);
+		}
+		else if (obj == mntmEspecialista) {
+			MantenimientoEspecialista frmEspecialista = new MantenimientoEspecialista();
+			frmEspecialista.setVisible(true);
+		}
 	
 	}
-	
 	
 }
