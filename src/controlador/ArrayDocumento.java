@@ -40,17 +40,8 @@ public class ArrayDocumento {
 	// ARREGLO "doc"
 	public TipoDocumento obtener(int pos) {
 		return doc.get(pos);
-	}
-	public int generarCodigo(){
-		int cod = 0;
-		if (tamaño() == 0) {
-			cod = 1;
-		} else {
-			cod = doc.get(tamaño() - 1).getCodDoc() + 1;
-		}
-		return cod;
-		
-	}
+	}	
+	
 	// METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL OBJETO QUE SE ENCUENTRA
 	// DENTRO DEL ARREGLO "doc"
 	// CASO CONTRARIO DEVUELVE NULL
@@ -60,6 +51,21 @@ public class ArrayDocumento {
 				return x;
 		}
 		return null;
+	}
+	
+	// //////////////////////////////
+	// GENERAR CODIGO AUTOMATICO //
+	// //////////////////////////////
+	public int GeneraCodigo() {
+		int cod = 0;
+
+		if (tamaño() == 0) {
+			cod = 1;
+		} else {
+			cod = doc.get(tamaño() - 1).getCodDoc() + 1;
+		}
+		return cod;
+
 	}
 
 	// GRABAR DE LA MEMORIA AL ARCHIVO DE TEXTO

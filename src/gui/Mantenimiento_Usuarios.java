@@ -12,7 +12,11 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import entidades.Area;
+import entidades.TipoDocumento;
 import entidades.Usuario;
+import controlador.ArrayArea;
+import controlador.ArrayDocumento;
 import controlador.ArrayUsuario;
 
 import java.awt.event.ActionListener;
@@ -27,6 +31,9 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 
 	//DECLARAMOS VARIABLES GLOBALES
 	ArrayUsuario a = new ArrayUsuario();
+	ArrayArea b = new ArrayArea();
+	ArrayDocumento c = new ArrayDocumento();
+	
 	DefaultTableModel tabla = new DefaultTableModel();
 	
 	private JLabel lblCodigo;
@@ -35,21 +42,18 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 	private JLabel lblCodigoDoc;
 	private JTextField txtNombres;
 	private JTextField txtApellidos;
-	private JTextField txtCodDoc;
 	private JTextField txtCodigo;
 	private JLabel lblDocumentoDeIndentidad;
 	private JLabel lblArea;
 	private JLabel lblCorreo;
 	private JLabel lblTelfono;
 	private JTextField txtDocumento;
-	private JTextField txtArea;
 	private JTextField txtCorreo;
 	private JTextField txtTelefono;
 	private JLabel lblMantenimientoDeUsuarios;
 	private JLabel lblFechaDeIngreso;
 	private JLabel lblEstado;
 	private JTextField txtFechaIng;
-	private JTextField txtEstado;
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JLabel label;
@@ -59,7 +63,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 	private JTable tablaUsuarios;
 	private JLabel lblNewLabel;
 	private JButton btnBuscar;
-	private JComboBox cboDocUsu,cboAreaUsu,cboStatusUsu;
+	private JComboBox<String> cboDocUsu,cboAreaUsu,cboStatusUsu;
 
 	public void campos() {
 		tabla.addColumn("Codigo");
@@ -121,11 +125,6 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		txtApellidos.setBounds(177, 162, 157, 25);
 		getContentPane().add(txtApellidos);
 
-		txtCodDoc = new JTextField();
-		txtCodDoc.setColumns(10);
-		txtCodDoc.setBounds(177, 198, 50, 25);
-		getContentPane().add(txtCodDoc);
-
 		txtCodigo = new JTextField();
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
@@ -150,13 +149,8 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 
 		txtDocumento = new JTextField();
 		txtDocumento.setColumns(10);
-		txtDocumento.setBounds(177, 234, 106, 25);
+		txtDocumento.setBounds(177, 234, 120, 25);
 		getContentPane().add(txtDocumento);
-
-		txtArea = new JTextField();
-		txtArea.setColumns(10);
-		txtArea.setBounds(483, 90, 48, 25);
-		getContentPane().add(txtArea);
 
 		txtCorreo = new JTextField();
 		txtCorreo.setColumns(10);
@@ -186,11 +180,6 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		txtFechaIng.setColumns(10);
 		txtFechaIng.setBounds(483, 198, 97, 25);
 		getContentPane().add(txtFechaIng);
-
-		txtEstado = new JTextField();
-		txtEstado.setColumns(10);
-		txtEstado.setBounds(483, 234, 48, 25);
-		getContentPane().add(txtEstado);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(this);
@@ -237,29 +226,61 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		btnBuscar.setBounds(307, 302, 89, 23);
 		getContentPane().add(btnBuscar);
 
-		cboAreaUsu = new JComboBox();
-		cboAreaUsu.setBounds(541, 92, 137, 20);
+		cboAreaUsu = new JComboBox<String>();
+		cboAreaUsu.setBounds(483, 92, 195, 20);
 		cboAreaUsu.addItem("");
-		cboAreaUsu.addItem("SISTEMAS");
-		cboAreaUsu.addItem("LOGISTICA");
-		cboAreaUsu.addItem("RRHH");
 		getContentPane().add(cboAreaUsu);
 
-		cboStatusUsu = new JComboBox();
-		cboStatusUsu.setBounds(541, 236, 137, 20);
+		cboStatusUsu = new JComboBox<String>();
+		cboStatusUsu.setBounds(483, 236, 140, 20);
 		cboStatusUsu.addItem("ACTIVO");
 		cboStatusUsu.addItem("INACTIVO");
 		getContentPane().add(cboStatusUsu);
 
-		cboDocUsu = new JComboBox();
-		cboDocUsu.setBounds(237, 200, 97, 20);
+		cboDocUsu = new JComboBox<String>();
+		cboDocUsu.setBounds(177, 200, 120, 20);
 		cboDocUsu.addItem("");
-		cboDocUsu.addItem("DNI");
-		cboDocUsu.addItem("LIBRETA MILITAR");
-		cboDocUsu.addItem("PASAPORTE");
 		getContentPane().add(cboDocUsu);
+		
+		
+		llenarCombos();
 
 	}
+	
+	//LLENAR COMBOS
+		public void llenarCombos(){
+			//COMBO TIPO DE DOCUMENTO
+			ArrayList<TipoDocumento> x1 = new ArrayList<TipoDocumento>();
+			x1 = c.ListarDocumento();
+			
+			String n[]= new String[c.tamaño()]; int indice=0;
+			
+			for(TipoDocumento a: x1){
+				n[indice] = a.getAbrDoc();
+				indice++;
+			}
+			
+			for(int i=0;i<c.tamaño();i++){
+				cboDocUsu.addItem(n[i]);		
+				System.out.print(n[i]+"\n");
+			}
+			
+			//COMBO AREA
+			ArrayList<Area> x2 = new ArrayList<Area>();
+			x2=b.ListarArea();
+			
+			String n2[]= new String[b.tamaño()]; int indice2=0;
+			
+			for(Area b: x2){
+				n2[indice2] = b.getNameSmallArea();
+				indice2++;
+			}
+			
+			for(int i=0;i<b.tamaño();i++){
+				cboAreaUsu.addItem(n2[i]);		
+				System.out.print(n2[i]+",");
+			}
+		}
 
 	// METODOS
 
@@ -324,25 +345,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		}
 	}
 
-	protected void do_btnNuevo_actionPerformed(ActionEvent e) {
-		nuevo();
-	}
-
-	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {
-		Usuario x = a.buscar(getCodigo());
-		if (x == null) {
-			x = new Usuario(getCodigo(), getNombre(), getApellidos(), getCodDocum(), getDocumento(), 
-							getArea(), getCorreo(), getTelefono(), getFechaIng(), getEstado());
-			a.adicionar(x);
-		} else {
-			JOptionPane.showMessageDialog(null, "El Usuario ya existe...!! NJD");
-		}
-		rellenarTabla();
-		a.grabar();
-		mostrarUsuarios();
-
-	}
-
+	//AL DAR CLIC EN UNA FILA MUESTRA LOS DATOS EN LOS TEXTBOX
 	public void mouseClicked(MouseEvent arg0) {
 		if (arg0.getSource() == tablaUsuarios) {
 			do_tabla_usuarios_mouseClicked(arg0);
@@ -364,6 +367,28 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 	protected void do_tabla_usuarios_mouseClicked(MouseEvent arg0) {
 		int fila = tablaUsuarios.getSelectedRow();		
 		LlenarInputs(fila);
+	}
+	
+	//ACCIONES DE LOS BOTONES
+	
+	protected void do_btnNuevo_actionPerformed(ActionEvent e) {
+		txtCodigo.setText("" + a.GeneraCodigo());
+		limpiar();
+	}
+
+	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {
+		Usuario x = a.buscar(getCodigo());
+		if (x == null) {
+			x = new Usuario(getCodigo(), getNombre(), getApellidos(), getCodDocum(), getDocumento(), 
+							getArea(), getCorreo(), getTelefono(), getFechaIng(), getEstado());
+			a.adicionar(x);
+		} else {
+			JOptionPane.showMessageDialog(null, "El Usuario ya existe...!! NJD");
+		}
+		rellenarTabla();
+		a.grabar();
+		mostrarUsuarios();
+
 	}
 
 	protected void do_btnModificar_actionPerformed(ActionEvent e) {
@@ -452,20 +477,17 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		txtCodigo.setText(tabla.getValueAt(fila, 0).toString());
 		txtNombres.setText(tabla.getValueAt(fila, 1).toString());
 		txtApellidos.setText(tabla.getValueAt(fila, 2).toString());
-		txtCodDoc.setText(tabla.getValueAt(fila, 3).toString());
+		cboDocUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
 		txtDocumento.setText(tabla.getValueAt(fila, 4).toString());
-		txtArea.setText(tabla.getValueAt(fila, 5).toString());
+		cboAreaUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,5).toString()));
 		txtCorreo.setText(tabla.getValueAt(fila, 6).toString());
 		txtTelefono.setText(tabla.getValueAt(fila, 7).toString());
-		txtFechaIng.setText(tabla.getValueAt(fila, 8).toString());
-		txtEstado.setText(tabla.getValueAt(fila, 9).toString());
-		
+		txtFechaIng.setText(tabla.getValueAt(fila, 8).toString());		
 		cboStatusUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,9).toString()));
-		cboAreaUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,5).toString()));
-		cboDocUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
+		
 	}
-	public void nuevo() {
-		txtCodigo.setText("" + a.GeneraCodigo());
+	
+	public void limpiar() {
 		txtNombres.setText("");
 		txtApellidos.setText("");
 		txtDocumento.setText("");

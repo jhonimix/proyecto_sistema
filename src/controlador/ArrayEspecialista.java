@@ -9,6 +9,10 @@ public class ArrayEspecialista {
 
 	// CREAMOS EL ARRAY ESPECIALISTA
 	private ArrayList<Especialista> esp;
+	
+	public ArrayList<Especialista> ListarEspecialista() {
+		return esp;
+	}
 
 	// CONSTRUCTOR DEL ARREGLO
 	public ArrayEspecialista() {
@@ -47,6 +51,21 @@ public class ArrayEspecialista {
 				return x;
 		}
 		return null;
+	}
+
+	// //////////////////////////////
+	// GENERAR CODIGO AUTOMATICO //
+	// //////////////////////////////
+	public int GeneraCodigo() {
+		int cod = 0;
+
+		if (tamaño() == 0) {
+			cod = 1;
+		} else {
+			cod = esp.get(tamaño() - 1).getCodEsp() + 1;
+		}
+		return cod;
+
 	}
 
 	// GRABAR DE LA MEMORIA AL ARCHIVO DE TEXTO

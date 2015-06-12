@@ -53,6 +53,21 @@ public class ArrayTipoIncidencia {
 		return null;
 	}
 
+	// //////////////////////////////
+	// GENERAR CODIGO AUTOMATICO //
+	// //////////////////////////////
+	public int GeneraCodigo() {
+		int cod = 0;
+
+		if (tamaño() == 0) {
+			cod = 1;
+		} else {
+			cod = tipoInc.get(tamaño() - 1).getCodTipoInc() + 1;
+		}
+		return cod;
+
+	}
+
 	// GRABAR DE LA MEMORIA AL RCHIVO DE TEXTO
 	public void grabar() {
 

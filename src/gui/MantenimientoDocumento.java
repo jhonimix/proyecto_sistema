@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
 
 
 
@@ -154,7 +156,7 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		btnBuscar.addActionListener(this);
 		getContentPane().add(btnBuscar);
 		
-		btnEliminar = new JButton("Eleminar");
+		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(412, 185, 104, 32);
 		btnEliminar.addActionListener(this);
 		getContentPane().add(btnEliminar);
@@ -189,45 +191,158 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		nuevo();
+		if(e.getSource()==btnRegistrar){
+			Registrar();
+			limpiar();
+		}
+		else if(e.getSource()==btnModificar){
+			Modificar();
+			limpiar();
+		}
+		else if(e.getSource()==btnBuscar){
+			Buscar();
+		}
+		else if(e.getSource()==btnEliminar){
+			Eliminar();
+			limpiar();
+		}
+		else if(e.getSource()==btnNuevo){
+			setCodigo(""+c.GeneraCodigo());
+			limpiar();
+		}
+		
 	}
-	//METODOS PARA LOS INPUST DE LOS FORMULARIOS
-	int getCodigo(){
+
+	//METODOS PARA LOS INPUTS DE LOS FORMULARIOS
+	
+	public int getCodigo() {
 		return Integer.parseInt(txtCodigo.getText());
 	}
+	
+	public void setCodigo(String txtString){
+		this.txtCodigo.setText(""+txtString);
+	}
+
+	public String getDescripcion() {
+		return txtDescripcion.getText();
+	}
+
+	public void setDescripcion(String txtDescripcion) {
+		this.txtDescripcion.setText(txtDescripcion);
+	}
+
+	public String getAbrev() {
+		return txtAbrev.getText();
+	}
+
+	public void setAbrev(String txtAbrev) {
+		this.txtAbrev.setText(txtAbrev);
+	}	
+
+	public int getEstado() {
+		return cboEstado.getSelectedIndex();
+	}
+
+	public void setEstado(int cboEstado) {
+		this.cboEstado.setSelectedIndex(cboEstado);
+	}
+	
+	public void Registrar(){
+		TipoDocumento x = c.buscar(getCodigo());
+		if (x == null) {
+			x = new TipoDocumento(getCodigo(),getDescripcion(),getAbrev(), getEstado());
+			c.adicionar(x);
+		} else {
+			JOptionPane.showMessageDialog(null, "El Documento ya existe...!! NJD");
+		}
+		llenarTabla();
+		c.grabar();
+		mostrarDocumentos();
+	}
+	
+	public void Eliminar(){
+		
+		TipoDocumento x = c.buscar(getCodigo());
+		if (x == null) {
+			JOptionPane.showMessageDialog(null, "El usuario no existe..!!");
+		} else {
+			c.eliminar(x);
+			JOptionPane.showMessageDialog(null,	"La operación se realizo con éxtio");
+
+		}
+		c.grabar();
+		mostrarDocumentos();
+	}
+	
+	public void Modificar(){
+		TipoDocumento u = c.buscar(getCodigo());
+		if (u == null) {
+			JOptionPane.showConfirmDialog(null, "El Codigo no existe...!!!");
+		} else {
+			u.setDesDoc(getDescripcion());
+			u.setAbrDoc(getAbrev());
+			u.setStatusDoc(getEstado());
+			c.grabar();
+			mostrarDocumentos();
+		}
+	}
+	
+	public void Buscar() {
+		// MUESTRA VENTANA PARA COLOCAR EL CODIGO A BUSCAR		
+		String rspt = JOptionPane.showInputDialog(null,"Ingrese el número de código");
+		if(rspt.equals(""))return;
+		int codigo = Integer.parseInt(rspt);
+		// BUSCA EL OBJETO EN EL ARREGLO Y GUARDA LA INFORMACION EN EL OBJETO "x"
+		TipoDocumento x = c.buscar(codigo);			
+		
+		if (x == null) {
+			JOptionPane.showMessageDialog(null, "El usuario no existe..!!");
+			return;
+		} else {
+
+			// FILA ALMACENA EL CODIGO DEL OBJETO
+			int fila = x.getCodDoc();
+
+			for (int i = 0; i <= tabla.getRowCount(); i++) {
+				if (tabla.getValueAt(i, 0).equals(fila)) {
+					llenarInputs(i);
+					break;
+				}
+			}
+		}
+		
+	}
+	
+	
 	//METODOS PARA EL FORMULARIO
 	
-	/* RELLENAR DATOS DE TABLA CON EL USUARIO NUEVO */
-	public void rellenarTabla() {
-		tabla.addRow(new Object[] { getCodigo(),  });
+	public void llenarTabla() {
+		tabla.addRow(new Object[] { getCodigo(), getDescripcion(), getAbrev() , getEstado() });
 		tablaDocumento.setModel(tabla);
 	}
-	/*RELLENAR DATOS A LA TABLA CARGADO DEL ARRAY DE LA MEMORIA */
+	
 	public void mostrarDocumentos() {
 		ArrayList<TipoDocumento> lista = new ArrayList<TipoDocumento>();
 		lista = c.ListarDocumento();
 		tabla.setRowCount(0);
 		for (TipoDocumento x : lista) {
-			tabla.addRow(new Object[] { x.getCodDoc(),x.getDesDoc(),x.getAbrDoc(),x.getStatusDoc()});
+			tabla.addRow(new Object[] { x.getCodDoc(), x.getDesDoc(), x.getAbrDoc(), x.getStatusDoc() });
 
 		}
 		tablaDocumento.setModel(tabla);
 	}
-	//RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
-		public void llenarInputs(int fila){
-			
-			txtCodigo.setText(tabla.getValueAt(fila, 0).toString());
-			txtDescripcion.setText(tabla.getValueAt(fila, 1).toString());
-			txtAbrev.setText(tabla.getValueAt(fila, 2).toString());
-			cboEstado.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
-			
-		}
-		
-		public void nuevo() {
-			txtCodigo.setText("" + c.generarCodigo());
-			txtDescripcion.setText("");
-			txtAbrev.setText("");
-			cboEstado.setSelectedIndex(0);
-		}		
+
+	// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
+	public void llenarInputs(int fila){
+		setCodigo(tabla.getValueAt(fila, 0).toString());
+		setDescripcion(tabla.getValueAt(fila, 1).toString());
+		setAbrev(tabla.getValueAt(fila, 2).toString());
+		setEstado(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
+	}
+
+	public void limpiar(){
+		setDescripcion("");
+		setAbrev("");
+		setEstado(-1);
+	}	
 }

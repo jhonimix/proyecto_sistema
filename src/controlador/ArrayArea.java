@@ -9,6 +9,10 @@ public class ArrayArea {
 
 	//CREAMOS NUESTRA VARIABLE ARRAYLIST
 	private ArrayList<Area> are;
+	
+	public ArrayList<Area> ListarArea() {
+		return are;
+	}
 
 	//CONSTRUCTOR DEL ARREGLO
 	public ArrayArea() {
@@ -44,6 +48,21 @@ public class ArrayArea {
 				return x;
 		}
 		return null;
+	}
+	
+	// //////////////////////////////
+	// GENERAR CODIGO AUTOMATICO //
+	// //////////////////////////////
+	public int GeneraCodigo() {
+		int cod = 0;
+
+		if (tamaño() == 0) {
+			cod = 1;
+		} else {
+			cod = are.get(tamaño() - 1).getCodArea() + 1;
+		}
+		return cod;
+
 	}
 
 	//GRABA DE LA MEMORIA AL ARCHIVO DE TEXTO

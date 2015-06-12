@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,10 +19,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JPasswordField;
 
-import java.awt.Window.Type;
-import java.awt.Frame;
-
-import javax.swing.SwingConstants;
 
 public class loginForm extends JFrame {
 	ArrayUsuario a = new ArrayUsuario();
