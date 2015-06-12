@@ -1,16 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import controlador.ArrayDocumento;
-
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -22,13 +14,23 @@ import javax.swing.JTable;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
+
+
+
+//IMPORTAMOS LAS DEPENDENCIAS
+import entidades.TipoDocumento;
+import controlador.ArrayDocumento;
+import clases.principalMetodos;
+
+import javax.swing.DefaultComboBoxModel;
 
 public class MantenimientoDocumento extends JDialog implements ActionListener, MouseListener {
 
-	//DECLARAMOS ATRIBUTOS GLOBALES
+	//DECLARAMOS ATRIBUTOS GLOBALES CREAMOS EL ARRAY
 	ArrayDocumento c = new ArrayDocumento();
 	DefaultTableModel tabla = new DefaultTableModel();
 	
@@ -36,7 +38,7 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 	private JTextField txtDescripcion;
 	private JTextField txtAbrev;
 	private JTable tablaDocumento;
-	private JComboBox cboEstado;
+	private JComboBox<String> cboEstado;
 	private JButton btnNuevo;
 	private JButton btnRegistrar;
 	private JButton btnModificar;
@@ -71,12 +73,13 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 	
 	
 	public MantenimientoDocumento() {
-		setBounds(100, 100, 542, 550);
+		setResizable(false);
+		setBounds(100, 100, 542, 441);
 		getContentPane().setLayout(null);
 		
 		JLabel lblMantenimientoTipoDe = new JLabel("MANTENIMIENTO TIPO DE DOCUMENTO");
-		lblMantenimientoTipoDe.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblMantenimientoTipoDe.setBounds(54, 11, 434, 48);
+		lblMantenimientoTipoDe.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMantenimientoTipoDe.setBounds(114, 18, 340, 34);
 		getContentPane().add(lblMantenimientoTipoDe);
 		
 		JLabel lblCodigo = new JLabel("Codigo :");
@@ -115,42 +118,43 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		getContentPane().add(txtAbrev);
 		txtAbrev.setColumns(10);
 		
-		cboEstado = new JComboBox();
+		cboEstado = new JComboBox<String>();
 		cboEstado.setBounds(100, 191, 127, 20);
+		cboEstado.addItem("NO ACTIVO");
 		cboEstado.addItem("ACTIVO");
-		cboEstado.addItem("INACTIVO");
 		getContentPane().add(cboEstado);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 237, 506, 219);
+		scrollPane.setBounds(10, 237, 506, 150);
 		getContentPane().add(scrollPane);
 		
 		tablaDocumento = new JTable();
 		tablaDocumento.addMouseListener(this);
 		scrollPane.setViewportView(tablaDocumento);
 		campos();
+		mostrarDocumentos();
 		
-		btnNuevo = new JButton("NUEVO");
+		btnNuevo = new JButton("Nuevo");
 		btnNuevo.setBounds(422, 63, 94, 31);
 		btnNuevo.addActionListener(this);
 		getContentPane().add(btnNuevo);
 		
-		btnRegistrar = new JButton("REGISTRAR");
+		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setBounds(298, 141, 104, 32);
 		btnRegistrar.addActionListener(this);
 		getContentPane().add(btnRegistrar);
 		
-		btnModificar = new JButton("MODIFICAR");
+		btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(412, 141, 104, 32);
 		btnModificar.addActionListener(this);
 		getContentPane().add(btnModificar);
 		
-		btnBuscar = new JButton("BUSCAR");
+		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(298, 185, 104, 32);
 		btnBuscar.addActionListener(this);
 		getContentPane().add(btnBuscar);
 		
-		btnEliminar = new JButton("ELIMINAR");
+		btnEliminar = new JButton("Eleminar");
 		btnEliminar.setBounds(412, 185, 104, 32);
 		btnEliminar.addActionListener(this);
 		getContentPane().add(btnEliminar);
@@ -159,8 +163,8 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-		
+		int fila = tablaDocumento.getSelectedRow();
+		llenarInputs(fila);
 	}
 
 	@Override
@@ -186,6 +190,44 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		nuevo();
 	}
+	//METODOS PARA LOS INPUST DE LOS FORMULARIOS
+	int getCodigo(){
+		return Integer.parseInt(txtCodigo.getText());
+	}
+	//METODOS PARA EL FORMULARIO
+	
+	/* RELLENAR DATOS DE TABLA CON EL USUARIO NUEVO */
+	public void rellenarTabla() {
+		tabla.addRow(new Object[] { getCodigo(),  });
+		tablaDocumento.setModel(tabla);
+	}
+	/*RELLENAR DATOS A LA TABLA CARGADO DEL ARRAY DE LA MEMORIA */
+	public void mostrarDocumentos() {
+		ArrayList<TipoDocumento> lista = new ArrayList<TipoDocumento>();
+		lista = c.ListarDocumento();
+		tabla.setRowCount(0);
+		for (TipoDocumento x : lista) {
+			tabla.addRow(new Object[] { x.getCodDoc(),x.getDesDoc(),x.getAbrDoc(),x.getStatusDoc()});
+
+		}
+		tablaDocumento.setModel(tabla);
+	}
+	//RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
+		public void llenarInputs(int fila){
+			
+			txtCodigo.setText(tabla.getValueAt(fila, 0).toString());
+			txtDescripcion.setText(tabla.getValueAt(fila, 1).toString());
+			txtAbrev.setText(tabla.getValueAt(fila, 2).toString());
+			cboEstado.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
+			
+		}
+		
+		public void nuevo() {
+			txtCodigo.setText("" + c.generarCodigo());
+			txtDescripcion.setText("");
+			txtAbrev.setText("");
+			cboEstado.setSelectedIndex(0);
+		}		
 }

@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+
 import javax.swing.border.BevelBorder;
 
 public class Mantenimiento_Usuarios extends JDialog implements ActionListener, MouseListener {
@@ -55,7 +56,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 	private JScrollPane scrollPane;
 	private JButton btnNuevo;
 	private JButton btnRegistrar;
-	private JTable tabla_usuarios;
+	private JTable tablaUsuarios;
 	private JLabel lblNewLabel;
 	private JButton btnBuscar;
 	private JComboBox cboDocUsu,cboAreaUsu,cboStatusUsu;
@@ -72,29 +73,10 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		tabla.addColumn("Fecha");
 		tabla.addColumn("Estado");
 		//MOSTRAMOS LOS CAMPOS EN TABLA
-		tabla_usuarios.setModel(tabla);
-	}
-
-	public void llenar_tabla() {
-		tabla.addRow(new Object[] { getCodigo(), getNombre(), getApellidos(), getCodDocum(), getDocumento(), 
-									getArea(), getCorreo(), getTelefono(), getFechaIng(), getEstado() });
-		tabla_usuarios.setModel(tabla);
-	}
-
-	public void mostrar_usuarios() {
-		ArrayList<Usuario> lista = new ArrayList<Usuario>();
-		lista = a.ListarUsuario();
-		tabla.setRowCount(0);
-		for (Usuario x : lista) {
-			tabla.addRow(new Object[] { x.getCodUser(), x.getNameUser(), x.getLastnameUser(), x.getCodDocUser(), x.getDniUser(),
-										x.getArea(), x.getEmail(), x.getFono(), x.getFechaIngreso(), x.getStatus() });
-
-		}
-		tabla_usuarios.setModel(tabla);
+		tablaUsuarios.setModel(tabla);
 	}
 
 	
-
 	/**
 	 * Launch the application.
 	 */
@@ -229,11 +211,11 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		scrollPane.setBounds(10, 359, 948, 271);
 		getContentPane().add(scrollPane);
 
-		tabla_usuarios = new JTable();
-		tabla_usuarios.addMouseListener(this);
-		scrollPane.setViewportView(tabla_usuarios);
+		tablaUsuarios = new JTable();
+		tablaUsuarios.addMouseListener(this);
+		scrollPane.setViewportView(tablaUsuarios);
 		campos();
-		mostrar_usuarios();
+		mostrarUsuarios();
 
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.addActionListener(this);
@@ -293,18 +275,12 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		return txtApellidos.getText();
 	}
 
-	/*int getCodDocum() {	//TEXTBOX
-		return Integer.parseInt(txtCodDoc.getText());
-	}*/
-
+	
 	String getDocumento() {
 		return txtDocumento.getText();
 	}
 
-	/*int getArea() {		//TEXTBOX
-		return Integer.parseInt(txtArea.getText());
-	}*/
-
+	
 	String getCorreo() {
 		return txtCorreo.getText();
 	}
@@ -317,9 +293,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		return txtFechaIng.getText();
 	}
 
-	/*int getEstado() {		//TEXTBOX
-		return Integer.parseInt(txtEstado.getText());
-	}*/
+	
 	int getEstado() {		//COMBOBOX
 		return cboStatusUsu.getSelectedIndex();
 	}
@@ -351,16 +325,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 	}
 
 	protected void do_btnNuevo_actionPerformed(ActionEvent e) {
-		txtCodigo.setText("" + a.GeneraCodigo());
-		txtNombres.setText("");
-		txtApellidos.setText("");
-		txtDocumento.setText("");
-		txtCorreo.setText("");
-		txtFechaIng.setText("");
-		txtTelefono.setText("");
-		cboAreaUsu.setSelectedIndex(0);
-		cboDocUsu.setSelectedIndex(0);
-		cboStatusUsu.setSelectedIndex(0);
+		nuevo();
 	}
 
 	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {
@@ -372,14 +337,14 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		} else {
 			JOptionPane.showMessageDialog(null, "El Usuario ya existe...!! NJD");
 		}
-		llenar_tabla();
+		rellenarTabla();
 		a.grabar();
-		mostrar_usuarios();
+		mostrarUsuarios();
 
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		if (arg0.getSource() == tabla_usuarios) {
+		if (arg0.getSource() == tablaUsuarios) {
 			do_tabla_usuarios_mouseClicked(arg0);
 		}
 	}
@@ -396,27 +361,9 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 	public void mouseReleased(MouseEvent arg0) {
 	}
 	
-	public void LlenarTextBox(int fila){
-		
-		txtCodigo.setText(tabla.getValueAt(fila, 0).toString());
-		txtNombres.setText(tabla.getValueAt(fila, 1).toString());
-		txtApellidos.setText(tabla.getValueAt(fila, 2).toString());
-		txtCodDoc.setText(tabla.getValueAt(fila, 3).toString());
-		txtDocumento.setText(tabla.getValueAt(fila, 4).toString());
-		txtArea.setText(tabla.getValueAt(fila, 5).toString());
-		txtCorreo.setText(tabla.getValueAt(fila, 6).toString());
-		txtTelefono.setText(tabla.getValueAt(fila, 7).toString());
-		txtFechaIng.setText(tabla.getValueAt(fila, 8).toString());
-		txtEstado.setText(tabla.getValueAt(fila, 9).toString());
-		
-		cboStatusUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,9).toString()));
-		cboAreaUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,5).toString()));
-		cboDocUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
-	}
-
 	protected void do_tabla_usuarios_mouseClicked(MouseEvent arg0) {
-		int fila = tabla_usuarios.getSelectedRow();		
-		LlenarTextBox(fila);
+		int fila = tablaUsuarios.getSelectedRow();		
+		LlenarInputs(fila);
 	}
 
 	protected void do_btnModificar_actionPerformed(ActionEvent e) {
@@ -434,7 +381,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 			u.setFechaIngreso(getFechaIng());
 			u.setStatus(getEstado());
 			a.grabar();
-			mostrar_usuarios();
+			mostrarUsuarios();
 		}
 	}
 
@@ -449,7 +396,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 
 		}
 		a.grabar();
-		mostrar_usuarios();
+		mostrarUsuarios();
 
 	}
 
@@ -472,7 +419,7 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 			
 			for(int i=0; i<=tabla.getRowCount();i++){
 				if(tabla.getValueAt(i,0).equals(fila)){		
-					LlenarTextBox(i);
+					LlenarInputs(i);
 					break;
 				}
 			}
@@ -480,10 +427,54 @@ public class Mantenimiento_Usuarios extends JDialog implements ActionListener, M
 		}
 		
 	}
-	
-	
-	
-	
-	
+	//METODOS PARA EL FORMULARIO
+	public void rellenarTabla() {
+		tabla.addRow(new Object[] { getCodigo(), getNombre(), getApellidos(), getCodDocum(), getDocumento(), 
+									getArea(), getCorreo(), getTelefono(), getFechaIng(), getEstado() });
+		tablaUsuarios.setModel(tabla);
+	}
+
+	public void mostrarUsuarios() {
+		ArrayList<Usuario> lista = new ArrayList<Usuario>();
+		lista = a.ListarUsuario();
+		tabla.setRowCount(0);
+		System.out.println(lista);
+		for (Usuario x : lista) {
+			tabla.addRow(new Object[] { x.getCodUser(), x.getNameUser(), x.getLastnameUser(), x.getCodDocUser(), x.getDniUser(),
+										x.getArea(), x.getEmail(), x.getFono(), x.getFechaIngreso(), x.getStatus() });
+
+		}
+		tablaUsuarios.setModel(tabla);
+	}
+	//RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
+	public void LlenarInputs(int fila){
+		
+		txtCodigo.setText(tabla.getValueAt(fila, 0).toString());
+		txtNombres.setText(tabla.getValueAt(fila, 1).toString());
+		txtApellidos.setText(tabla.getValueAt(fila, 2).toString());
+		txtCodDoc.setText(tabla.getValueAt(fila, 3).toString());
+		txtDocumento.setText(tabla.getValueAt(fila, 4).toString());
+		txtArea.setText(tabla.getValueAt(fila, 5).toString());
+		txtCorreo.setText(tabla.getValueAt(fila, 6).toString());
+		txtTelefono.setText(tabla.getValueAt(fila, 7).toString());
+		txtFechaIng.setText(tabla.getValueAt(fila, 8).toString());
+		txtEstado.setText(tabla.getValueAt(fila, 9).toString());
+		
+		cboStatusUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,9).toString()));
+		cboAreaUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,5).toString()));
+		cboDocUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
+	}
+	public void nuevo() {
+		txtCodigo.setText("" + a.GeneraCodigo());
+		txtNombres.setText("");
+		txtApellidos.setText("");
+		txtDocumento.setText("");
+		txtCorreo.setText("");
+		txtFechaIng.setText("");
+		txtTelefono.setText("");
+		cboAreaUsu.setSelectedIndex(0);
+		cboDocUsu.setSelectedIndex(0);
+		cboStatusUsu.setSelectedIndex(0);
+	}
 	
 }

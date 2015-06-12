@@ -1,9 +1,8 @@
 package controlador;
+import entidades.TipoDocumento;
 
 import java.io.*;
 import java.util.ArrayList;
-
-import entidades.TipoDocumento;
 
 public class ArrayDocumento {
 
@@ -42,7 +41,10 @@ public class ArrayDocumento {
 	public TipoDocumento obtener(int pos) {
 		return doc.get(pos);
 	}
-
+	public int generarCodigo(){
+		int cod = 0;
+		return cod;
+	}
 	// METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL OBJETO QUE SE ENCUENTRA
 	// DENTRO DEL ARREGLO "doc"
 	// CASO CONTRARIO DEVUELVE NULL
