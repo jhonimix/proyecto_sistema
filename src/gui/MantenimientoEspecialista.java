@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -18,17 +20,27 @@ import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 
+import clases.Estado;
 import controlador.ArrayEspecialista;
 import entidades.Especialista;
+
 import java.util.ArrayList;
+
 import javax.swing.JSeparator;
 import javax.swing.border.SoftBevelBorder;
 
-public class MantenimientoEspecialista extends JDialog implements ActionListener,MouseListener{
+import java.awt.event.KeyAdapter;
+import java.awt.Color;
+
+import javax.swing.ImageIcon;
+
+public class MantenimientoEspecialista extends JDialog implements ActionListener,MouseListener,KeyListener{
 	
 	//DECLARAMOS ATRIBUTOS GLOBALES CREAMOS EL ARRAY
 	ArrayEspecialista d = new ArrayEspecialista();
 	DefaultTableModel tabla = new DefaultTableModel();
+
+	Estado obje = new Estado();
 	
 	private JTextField txtCodigo;
 	private JTextField txtNombres;
@@ -44,6 +56,8 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 	private JButton btnEliminar;
 	private JComboBox<String> cboEstado;
 	private JSeparator separator;
+	private JLabel mensaje1;
+	private JLabel lblmensaje01;
 	
 	public void campos() {
 		tabla.addColumn("Codigo");
@@ -76,6 +90,12 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 	public MantenimientoEspecialista() {
 		setBounds(100, 100, 597, 603);
 		getContentPane().setLayout(null);
+		
+		mensaje1 = new JLabel("Formato de fecha \"dd-MM-yyyy\"");
+		mensaje1.setForeground(Color.RED);
+		mensaje1.setBounds(385, 196, 186, 31);
+		mensaje1.setVisible(false);
+		getContentPane().add(mensaje1);
 		
 		JLabel lblCodigo = new JLabel("Codigo :");
 		lblCodigo.setBounds(26, 62, 64, 22);
@@ -142,26 +162,31 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		txtCodigo.setColumns(10);
 		
 		txtNombres = new JTextField();
+		txtNombres.addKeyListener(this);
 		txtNombres.setColumns(10);
 		txtNombres.setBounds(100, 109, 278, 20);
 		getContentPane().add(txtNombres);
 		
 		txtApellidos = new JTextField();
+		txtApellidos.addKeyListener(this);
 		txtApellidos.setColumns(10);
 		txtApellidos.setBounds(100, 146, 278, 20);
 		getContentPane().add(txtApellidos);
 		
 		txtEspecialidad = new JTextField();
+		txtEspecialidad.addKeyListener(this);
 		txtEspecialidad.setColumns(10);
 		txtEspecialidad.setBounds(100, 184, 112, 20);
 		getContentPane().add(txtEspecialidad);
 		
 		txtAnexo = new JTextField();
+		txtAnexo.addKeyListener(this);
 		txtAnexo.setColumns(10);
 		txtAnexo.setBounds(100, 221, 112, 20);
 		getContentPane().add(txtAnexo);
 		
 		txtFecha = new JTextField();
+		txtFecha.addKeyListener(this);
 		txtFecha.setColumns(10);
 		txtFecha.setBounds(398, 184, 148, 20);
 		getContentPane().add(txtFecha);
@@ -179,8 +204,6 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		
 		cboEstado = new JComboBox<String>();
 		cboEstado.setBounds(398, 221, 149, 20);
-		cboEstado.addItem("No Activo");
-		cboEstado.addItem("Activo");
 		getContentPane().add(cboEstado);
 		
 		JLabel lblFoto = new JLabel("New label");
@@ -191,6 +214,16 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		separator = new JSeparator();
 		separator.setBounds(10, 38, 561, 2);
 		getContentPane().add(separator);
+		
+		lblmensaje01 = new JLabel("");
+		lblmensaje01.setIcon(new ImageIcon("C:\\Users\\Dudu\\git\\proyecto_sistema\\bin\\gui\\img\\24\\icono_error.png"));
+		lblmensaje01.setBounds(357, 196, 31, 31);
+		lblmensaje01.setVisible(false);
+		getContentPane().add(lblmensaje01);
+		
+		// COMBO ESTADO
+		cboEstado.addItem(obje.getNombre0());
+		cboEstado.addItem(obje.getNombre1());
 	}
 
 	@Override
@@ -245,6 +278,9 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		else if(e.getSource()==btnNuevo){
 			setCodigo(""+d.GeneraCodigo());
 			limpiar();
+			mensaje1.setVisible(false);
+			lblmensaje01.setVisible(false);
+			
 		}
 	}
 
@@ -388,7 +424,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 			lista = d.ListarEspecialista();
 			tabla.setRowCount(0);
 			for (Especialista x : lista) {
-				tabla.addRow(new Object[] { x.getCodEsp(),x.getNomEsp(),x.getApeEsp(),x.getEspEsp(),x.getAnexoEsp(),x.getFecIngEsp(),x.getStatusEsp() });
+				tabla.addRow(new Object[] { x.getCodEsp(),x.getNomEsp(),x.getApeEsp(),x.getEspEsp(),x.getAnexoEsp(),x.getFecIngEsp(),obje.bnombre(x.getStatusEsp()) });
 
 			}
 			TablaEspecialista.setModel(tabla);
@@ -412,6 +448,52 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 			setAnexo("");
 			setFecha("");
 			setEstado(-1);
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+			if(e.getSource()==txtNombres){		
+				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+					e.consume();		
+				}		
+			}
+			else if (e.getSource()==txtApellidos) {
+				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+					e.consume();		
+				}
+			}
+			else if (e.getSource()==txtEspecialidad) {
+				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+					e.consume();		
+				}
+			}
+			else if (e.getSource()==txtAnexo) {
+				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+					e.consume();		
+				}
+			}
+			else if (e.getSource()==txtFecha) {
+				if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-'){			
+					e.consume();
+				}
+				if(txtFecha.getText().length()==10){
+					mensaje1.setVisible(true);
+					lblmensaje01.setVisible(true);
+					e.consume();
+				}
+			}
 		}	
 	
 }

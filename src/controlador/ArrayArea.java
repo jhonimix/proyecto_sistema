@@ -50,6 +50,16 @@ public class ArrayArea {
 		return null;
 	}
 	
+	//METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL NOMBRE QUE SE ENCUENTRA EN EL ARREGLO "are" 
+	//CASO CONTRARIO RETORNA NULL
+	public String bnombre(int cod) {
+		for (Area x : are) {
+			if (x.getCodArea() == cod)
+				return x.getNameLargeArea();
+		}
+		return null;
+	}
+	
 	// //////////////////////////////
 	// GENERAR CODIGO AUTOMATICO //
 	// //////////////////////////////

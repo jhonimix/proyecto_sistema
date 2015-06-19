@@ -15,14 +15,22 @@ import javax.swing.JTable;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 
+
+
+
+
+
 //IMPORTAMOS LAS DEPENDENCIAS
 import entidades.TipoDocumento;
 import controlador.ArrayDocumento;
+import clases.Estado;
 import clases.principalMetodos;
 
 import javax.swing.DefaultComboBoxModel;
@@ -30,11 +38,15 @@ import javax.swing.JSeparator;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
-public class MantenimientoDocumento extends JDialog implements ActionListener, MouseListener {
+import java.awt.event.KeyAdapter;
+
+public class MantenimientoDocumento extends JDialog implements ActionListener, MouseListener, KeyListener {
 
 	//DECLARAMOS ATRIBUTOS GLOBALES CREAMOS EL ARRAY
 	ArrayDocumento c = new ArrayDocumento();
 	DefaultTableModel tabla = new DefaultTableModel();
+
+	Estado obje = new Estado();
 	
 	private JTextField txtCodigo;
 	private JTextField txtDescripcion;
@@ -112,19 +124,19 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		txtCodigo.setColumns(10);
 		
 		txtDescripcion = new JTextField();
+		txtDescripcion.addKeyListener(this);
 		txtDescripcion.setBounds(100, 108, 278, 20);
 		getContentPane().add(txtDescripcion);
 		txtDescripcion.setColumns(10);
 		
 		txtAbrev = new JTextField();
+		txtAbrev.addKeyListener(this);
 		txtAbrev.setBounds(100, 147, 127, 20);
 		getContentPane().add(txtAbrev);
 		txtAbrev.setColumns(10);
 		
 		cboEstado = new JComboBox<String>();
 		cboEstado.setBounds(100, 191, 127, 20);
-		cboEstado.addItem("NO ACTIVO");
-		cboEstado.addItem("ACTIVO");
 		getContentPane().add(cboEstado);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -166,6 +178,10 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		separator = new JSeparator();
 		separator.setBounds(10, 43, 516, 2);
 		getContentPane().add(separator);
+		
+		//COMBO ESTADO
+		cboEstado.addItem(obje.getNombre0());
+		cboEstado.addItem(obje.getNombre1());
 	}
 
 	@Override
@@ -335,7 +351,7 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		lista = c.ListarDocumento();
 		tabla.setRowCount(0);
 		for (TipoDocumento x : lista) {
-			tabla.addRow(new Object[] { x.getCodDoc(), x.getDesDoc(), x.getAbrDoc(), x.getStatusDoc() });
+			tabla.addRow(new Object[] { x.getCodDoc(), x.getDesDoc(), x.getAbrDoc(),obje.bnombre(x.getStatusDoc()) });
 
 		}
 		tablaDocumento.setModel(tabla);
@@ -353,5 +369,30 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		setDescripcion("");
 		setAbrev("");
 		setEstado(-1);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==txtDescripcion){
+			if(!Character.isLetter(arg0.getKeyChar()) && arg0.getKeyChar()!=' ' && arg0.getKeyChar()!='.'){			
+				arg0.consume();		
+			}	
+		}
+		else if (arg0.getSource()==txtAbrev){
+			if(!Character.isLetter(arg0.getKeyChar()) && arg0.getKeyChar()!=' ' && arg0.getKeyChar()!='.'){			
+				arg0.consume();		
+			}	
+		}
 	}	
 }

@@ -82,10 +82,11 @@ public class principalForm extends JFrame implements ActionListener {
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 431);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setContentPane(contentPane);
 
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(44, 15, 265, 14);
@@ -217,7 +218,11 @@ public class principalForm extends JFrame implements ActionListener {
 		else if(obj == mntmUser){
 			MantenimientoUsuarios frmUsuario = new MantenimientoUsuarios();
 			frmUsuario.setVisible(true);
+			contentPane.add(frmUsuario);
 		}	
+		else if(obj==mntmArea){
+			
+		}
 		else if (obj == mntmTipoDocumento) {
 			MantenimientoDocumento frmDocumento = new MantenimientoDocumento();
 			frmDocumento.setVisible(true);

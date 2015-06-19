@@ -1,5 +1,6 @@
 package controlador;
 
+import entidades.Area;
 import entidades.TipoDocumento;
 
 import java.io.*;
@@ -53,6 +54,16 @@ public class ArrayDocumento {
 		}
 		return null;
 	}
+	
+	//METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL NOMBRE QUE SE ENCUENTRA EN EL ARREGLO "are" 
+	//CASO CONTRARIO RETORNA NULL
+		public String bnombre(int cod) {
+			for (TipoDocumento x : doc) {
+				if (x.getCodDoc() == cod)
+					return x.getDesDoc();
+			}
+			return null;
+		}
 	
 	// //////////////////////////////
 	// GENERAR CODIGO AUTOMATICO //
