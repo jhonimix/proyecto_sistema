@@ -360,9 +360,11 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 	// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
 	public void llenarInputs(int fila){
 		setCodigo(tabla.getValueAt(fila, 0).toString());
+		TipoDocumento x = c.buscar(getCodigo());
+		
 		setDescripcion(tabla.getValueAt(fila, 1).toString());
 		setAbrev(tabla.getValueAt(fila, 2).toString());
-		setEstado(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
+		setEstado(x.getStatusDoc());
 	}
 
 	public void limpiar(){

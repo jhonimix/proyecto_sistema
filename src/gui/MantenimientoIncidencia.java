@@ -352,9 +352,11 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 	// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
 	public void llenarInputs(int fila) {
 		setCodigo(tabla.getValueAt(fila, 0).toString());
+		TipoIncidencia x = e.buscar(getCodigo());
+		
 		setDescripcion(tabla.getValueAt(fila, 1).toString());
 		setAbrev(tabla.getValueAt(fila, 2).toString());
-		setEstado(Integer.parseInt(tabla.getValueAt(fila, 3).toString()));
+		setEstado(x.getEstTipoInc());
 	}
 
 	public void limpiar() {

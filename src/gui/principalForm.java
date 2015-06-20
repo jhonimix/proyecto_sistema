@@ -3,9 +3,7 @@ package gui;
 import gui.MantenimientoDocumento;
 import gui.MantenimientoIncidencia;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

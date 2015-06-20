@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -283,7 +284,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		getContentPane().add(separator);
 		
 		lblmensaje01 = new JLabel("");
-		lblmensaje01.setIcon(new ImageIcon("C:\\Users\\Dudu\\git\\proyecto_sistema\\bin\\gui\\img\\24\\icono_error.png"));
+		lblmensaje01.setIcon(getIcon("icono_error.png",null));
 		lblmensaje01.setBounds(453, 209, 28, 32);
 		getContentPane().add(lblmensaje01);
 		lblmensaje01.setVisible(false);
@@ -292,8 +293,24 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		llenarCombos();
 
 	}
+
+	public ImageIcon getIcon(String icono, String size) {
+		size = "16";
+		java.net.URL imgUrl = getClass().getResource("img/" + size + "/" + icono);
+		if(imgUrl != null){
+			ImageIcon imgIcon = new ImageIcon(imgUrl);
+			return imgIcon;
+		} 
+		else{
+			System.out.println("Error no se encontro el archivo " + icono);
+		}
+		return null;
+	}
+	/* ---------------------
 	
-	//LLENAR COMBOS
+	* 	LLENAR COMBOS		*
+	 
+	------------------------*/
 		public void llenarCombos(){
 			//COMBO TIPO DE DOCUMENTO
 			ArrayList<TipoDocumento> x1 = new ArrayList<TipoDocumento>();
@@ -527,16 +544,18 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	//RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
 	public void LlenarInputs(int fila){		
 		
-		txtCodigo.setText(tabla.getValueAt(fila, 0).toString());				
+		txtCodigo.setText(tabla.getValueAt(fila, 0).toString());
+		Usuario x = a.buscar(Integer.parseInt(txtCodigo.getText()));
+		
 		txtNombres.setText(tabla.getValueAt(fila, 1).toString());
 		txtApellidos.setText(tabla.getValueAt(fila, 2).toString());
-		//cboDocUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,3).toString()));
+		cboDocUsu.setSelectedIndex(x.getCodDocUser()); 					//COLUMNA 3
 		txtDocumento.setText(tabla.getValueAt(fila, 4).toString());
-		//cboAreaUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,5).toString()));
+		cboAreaUsu.setSelectedIndex(x.getArea());						//COLUMNA 5
 		txtCorreo.setText(tabla.getValueAt(fila, 6).toString());
 		txtTelefono.setText(tabla.getValueAt(fila, 7).toString());
-		txtFechaIng.setText(tabla.getValueAt(fila, 8).toString());		
-		//cboStatusUsu.setSelectedIndex(Integer.parseInt(tabla.getValueAt(fila,9).toString()));
+		txtFechaIng.setText(tabla.getValueAt(fila, 8).toString());
+		cboStatusUsu.setSelectedIndex(x.getStatus()); 					//COLUMNA 9
 		
 	}
 	

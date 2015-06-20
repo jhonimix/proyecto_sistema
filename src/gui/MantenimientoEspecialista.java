@@ -433,12 +433,14 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
 		public void llenarInputs(int fila){
 			setCodigo(tabla.getValueAt(fila, 0).toString());
+			Especialista x = d.buscar(getCodigo());
+			
 			setNombres(tabla.getValueAt(fila, 1).toString());
 			setApellidos(tabla.getValueAt(fila, 2).toString());
 			setEspecialidad(tabla.getValueAt(fila, 3).toString());
 			setAnexo(tabla.getValueAt(fila, 4).toString());
 			setFecha(tabla.getValueAt(fila, 5).toString());
-			setEstado(Integer.parseInt(tabla.getValueAt(fila,6).toString()));
+			setEstado(x.getStatusEsp());
 		}
 
 		public void limpiar(){
