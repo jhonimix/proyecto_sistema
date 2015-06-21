@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+import javax.swing.JInternalFrame;
 
 public class principalForm extends JFrame implements ActionListener {	
 	
@@ -77,27 +78,24 @@ public class principalForm extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public principalForm() {
+		setTitle("BIENVENIDO");
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 720, 431);
+		setBounds(100, 100, 735, 498);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(44, 15, 265, 14);
 		contentPane.add(lblUsuario);
 
-		btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
-		btnCerrarSesin.addActionListener(this);
+		btnCerrarSesin = new JButton("Cerrar Sesion");
 		btnCerrarSesin.setBounds(540, 11, 122, 23);
+		btnCerrarSesin.addActionListener(this);
 		contentPane.add(btnCerrarSesin);
-
-		JPanel panel = new JPanel();
-		panel.setBounds(44, 71, 618, 274);
-		contentPane.add(panel);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(44, 44, 618, 14);
@@ -129,7 +127,8 @@ public class principalForm extends JFrame implements ActionListener {
 
 		mntmUser.setIcon(getIcon("user.png", null));
 
-		mntmArea = new JMenuItem("\u00C1rea");
+		mntmArea = new JMenuItem("Area");
+		mntmArea.addActionListener(this);
 		mnMantenimiento.add(mntmArea);
 		mntmArea.setIcon(getIcon("house.png", null));
 
@@ -152,12 +151,15 @@ public class principalForm extends JFrame implements ActionListener {
 		mnPrincipal.add(mnIncidencia);
 
 		mntmIngreso = new JMenuItem("Ingreso");
+		mntmIngreso.addActionListener(this);
 		mnIncidencia.add(mntmIngreso);
 
 		mntmListado = new JMenuItem("Listado");
+		mntmListado.addActionListener(this);
 		mnIncidencia.add(mntmListado);
 
 		mntmUpdate = new JMenuItem("Actualizaci\u00F3n");
+		mntmUpdate.addActionListener(this);
 		mnIncidencia.add(mntmUpdate);
 
 		mnReportes = new JMenu("Reportes");
@@ -166,10 +168,10 @@ public class principalForm extends JFrame implements ActionListener {
 		mntmInciArea = new JMenuItem("Incidencias por Area");
 		mnReportes.add(mntmInciArea);
 
-		mntmInciTipo = new JMenuItem("Incidencia por tipo");
+		mntmInciTipo = new JMenuItem("GIncidencia por tipo");
 		mnReportes.add(mntmInciTipo);
 
-		mntmInciFecha = new JMenuItem("Incidencia por rango de fecha");
+		mntmInciFecha = new JMenuItem("GIncidencia por rango de fecha");
 		mnReportes.add(mntmInciFecha);
 
 		mntmInciFalla = new JMenuItem("Incencias falladas");
@@ -202,6 +204,7 @@ public class principalForm extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Object obj = e.getSource();
+		GIncidencia frmIncidencia;
 		
 		if(obj==btnCerrarSesin){
 			principalForm.this.login.setVisible(true);
@@ -216,10 +219,8 @@ public class principalForm extends JFrame implements ActionListener {
 		else if(obj == mntmUser){
 			MantenimientoUsuarios frmUsuario = new MantenimientoUsuarios();
 			frmUsuario.setVisible(true);
-			contentPane.add(frmUsuario);
 		}	
 		else if(obj==mntmArea){
-			
 		}
 		else if (obj == mntmTipoDocumento) {
 			MantenimientoDocumento frmDocumento = new MantenimientoDocumento();
@@ -233,7 +234,35 @@ public class principalForm extends JFrame implements ActionListener {
 			MantenimientoEspecialista frmEspecialista = new MantenimientoEspecialista();
 			frmEspecialista.setVisible(true);
 		}
+		else if (obj == mntmIngreso) {
+			frmIncidencia = new GIncidencia();
+			frmIncidencia.setVisible(true);
+			frmIncidencia.panel.setVisible(true);
+			frmIncidencia.btnRegistrar.setVisible(true);
+			frmIncidencia.btnNuevo.setVisible(true);
+			frmIncidencia.btnLimpiar.setVisible(true);
+			frmIncidencia.Incidencia.setVisible(true);		
+		}
+		else if (obj == mntmListado) {
+			frmIncidencia = new GIncidencia();
+			frmIncidencia.setVisible(true);
+			frmIncidencia.setTitle("Listado de Incidencias Registradas");
+			frmIncidencia.btnListado.setVisible(true);
+			frmIncidencia.btnLimpiar2.setVisible(true);
+			frmIncidencia.lblMensListado1.setVisible(true);
+			frmIncidencia.lblMensListado2.setVisible(true);
+			frmIncidencia.Listado.setVisible(true);
+		}
+		else if (obj == mntmUpdate) {
+			frmIncidencia = new GIncidencia();
+			frmIncidencia.setVisible(true);
+			frmIncidencia.setTitle("Actualizar Incidencias Registradas");
+			frmIncidencia.panel.setVisible(true);
+			frmIncidencia.btnBuscar.setVisible(true);
+			frmIncidencia.btnModificar.setVisible(true);
+			frmIncidencia.btnLimpiar.setVisible(true);
+			frmIncidencia.Incidencia.setVisible(true);
+		}
 	
 	}
-	
 }

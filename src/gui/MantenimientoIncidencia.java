@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -28,6 +29,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
 import java.awt.event.KeyAdapter;
+import java.awt.Window.Type;
+import java.awt.Toolkit;
 
 public class MantenimientoIncidencia extends JDialog implements ActionListener, MouseListener,KeyListener{
 	
@@ -76,7 +79,10 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 	 * Create the dialog.
 	 */
 	public MantenimientoIncidencia() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MantenimientoIncidencia.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
 		setResizable(false);
+		setType(Type.POPUP);
+		setTitle("Mantenimiento de los Tipos de Incidencias");
 		setBounds(100, 100, 542, 534);
 		getContentPane().setLayout(null);
 		

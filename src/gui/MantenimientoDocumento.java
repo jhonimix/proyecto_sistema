@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 
 
+
 //IMPORTAMOS LAS DEPENDENCIAS
 import entidades.TipoDocumento;
 import controlador.ArrayDocumento;
@@ -39,6 +41,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
 import java.awt.event.KeyAdapter;
+import java.awt.Window.Type;
+import java.awt.Toolkit;
 
 public class MantenimientoDocumento extends JDialog implements ActionListener, MouseListener, KeyListener {
 
@@ -88,7 +92,10 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 	
 	
 	public MantenimientoDocumento() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MantenimientoDocumento.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
 		setResizable(false);
+		setTitle("Mantenimiento de los Tipos de Documentos");
+		setType(Type.POPUP);
 		setBounds(100, 100, 542, 528);
 		getContentPane().setLayout(null);
 		

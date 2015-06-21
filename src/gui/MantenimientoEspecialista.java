@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -33,6 +34,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
+import java.awt.Window.Type;
+import java.awt.Toolkit;
 
 public class MantenimientoEspecialista extends JDialog implements ActionListener,MouseListener,KeyListener{
 	
@@ -54,7 +57,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 	private JButton btnModificar;
 	private JButton btnBuscar;
 	private JButton btnEliminar;
-	private JComboBox<String> cboEstado;
+	private JComboBox cboEstado;
 	private JSeparator separator;
 	private JLabel mensaje1;
 	private JLabel lblmensaje01;
@@ -88,6 +91,10 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 	 * Create the dialog.
 	 */
 	public MantenimientoEspecialista() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MantenimientoEspecialista.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
+		setResizable(false);
+		setType(Type.POPUP);
+		setTitle("Mantenimiento del Especialista");
 		setBounds(100, 100, 597, 603);
 		getContentPane().setLayout(null);
 		
@@ -202,7 +209,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		campos();
 		mostrarEspecialista();
 		
-		cboEstado = new JComboBox<String>();
+		cboEstado = new JComboBox();
 		cboEstado.setBounds(398, 221, 149, 20);
 		getContentPane().add(cboEstado);
 		
@@ -482,7 +489,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 				}
 			}
 			else if (e.getSource()==txtAnexo) {
-				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+				if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='*'){			
 					e.consume();		
 				}
 			}

@@ -20,9 +20,9 @@ public class ArrayUsuario {
 		cargarDatos();
 	}
 
-	// ---------------------------------------------------
-	// METODOS PARA DAR MANTENIMIENTO AL ARRAYLIST |
-	// ---------------------------------------------------
+	// ---------------------------------------
+	// METODOS PARA DAR MANTENIMIENTO AL ARRAYLIST 
+	// ---------------------------------------
 	public void adicionar(Usuario x) {
 		user.add(x);
 	}

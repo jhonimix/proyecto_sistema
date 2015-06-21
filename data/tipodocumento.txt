@@ -1,4 +1,4 @@
-1,Documento de Identidad, DNI,1
+1,Documento de Identidad, DNI,0
 2,Passaporte,PASS,1
 3,Libreta Militar, LMIL,1
 4,Brevete,BREV,1

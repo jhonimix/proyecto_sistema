@@ -81,7 +81,7 @@ public class ArrayEspecialista {
 				linea = d.getCodEsp() + "," + d.getNomEsp() + ","
 						+ d.getApeEsp() + "," + d.getEspEsp() + ","
 						+ d.getAnexoEsp() + "," + d.getFecIngEsp() + ","
-						+ d.getEspEsp();
+						+ d.getStatusEsp();
 				// GRABAR LOS DATOS DE LA MEMORIA AL ARCHIVO "Especialista.txt"
 				pw.println(linea);
 			}
@@ -104,9 +104,7 @@ public class ArrayEspecialista {
 				// CREAR UN ARREGLO DEL TIPO STRING SEPARANDO LOS CAMPOS
 				String row[] = linea.split(",");
 				// CREAR EL OBJETO "d"
-				Especialista d = new Especialista(Integer.parseInt(row[0]),
-						row[1], row[2], row[3], row[4], row[5],
-						Integer.parseInt(row[6]));
+				Especialista d = new Especialista(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], Integer.parseInt(row[6]));
 				// ENVIAR EL OBJETO "d" AL ARREGLO "esp"
 				esp.add(d);
 			}
