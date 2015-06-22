@@ -6,9 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
+
+
+import clases.imagenFondo;
 import controlador.ArrayUsuario;
 import entidades.Usuario;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -38,7 +43,12 @@ public class loginForm extends JFrame {
 				try {
 					loginForm frame = new loginForm();
 					frame.setVisible(true);
+					frame.setSize(450,350);
 					frame.setLocationRelativeTo(null);
+					ImageIcon icon = new ImageIcon(frame.getClass().getResource("img/fondo-login.png"));
+					imagenFondo imagenFondo = new imagenFondo(icon.getImage(),450,350);
+					frame.getContentPane().add(imagenFondo);
+					
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,27 +65,18 @@ public class loginForm extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Ingreso al sistema");
 		setResizable(false);
-		
-		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		setBounds(100, 100, 450, 351);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(68, 78, 76, 14);
-		contentPane.add(lblUsuario);
-		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(68, 129, 76, 14);
-		contentPane.add(lblPassword);
-		
 		txtUser = new JTextField();
-		txtUser.setBounds(154, 75, 140, 20);
+		txtUser.setBounds(127, 146, 200, 29);
 		contentPane.add(txtUser);
 		txtUser.setColumns(10);
 		
-		JButton btnIngresar = new JButton("Ingresar");
+		JButton btnIngresar = new JButton("Ingresar al sistema");
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String username = txtUser.getText();
@@ -91,13 +92,13 @@ public class loginForm extends JFrame {
 				
 			}
 		});
-		btnIngresar.setBounds(154, 167, 140, 35);
+		btnIngresar.setBounds(127, 256, 200, 35);
 		contentPane.add(btnIngresar);
 		
 		
 		
 		passUser = new JPasswordField();
-		passUser.setBounds(154, 126, 140, 20);
+		passUser.setBounds(127, 204, 200, 28);
 		contentPane.add(passUser);
 		//listar();
 	}
