@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 
 
+
 import clases.imagenFondo;
 import controlador.ArrayUsuario;
 import entidades.Usuario;
@@ -23,19 +24,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JPasswordField;
+
 import java.awt.Color;
+import java.util.ArrayList;
+
 import javax.swing.SwingConstants;
 
 
 public class loginForm extends JFrame {
+	
 	ArrayUsuario a = new ArrayUsuario();
+	
 	private JPanel contentPane;
 	private JTextField txtUser;
 	private JPasswordField passUser;
 	
-	String b ="admin";
-	String c ="1234";
-	
+	public String b ="admin";
+	public String c ="1234";
+
+	public Usuario xIngreso;
 	/**
 	 * Launch the application.
 	 */
@@ -89,6 +96,8 @@ public class loginForm extends JFrame {
 						gui.principalForm nueva = new gui.principalForm();
 						nueva.setVisible(true);
 						nueva.setLocationRelativeTo(null);
+						nueva.setTitle("Bienvenido al Menú Principal "+ xIngreso.getNameUser());
+						nueva.objUsu = xIngreso;
 						ImageIcon icon = new ImageIcon(nueva.getClass().getResource("img/fondo-principal.png"));
 						imagenFondo fondo = new imagenFondo(icon.getImage(),750,500);
 						nueva.getContentPane().add(fondo);
@@ -124,59 +133,44 @@ public class loginForm extends JFrame {
 		lblDesarrolladoPorEl.setBounds(209, 302, 205, 14);
 		contentPane.add(lblDesarrolladoPorEl);
 		//listar();
-	}
-	void imprimir(String s){
-		System.out.println( s + "\n");
-	}
-		
-	void listar(){ 
-		imprimir("--------------------------------------------------------");
-		for(int i=0; i<a.tamaño(); i++){
-			Usuario x=a.obtener(i);
-			imprimir(x.getCodDocUser()+"\t\t" + 
-			         x.getNameUser()+"\t\t"+
-				     x.getLastnameUser()+"\t"+
-			         x.getCodDocUser()+"\t"+
-				     x.getDniUser()+"\t"+
-			         x.getArea()+"\t"+
-				     x.getEmail()+"\t"+
-			         x.getFono()+"\t"+
-				     x.getFechaIngreso()+"\t"+
-			         //x.getPass()+"\t"+
-				     x.getStatus()
-				     );
-		}
-	}
+	}	
 	
-	//Metodo para ingresar con el usuario email y pass
-		public boolean IngresoUsuario(String user, String pass){
-			String msg;
-			if(b.compareTo(user)==0 && c.compareTo(pass)==0){
-				return true;
-			}
-	        //buscamos los items de los usuarios email y pass
-			/*for(int i = 0; i < a.tamaño() ; i++){				
-				if((a.obtener(i).getEmail().compareTo(user) == 0 && a.obtener(i).getDniUser().compareTo(pass)==0)){
-					
-					//Verificamos si el usuario no esta activo
-					if(a.obtener(i).getStatus()==1){
-						return true;
-					}
-					else{
-						//Enviamos un mensaje
-						msg="Tu usuario esta no activo";
-						mensaje(msg);
-						return false;
-						//imprimir(text);
-					}
-					
+	// METODO PARA INGRESAR CON EL NOMBRE DEL USUARIO Y LA CONTRASEÑA(DNI)
+	public boolean IngresoUsuario(String user, String pass) {
+		String msg;
+		// if(b.compareTo(user)==0 && c.compareTo(pass)==0){
+		// return true;
+		// }
+
+		// BUSCAMOS LOS ITEMS DE LOS USUARIOS QUE LOGEARON
+		for (int i = 0; i < a.tamaño(); i++) {
+			if ((a.obtener(i).getNameUser().compareTo(user) == 0 && a
+					.obtener(i).getDniUser().compareTo(pass) == 0)) {
+				xIngreso = a.obtener(i);
+
+				// VERIFICAMOS SI EL USUARIO ESTA ACTIVO
+				if (xIngreso.getStatus() == 1) {
+					return true;
+				} else {
+					// LE ENVIAMOS UN MENSAJE SI LO ESTA
+					msg = "Tu usuario esta no activo";
+					mensaje(msg);
+					return false;
+					// imprimir(text);
 				}
-			}*/
-			msg = "Usuario o contraseña incorrectos";
-			mensaje(msg);
-			return false;
+
+			}
 		}
-		void mensaje(String s){
-			JOptionPane.showMessageDialog(null,s);
-		}
+		msg = "Usuario o contraseña incorrectos";
+		mensaje(msg);
+		return false;
+	}
+
+	void mensaje(String s) {
+		JOptionPane.showMessageDialog(null, s);
+	}
+
+	void imprimir(String s) {
+		System.out.println(s + "\n");
+	}
 }

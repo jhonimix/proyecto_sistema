@@ -1,5 +1,6 @@
 package gui;
 
+import entidades.Usuario;
 import gui.MantenimientoDocumento;
 import gui.MantenimientoIncidencia;
 
@@ -17,12 +18,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import clases.imagenFondo;
+
 import javax.swing.JButton;
 
 
 public class principalForm extends JFrame implements ActionListener {	
 	
 	gui.loginForm login = new gui.loginForm();
+	
+	Usuario objUsu;
 
 	//DECLARAMOS GLOBALES LAS VARIABLES DEL FORMULARIO
 	private JPanel contentPane;
@@ -80,7 +84,6 @@ public class principalForm extends JFrame implements ActionListener {
 	 */
 	public principalForm() {
 		setResizable(false);
-		setTitle("BIENVENIDO");
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 544);
@@ -204,13 +207,13 @@ public class principalForm extends JFrame implements ActionListener {
 		Object obj = e.getSource();
 		GIncidencia frmIncidencia;
 		
-		if(obj==btnCerrarSesin){
+		/*if(obj==btnCerrarSesin){
+			dispose();	
+		}*/
+		
+		if(obj == mntmSalir){
 			principalForm.this.login.setVisible(true);
 			principalForm.this.login.setLocationRelativeTo(null);
-			dispose();	
-		}
-		
-		else if(obj == mntmSalir){
 			dispose();
 		}
 		
@@ -219,6 +222,7 @@ public class principalForm extends JFrame implements ActionListener {
 			frmUsuario.setVisible(true);
 		}	
 		else if(obj==mntmArea){
+			
 		}
 		else if (obj == mntmTipoDocumento) {
 			MantenimientoDocumento frmDocumento = new MantenimientoDocumento();
@@ -239,7 +243,8 @@ public class principalForm extends JFrame implements ActionListener {
 			frmIncidencia.btnRegistrar.setVisible(true);
 			frmIncidencia.btnNuevo.setVisible(true);
 			frmIncidencia.btnLimpiar.setVisible(true);
-			frmIncidencia.Incidencia.setVisible(true);		
+			frmIncidencia.Incidencia.setVisible(true);
+			frmIncidencia.setCodUsu(objUsu.getCodUser());
 		}
 		else if (obj == mntmListado) {
 			frmIncidencia = new GIncidencia();

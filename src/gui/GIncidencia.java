@@ -35,7 +35,9 @@ import entidades.*;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GIncidencia extends JDialog implements ActionListener{	
 	
@@ -316,6 +318,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 		
 		cboTipoInc = new JComboBox();
 		cboTipoInc.setBounds(203, 83, 106, 20);
+		cboTipoInc.addItem("");
 		panel.add(cboTipoInc);
 		
 		btnLimpiar2 = new JButton("LIMPIAR");
@@ -335,7 +338,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 		txtListado = new JTextArea();
 		Listado.setViewportView(txtListado);
 		
-		llenaCombos();
+		llenaCampos();
 		
 	}
 	
@@ -356,7 +359,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 		}
 	}
 	
-	void llenaCombos(){
+	void llenaCampos(){
 		
 		//COMBO CODIGO ESPECIALISTA
 		ArrayList<Especialista> x1 = new ArrayList<Especialista>();
@@ -374,6 +377,32 @@ public class GIncidencia extends JDialog implements ActionListener{
 			cboEspecialista.addItem(n[i]);
 			//System.out.print(n[i]+"\n");
 		}
+		
+		// COMBO CODIGO TIPO DE INCIDENCIA
+		ArrayList<TipoIncidencia> x2 = new ArrayList<TipoIncidencia>();
+		x2 = tipo.ListarTipoIncidencia();
+
+		int n1[] = new int[espec.tamaño()];
+		int indice1 = 0;
+
+		for (TipoIncidencia a : x2) {
+			n1[indice1] = a.getCodTipoInc();
+			indice1++;
+		}
+
+		for (int i = 0; i < espec.tamaño(); i++) {
+			cboTipoInc.addItem(n1[i]);
+			// System.out.print(n[i]+"\n");
+		}
+		
+		// LLENAMOS FECHA DE REGISTRO
+		setFecRegistro(fechaActual());
+	}
+	
+	public static String fechaActual(){
+		Date fecha = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		return sdf.format(fecha);
 	}
 	
 	/*---------------------------
@@ -502,8 +531,8 @@ public class GIncidencia extends JDialog implements ActionListener{
 		if (e.getSource()==btnBuscar) {
 			
 		}
-		if (e.getSource()==btnRegistrar) {
-			
+		if (e.getSource()==btnRegistrar) {			
+			registrar();
 		}
 		if (e.getSource()==btnModificar) {
 			
@@ -511,6 +540,12 @@ public class GIncidencia extends JDialog implements ActionListener{
 		if (e.getSource()==btnListado) {
 			
 		}
-	}	
+	}
 	
+	/*-----------------------------
+	 * 	METODOS DE LOS BOTONES
+	 * ---------------------------*/
+	void registrar(){
+		
+	}
 }
