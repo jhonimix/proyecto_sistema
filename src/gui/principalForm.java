@@ -32,7 +32,6 @@ public class principalForm extends JFrame implements ActionListener {
 	
 	/* MENU SISTEMA */
 	private JMenu mnSistema;
-	private JMenuItem mntmOpenSession;
 	private JMenuItem mntmSalir;
 	/* MENU MANTENIMIENTO */
 	private JMenu mnMantenimiento;
@@ -109,10 +108,6 @@ public class principalForm extends JFrame implements ActionListener {
 
 		mnSistema = new JMenu("Sistema");
 		mnPrincipal.add(mnSistema);
-
-		mntmOpenSession = new JMenuItem("Iniciar sesi\u00F3n");
-		mnSistema.add(mntmOpenSession);
-		mntmOpenSession.setIcon(getIcon("login.png", null));
 
 		mntmSalir = new JMenuItem("Salir");
 		mntmSalir.addActionListener(this);
