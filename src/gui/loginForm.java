@@ -91,7 +91,7 @@ public class loginForm extends JFrame {
 				String username = txtUser.getText();
 		        String password = new String(passUser.getPassword());
 		        
-			        if(IngresoUsuario(username,password)){
+			        if(IngresoUsuario(username.toUpperCase(),password)){
 						//lblSession.setText("Ingresaste");
 						gui.principalForm nueva = new gui.principalForm();
 						nueva.setVisible(true);
@@ -107,9 +107,7 @@ public class loginForm extends JFrame {
 			}
 		});
 		btnIngresar.setBounds(127, 256, 200, 35);
-		contentPane.add(btnIngresar);
-		
-		
+		contentPane.add(btnIngresar);		
 		
 		passUser = new JPasswordField();
 		passUser.setBounds(183, 204, 144, 28);
@@ -144,7 +142,7 @@ public class loginForm extends JFrame {
 
 		// BUSCAMOS LOS ITEMS DE LOS USUARIOS QUE LOGEARON
 		for (int i = 0; i < a.tamaño(); i++) {
-			if ((a.obtener(i).getNameUser().compareTo(user) == 0 && a
+			if ((a.obtener(i).getNameUser().toUpperCase().compareTo(user) == 0 && a
 					.obtener(i).getDniUser().compareTo(pass) == 0)) {
 				xIngreso = a.obtener(i);
 

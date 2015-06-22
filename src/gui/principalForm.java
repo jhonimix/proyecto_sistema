@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import clases.imagenFondo;
 
 import javax.swing.JButton;
+import java.awt.Font;
 
 
 public class principalForm extends JFrame implements ActionListener {	
@@ -107,6 +108,7 @@ public class principalForm extends JFrame implements ActionListener {
 		contentPane.add(separator);*/
 
 		mnPrincipal = new JMenuBar();
+		mnPrincipal.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		setJMenuBar(mnPrincipal);
 
 		mnSistema = new JMenu("Sistema");

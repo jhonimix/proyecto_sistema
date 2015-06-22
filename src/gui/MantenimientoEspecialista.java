@@ -168,6 +168,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		getContentPane().add(btnEliminar);
 		
 		txtCodigo = new JTextField();
+		txtCodigo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCodigo.setEditable(false);
 		txtCodigo.setBounds(100, 63, 102, 20);
 		getContentPane().add(txtCodigo);

@@ -48,7 +48,7 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 	private JTextField txtDescripcion;
 	private JTextField txtAbrev;
 	private JTable tablaTipoIncidencia;
-	private JComboBox<String> cboEstado;
+	private JComboBox cboEstado;
 	private JButton btnNuevo;
 	private JButton btnRegistrar;
 	private JButton btnModificar;
@@ -116,6 +116,7 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		getContentPane().add(lblEstado);
 		
 		txtCodigo = new JTextField();
+		txtCodigo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCodigo.setEditable(false);
 		txtCodigo.setBounds(100, 66, 94, 20);
 		getContentPane().add(txtCodigo);
@@ -133,7 +134,7 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		getContentPane().add(txtAbrev);
 		txtAbrev.setColumns(10);
 		
-		cboEstado = new JComboBox<String>();
+		cboEstado = new JComboBox();
 		cboEstado.setBounds(100, 191, 127, 20);
 		getContentPane().add(cboEstado);
 		

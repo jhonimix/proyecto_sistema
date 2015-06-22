@@ -53,7 +53,6 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	ArrayDocumento c = new ArrayDocumento();
 	
 	DefaultTableModel tabla = new DefaultTableModel();
-	TableColumn columna;
 	Estado obje = new Estado();
 	
 	private JLabel lblCodigo;
@@ -82,7 +81,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	private JTable tablaUsuarios;
 	private JLabel lblNewLabel;
 	private JButton btnBuscar;
-	private JComboBox<String> cboDocUsu,cboAreaUsu,cboStatusUsu;
+	private JComboBox cboDocUsu,cboAreaUsu,cboStatusUsu;
 	private JSeparator separator;
 	private JLabel mensaje1;
 
@@ -148,18 +147,22 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		getContentPane().add(lblCodigoDoc);
 
 		txtNombres = new JTextField();
+		txtNombres.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtNombres.addKeyListener(this);
 		txtNombres.setBounds(177, 126, 157, 25);
 		getContentPane().add(txtNombres);
 		txtNombres.setColumns(10);
 
 		txtApellidos = new JTextField();
+		txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtApellidos.addKeyListener(this);
 		txtApellidos.setColumns(10);
 		txtApellidos.setBounds(177, 162, 157, 25);
 		getContentPane().add(txtApellidos);
 
 		txtCodigo = new JTextField();
+		txtCodigo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtCodigo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
 		txtCodigo.setBounds(178, 90, 50, 25);
@@ -182,12 +185,14 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		getContentPane().add(lblTelfono);
 
 		txtDocumento = new JTextField();
+		txtDocumento.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtDocumento.addKeyListener(this);
 		txtDocumento.setColumns(10);
 		txtDocumento.setBounds(177, 234, 120, 25);
 		getContentPane().add(txtDocumento);
 
 		txtCorreo = new JTextField();
+		txtCorreo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtCorreo.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
@@ -206,6 +211,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		getContentPane().add(txtCorreo);
 
 		txtTelefono = new JTextField();
+		txtTelefono.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtTelefono.addKeyListener(this);
 		txtTelefono.setColumns(10);
 		txtTelefono.setBounds(483, 162, 97, 25);
@@ -226,6 +232,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		getContentPane().add(lblEstado);
 
 		txtFechaIng = new JTextField();
+		txtFechaIng.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtFechaIng.addKeyListener(this);
 		txtFechaIng.setColumns(10);
 		txtFechaIng.setBounds(483, 198, 97, 25);
@@ -249,6 +256,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		getContentPane().add(scrollPane);
 		
 		tablaUsuarios = new JTable(tabla);
+		tablaUsuarios.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tablaUsuarios.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tablaUsuarios.addMouseListener(this);	
 		scrollPane.setViewportView(tablaUsuarios);	
@@ -277,15 +285,18 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		getContentPane().add(btnBuscar);
 
 		cboAreaUsu = new JComboBox<String>();
+		cboAreaUsu.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		cboAreaUsu.setBounds(483, 92, 195, 20);
 		cboAreaUsu.addItem("");
 		getContentPane().add(cboAreaUsu);
 
-		cboStatusUsu = new JComboBox<String>();
+		cboStatusUsu = new JComboBox();
+		cboStatusUsu.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		cboStatusUsu.setBounds(483, 236, 140, 20);
 		getContentPane().add(cboStatusUsu);
 
 		cboDocUsu = new JComboBox<String>();
+		cboDocUsu.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		cboDocUsu.setBounds(177, 200, 120, 20);
 		cboDocUsu.addItem("");
 		getContentPane().add(cboDocUsu);
@@ -621,7 +632,6 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	void tamañoColumnas(){
 		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
 		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
-		
 		
 		TableColumn a = tablaUsuarios.getColumn("Codigo");
 		a.setPreferredWidth(50);

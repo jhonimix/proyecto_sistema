@@ -13,7 +13,7 @@ public class ArrayIncidencia {
 	//METODO CONSTRUCTOR
 	public ArrayIncidencia() {
 		incidencia = new ArrayList<Incidencia>();
-		//cargarDatos();
+		cargarDatos();
 	}
 	
 	/*------------------------------------
@@ -103,5 +103,10 @@ public class ArrayIncidencia {
 		}
 	}
 	
+	//UN METODO QUE RETORNA LA CANTIDAD DE INCIDENCIAS REGISTRADAS
+	public int CantIncidencias(){
+		int c=tamaño();				
+		return c;
+	}
 	
 }
