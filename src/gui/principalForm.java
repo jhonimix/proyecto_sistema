@@ -78,6 +78,7 @@ public class principalForm extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public principalForm() {
+		setResizable(false);
 		setTitle("BIENVENIDO");
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,18 +89,18 @@ public class principalForm extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblUsuario = new JLabel("Usuario:");
+		/* JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(44, 15, 265, 14);
-		contentPane.add(lblUsuario);
+		contentPane.add(lblUsuario);*/
 
-		btnCerrarSesin = new JButton("Cerrar Sesion");
+		/*btnCerrarSesin = new JButton("Cerrar Sesion");
 		btnCerrarSesin.setBounds(540, 11, 122, 23);
 		btnCerrarSesin.addActionListener(this);
-		contentPane.add(btnCerrarSesin);
+		contentPane.add(btnCerrarSesin); */
 		
-		JSeparator separator = new JSeparator();
+		/* JSeparator separator = new JSeparator();
 		separator.setBounds(44, 44, 618, 14);
-		contentPane.add(separator);
+		contentPane.add(separator);*/
 
 		mnPrincipal = new JMenuBar();
 		setJMenuBar(mnPrincipal);

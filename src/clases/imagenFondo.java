@@ -15,7 +15,7 @@ public class imagenFondo extends JPanel {
 		this.setPreferredSize(tam);
 		this.setMinimumSize(tam);
 		this.setMaximumSize(tam);
-		this.setSize(450,300);
+		this.setSize(ancho,alto);
 		this.setLayout(null);
 	}
 	protected void paintComponent(Graphics g){

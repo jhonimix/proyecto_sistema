@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JPasswordField;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 
 public class loginForm extends JFrame {
@@ -72,7 +74,7 @@ public class loginForm extends JFrame {
 		contentPane.setLayout(null);
 		
 		txtUser = new JTextField();
-		txtUser.setBounds(127, 146, 200, 29);
+		txtUser.setBounds(183, 146, 144, 29);
 		contentPane.add(txtUser);
 		txtUser.setColumns(10);
 		
@@ -98,8 +100,20 @@ public class loginForm extends JFrame {
 		
 		
 		passUser = new JPasswordField();
-		passUser.setBounds(127, 204, 200, 28);
+		passUser.setBounds(183, 204, 144, 28);
 		contentPane.add(passUser);
+		
+		JLabel lblUsuario = new JLabel("Usuario :");
+		lblUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblUsuario.setForeground(Color.WHITE);
+		lblUsuario.setBounds(95, 153, 78, 14);
+		contentPane.add(lblUsuario);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a :");
+		lblContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblContrasea.setForeground(Color.WHITE);
+		lblContrasea.setBounds(95, 211, 78, 14);
+		contentPane.add(lblContrasea);
 		//listar();
 	}
 	void imprimir(String s){
