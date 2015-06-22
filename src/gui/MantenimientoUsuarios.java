@@ -12,7 +12,10 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import entidades.Area;
 import entidades.TipoDocumento;
@@ -34,6 +37,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import com.sun.javafx.collections.SetAdapterChange;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -48,6 +53,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	ArrayDocumento c = new ArrayDocumento();
 	
 	DefaultTableModel tabla = new DefaultTableModel();
+	TableColumn columna;
 	Estado obje = new Estado();
 	
 	private JLabel lblCodigo;
@@ -84,7 +90,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		tabla.addColumn("Codigo");
 		tabla.addColumn("Nombres");
 		tabla.addColumn("Apellidos");
-		tabla.addColumn("CodDoc");
+		tabla.addColumn("Tipo de Documento");
 		tabla.addColumn("Documento");
 		tabla.addColumn("Area");
 		tabla.addColumn("Correo");
@@ -103,7 +109,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		try {
 			MantenimientoUsuarios dialog = new MantenimientoUsuarios();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			dialog.setVisible(true);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -235,17 +241,20 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		btnEliminar.setBounds(406, 302, 89, 23);
 		getContentPane().add(btnEliminar);
 
-		scrollPane = new JScrollPane();
-		scrollPane.setAutoscrolls(true);
+		scrollPane = new JScrollPane(tablaUsuarios);
+		JViewport viewport = new JViewport();
+		scrollPane.setRowHeaderView(viewport);
 		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scrollPane.setBounds(10, 359, 955, 271);
 		getContentPane().add(scrollPane);
-
-		tablaUsuarios = new JTable();
-		tablaUsuarios.addMouseListener(this);
-		scrollPane.setViewportView(tablaUsuarios);
+		
+		tablaUsuarios = new JTable(tabla);
+		tablaUsuarios.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tablaUsuarios.addMouseListener(this);	
+		scrollPane.setViewportView(tablaUsuarios);	
 		campos();
 		mostrarUsuarios();
+		tamañoColumnas();		
 
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.addActionListener(this);
@@ -287,21 +296,64 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		
 		
 		llenarCombos();
+	}
+	
+	/*---------------
+	*	VALIDACIONES
+	*----------------*/
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
 	}
 
-	public ImageIcon getIcon(String icono, String size) {
-		size = "16";
-		java.net.URL imgUrl = getClass().getResource("img/" + size + "/" + icono);
-		if(imgUrl != null){
-			ImageIcon imgIcon = new ImageIcon(imgUrl);
-			return imgIcon;
-		} 
-		else{
-			System.out.println("Error no se encontro el archivo " + icono);
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == txtNombres) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' '
+					&& e.getKeyChar() != '.') {
+				e.consume();
+			}
+
+		} else if (e.getSource() == txtApellidos) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' '
+					&& e.getKeyChar() != '.') {
+				e.consume();
+			}
+		} else if (e.getSource() == txtDocumento) {
+			if (!Character.isDigit(e.getKeyChar())) {
+				e.consume();
+			}
+			if (txtDocumento.getText().length() == 8) {
+				e.consume();
+			}
+		} else if (e.getSource() == txtCorreo) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != '@'
+					&& e.getKeyChar() != '.'
+					&& !Character.isDigit(e.getKeyChar())) {
+				e.consume();
+			}
+		} else if (e.getSource() == txtTelefono) {
+			if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '-') {
+				e.consume();
+			}
+		} else if (e.getSource() == txtFechaIng) {
+			if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '-') {
+				e.consume();
+			}
+			if (txtFechaIng.getText().length() == 10) {
+				mensaje1.setVisible(true);
+				e.consume();
+			}
 		}
-		return null;
 	}
+	
 	/* ---------------------
 	
 	* 	LLENAR COMBOS		*
@@ -566,65 +618,40 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		cboStatusUsu.setSelectedIndex(0);
 	}
 	
-	/*---------------
-		VALIDACIONES
-	*----------------*/
-	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-
-	@Override
-	public void keyReleased(KeyEvent e) {		
-		// TODO Auto-generated method stub		
-	}
-	
-	
-	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==txtNombres){			
-			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-				e.consume();		
-			}			
-			
-		}
-		else if (e.getSource()==txtApellidos) {
-			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-				e.consume();		
-			}	
-		}		
-		else if (e.getSource()==txtDocumento) {
-			if(!Character.isDigit(e.getKeyChar())){			
-				e.consume();		
-			}	
-			if(txtDocumento.getText().length()==8){
-				e.consume();
-			}
-		}
-		else if (e.getSource()==txtCorreo) {
-			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!='@' && e.getKeyChar()!='.' && !Character.isDigit(e.getKeyChar())){			
-				e.consume();
-			}	
-		}
-		else if (e.getSource()==txtTelefono) {
-			if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-'){			
-				e.consume();		
-			}	
-		}
-		else if (e.getSource()==txtFechaIng) {
-			if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-'){			
-				e.consume();
-			}			
-			if(txtFechaIng.getText().length()==10){
-				mensaje1.setVisible(true);
-				e.consume();
-			}
-		}
+	void tamañoColumnas(){
+		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		
+		TableColumn a = tablaUsuarios.getColumn("Codigo");
+		a.setPreferredWidth(50);
+		a.setCellRenderer(modelocentrar);
+		TableColumn b = tablaUsuarios.getColumn("Nombres");
+		b.setPreferredWidth(115);
+		b.setCellRenderer(modelocentrar);
+		TableColumn c = tablaUsuarios.getColumn("Apellidos");
+		c.setPreferredWidth(115);
+		c.setCellRenderer(modelocentrar);
+		TableColumn d = tablaUsuarios.getColumn("Tipo de Documento");
+		d.setPreferredWidth(160);
+		d.setCellRenderer(modelocentrar);
+		TableColumn e = tablaUsuarios.getColumn("Documento");
+		e.setPreferredWidth(80);
+		e.setCellRenderer(modelocentrar);
+		TableColumn f = tablaUsuarios.getColumn("Area");
+		f.setPreferredWidth(200);
+		f.setCellRenderer(modelocentrar);
+		TableColumn g = tablaUsuarios.getColumn("Correo");
+		g.setPreferredWidth(170);
+		g.setCellRenderer(modelocentrar);
+		TableColumn h = tablaUsuarios.getColumn("Telefono");
+		h.setPreferredWidth(100);
+		h.setCellRenderer(modelocentrar);
+		TableColumn i = tablaUsuarios.getColumn("Fecha");
+		i.setPreferredWidth(100);
+		i.setCellRenderer(modelocentrar);
+		TableColumn j = tablaUsuarios.getColumn("Estado");
+		j.setPreferredWidth(100);		
+		j.setCellRenderer(modelocentrar);	
 	}
 }

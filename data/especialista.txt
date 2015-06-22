@@ -1,4 +1,4 @@
-1,Alfredo,Gutierrez,Hardware y Redes,234,01-03-2014,1
+1,Alfredo Sebastian,Gutierrez,Hardware y Redes,234,01-03-2014,1
 2,Maria,Hernandez,Programador Java,134,11-05-2014,0
 3,Teresa,Cardenas,Programador PHP,123,12-02-2014,1
 4,Enrique,Martinez,Gestión de proyecto,456,20-06-2014,1

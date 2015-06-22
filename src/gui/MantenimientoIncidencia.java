@@ -18,7 +18,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JViewport;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import clases.Estado;
 import controlador.ArrayTipoIncidencia;
@@ -133,15 +137,19 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		cboEstado.setBounds(100, 191, 127, 20);
 		getContentPane().add(cboEstado);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(tablaTipoIncidencia);
+		JViewport viewport = new JViewport();
+		scrollPane.setRowHeaderView(viewport);
 		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scrollPane.setBounds(10, 237, 516, 243);
 		getContentPane().add(scrollPane);
 		
-		tablaTipoIncidencia = new JTable();
+		tablaTipoIncidencia = new JTable(tabla);
+		tablaTipoIncidencia.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tablaTipoIncidencia.addMouseListener(this);
 		scrollPane.setViewportView(tablaTipoIncidencia);
 		campos();
+		tamañoColumnas();
 		mostrarTipoIncidencia();
 		
 		btnNuevo = new JButton("Nuevo");
@@ -178,6 +186,33 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		cboEstado.addItem(obje.getNombre1());
 	}
 
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==txtDescripcion){
+			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+				e.consume();		
+			}	
+		}
+		else if (e.getSource()==txtAbrev){
+			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+				e.consume();		
+			}	
+		}
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -371,32 +406,22 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		setEstado(-1);
 	}
 
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub		
+	void tamañoColumnas(){
+		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		TableColumn a = tablaTipoIncidencia.getColumn("Codigo");
+		a.setPreferredWidth(50);
+		a.setCellRenderer(modelocentrar);
+		TableColumn b = tablaTipoIncidencia.getColumn("Descripcion");
+		b.setPreferredWidth(250);
+		b.setCellRenderer(modelocentrar);
+		TableColumn c = tablaTipoIncidencia.getColumn("Abreviatura");
+		c.setPreferredWidth(150);
+		c.setCellRenderer(modelocentrar);
+		TableColumn d = tablaTipoIncidencia.getColumn("Estado");
+		d.setPreferredWidth(100);
+		d.setCellRenderer(modelocentrar);
 	}
-
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub		
-	}
-
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==txtDescripcion){
-			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-				e.consume();		
-			}	
-		}
-		else if (e.getSource()==txtAbrev){
-			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-				e.consume();		
-			}	
-		}
-	}
-
 }

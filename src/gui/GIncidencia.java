@@ -16,6 +16,7 @@ import javax.swing.border.SoftBevelBorder;
 import java.awt.SystemColor;
 
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -425,16 +426,16 @@ public class GIncidencia extends JDialog implements ActionListener{
 		this.txtCodUsu.setText(""+txtCodUsu);
 	}
 	
-	public String getCodEsp(){
-		return cboEspecialista.getSelectedItem().toString();
+	public int getCodEsp(){
+		return Integer.parseInt(cboEspecialista.getSelectedItem().toString());
 	}
 	
 	public void setCodEsp(int pos){
 		cboEspecialista.setSelectedIndex(pos);
 	}
 	
-	public String getCodTipo(){
-		return cboTipoInc.getSelectedItem().toString();
+	public int getCodTipo(){
+		return Integer.parseInt(cboTipoInc.getSelectedItem().toString());
 	}
 	
 	public void setCodTipo(int pos){
@@ -489,14 +490,10 @@ public class GIncidencia extends JDialog implements ActionListener{
 		cboEstado.setSelectedIndex(pos);
 	}
 	
-	/*---- GET/SET DE LOS TEXT AREAS ----*/
-	
-	public String getTxtIncidencia() {
-		return txtIncidencia.getText();
-	}
+	/*---- GET/SET DE LOS TEXT AREAS ----*/	
 
 	public void setIncidencia(String txtIncidencia) {
-		this.txtIncidencia.setText(txtIncidencia);
+		this.txtIncidencia.append(txtIncidencia);
 	}
 
 	public String getDescripcion() {
@@ -504,7 +501,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 	}
 
 	public void setDescripcion(String txtDescripcion) {
-		this.txtDescripcion.setText(txtDescripcion);
+		this.txtDescripcion.append(txtDescripcion);
 	}
 
 	public String getObservacion() {
@@ -512,7 +509,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 	}
 
 	public void setObservacion(String txtObservacion) {
-		this.txtObservacion.setText(txtObservacion);
+		this.txtObservacion.append(txtObservacion);
 	}
 	
 	/*-----------------------
@@ -546,6 +543,37 @@ public class GIncidencia extends JDialog implements ActionListener{
 	 * 	METODOS DE LOS BOTONES
 	 * ---------------------------*/
 	void registrar(){
+		Incidencia x = inc.buscar(getCodigo());
+		if(x==null){
+			
+			Incidencia objInc = new Incidencia(getCodigo(),getCodUsu(),getCodEsp(),getCodTipo(),getDescripcion(),
+					   getObservacion(),getTiempoEstimado(),getTiempoReal(),getFecRegistro(),
+					   getFecInicio(),getFecFinal(),getEstado());
+			
+			inc.adicionar(objInc);
+			listar(objInc);
+		}else {
+			JOptionPane.showMessageDialog(null, "La incidencia ya está registrada...!! NJD");
+		}
 		
+	}
+	void listado(){
+		
+	}
+	void modificar(){
+		
+	}
+	void listar(Incidencia z){
+		imprimir("----------------------******************************-----------------------");
+		imprimir("--------------------* REGISTRO GENERAL DE INCIDENCIAS *--------------------");
+		imprimir("----------------------******************************-----------------------");
+		imprimir("INCIDENCIA NUMERO: " + "\t"+ z.getCodigo());
+	}
+	void limpiar(){
+		
+	}
+	
+	void imprimir(String s){
+		setIncidencia(s+"\n");
 	}
 }

@@ -5,6 +5,8 @@ import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JViewport;
+import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -18,7 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.JTable;
 
 import clases.Estado;
@@ -34,6 +38,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
+
 import java.awt.Window.Type;
 import java.awt.Toolkit;
 
@@ -68,7 +73,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		tabla.addColumn("Apellidos");
 		tabla.addColumn("Especialidad");
 		tabla.addColumn("Anexo");
-		tabla.addColumn("Fecha");
+		tabla.addColumn("Fecha de Ingreso");
 		tabla.addColumn("Estado");
 		//MOSTRAMOS LOS CAMPOS EN TABLA
 		TablaEspecialista.setModel(tabla);
@@ -198,15 +203,19 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		txtFecha.setBounds(398, 184, 148, 20);
 		getContentPane().add(txtFecha);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(TablaEspecialista);
+		JViewport viewport = new JViewport();
+		scrollPane.setRowHeaderView(viewport);
 		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scrollPane.setBounds(10, 296, 561, 257);
 		getContentPane().add(scrollPane);
 		
 		TablaEspecialista = new JTable();
+		TablaEspecialista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		TablaEspecialista.addMouseListener(this);
 		scrollPane.setViewportView(TablaEspecialista);
 		campos();
+		tamañoColumnas();
 		mostrarEspecialista();
 		
 		cboEstado = new JComboBox();
@@ -233,6 +242,47 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		cboEstado.addItem(obje.getNombre1());
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+		if (e.getSource() == txtNombres) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
+				e.consume();
+			}
+		} else if (e.getSource() == txtApellidos) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
+				e.consume();
+			}
+		} else if (e.getSource() == txtEspecialidad) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
+				e.consume();
+			}
+		} else if (e.getSource() == txtAnexo) {
+			if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '*' || txtAnexo.getText().length()==7) {
+				e.consume();
+			}
+		} else if (e.getSource() == txtFecha) {
+			if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '-') {
+				e.consume();
+			}
+			if (txtFecha.getText().length() == 10) {
+				mensaje1.setVisible(true);
+				lblmensaje01.setVisible(true);
+				e.consume();
+			}
+		}
+	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -419,90 +469,74 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		
 	}
 	
-	//METODOS PARA EL FORMULARIO
-	
-		public void llenarTabla() {
-			tabla.addRow(new Object[] { getCodigo(), getNombres(),getApellidos(),getEspecialidad(),getAnexo(),getFecha(), getEstado() });
-			TablaEspecialista.setModel(tabla);
-		}
-		
-		public void mostrarEspecialista() {
-			ArrayList<Especialista> lista = new ArrayList<Especialista>();
-			lista = d.ListarEspecialista();
-			tabla.setRowCount(0);
-			for (Especialista x : lista) {
-				tabla.addRow(new Object[] { x.getCodEsp(),x.getNomEsp(),x.getApeEsp(),x.getEspEsp(),x.getAnexoEsp(),x.getFecIngEsp(),obje.bnombre(x.getStatusEsp()) });
+	// METODOS PARA EL FORMULARIO
 
-			}
-			TablaEspecialista.setModel(tabla);
-		}
+	public void llenarTabla() {
+		tabla.addRow(new Object[] { getCodigo(), getNombres(), getApellidos(),
+				getEspecialidad(), getAnexo(), getFecha(), getEstado() });
+		TablaEspecialista.setModel(tabla);
+	}
 
-		// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
-		public void llenarInputs(int fila){
-			setCodigo(tabla.getValueAt(fila, 0).toString());
-			Especialista x = d.buscar(getCodigo());
-			
-			setNombres(tabla.getValueAt(fila, 1).toString());
-			setApellidos(tabla.getValueAt(fila, 2).toString());
-			setEspecialidad(tabla.getValueAt(fila, 3).toString());
-			setAnexo(tabla.getValueAt(fila, 4).toString());
-			setFecha(tabla.getValueAt(fila, 5).toString());
-			setEstado(x.getStatusEsp());
-		}
+	public void mostrarEspecialista() {
+		ArrayList<Especialista> lista = new ArrayList<Especialista>();
+		lista = d.ListarEspecialista();
+		tabla.setRowCount(0);
+		for (Especialista x : lista) {
+			tabla.addRow(new Object[] { x.getCodEsp(), x.getNomEsp(),
+					x.getApeEsp(), x.getEspEsp(), x.getAnexoEsp(),
+					x.getFecIngEsp(), obje.bnombre(x.getStatusEsp()) });
 
-		public void limpiar(){
-			setNombres("");
-			setApellidos("");
-			setEspecialidad("");
-			setAnexo("");
-			setFecha("");
-			setEstado(-1);
 		}
+		TablaEspecialista.setModel(tabla);
+	}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub			
-		}
+	// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
+	public void llenarInputs(int fila) {
+		setCodigo(tabla.getValueAt(fila, 0).toString());
+		Especialista x = d.buscar(getCodigo());
 
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub			
-		}
+		setNombres(tabla.getValueAt(fila, 1).toString());
+		setApellidos(tabla.getValueAt(fila, 2).toString());
+		setEspecialidad(tabla.getValueAt(fila, 3).toString());
+		setAnexo(tabla.getValueAt(fila, 4).toString());
+		setFecha(tabla.getValueAt(fila, 5).toString());
+		setEstado(x.getStatusEsp());
+	}
 
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-			if(e.getSource()==txtNombres){		
-				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-					e.consume();		
-				}		
-			}
-			else if (e.getSource()==txtApellidos) {
-				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-					e.consume();		
-				}
-			}
-			else if (e.getSource()==txtEspecialidad) {
-				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-					e.consume();		
-				}
-			}
-			else if (e.getSource()==txtAnexo) {
-				if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='*'){			
-					e.consume();		
-				}
-			}
-			else if (e.getSource()==txtFecha) {
-				if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-'){			
-					e.consume();
-				}
-				if(txtFecha.getText().length()==10){
-					mensaje1.setVisible(true);
-					lblmensaje01.setVisible(true);
-					e.consume();
-				}
-			}
-		}	
-	
+	public void limpiar() {
+		setNombres("");
+		setApellidos("");
+		setEspecialidad("");
+		setAnexo("");
+		setFecha("");
+		setEstado(-1);
+	}
+
+
+	void tamañoColumnas() {
+		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+
+		TableColumn a = TablaEspecialista.getColumn("Codigo");
+		a.setPreferredWidth(50);
+		a.setCellRenderer(modelocentrar);
+		TableColumn b = TablaEspecialista.getColumn("Nombres");
+		b.setPreferredWidth(120);
+		b.setCellRenderer(modelocentrar);
+		TableColumn c = TablaEspecialista.getColumn("Apellidos");
+		c.setPreferredWidth(120);
+		c.setCellRenderer(modelocentrar);
+		TableColumn d = TablaEspecialista.getColumn("Especialidad");
+		d.setPreferredWidth(200);
+		d.setCellRenderer(modelocentrar);		
+		TableColumn e = TablaEspecialista.getColumn("Anexo");
+		e.setPreferredWidth(60);
+		e.setCellRenderer(modelocentrar);
+		TableColumn f = TablaEspecialista.getColumn("Fecha de Ingreso");
+		f.setPreferredWidth(125);
+		f.setCellRenderer(modelocentrar);
+		TableColumn g = TablaEspecialista.getColumn("Estado");
+		g.setPreferredWidth(100);
+		g.setCellRenderer(modelocentrar);
+	}
 }

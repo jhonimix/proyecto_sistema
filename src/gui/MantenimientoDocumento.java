@@ -2,7 +2,9 @@ package gui;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -13,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JViewport;
+import javax.swing.SwingConstants;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +25,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
+
 
 
 
@@ -146,15 +152,19 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		cboEstado.setBounds(100, 191, 127, 20);
 		getContentPane().add(cboEstado);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(tablaDocumento);
+		JViewport viewport = new JViewport();
+		scrollPane.setRowHeaderView(viewport);
 		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scrollPane.setBounds(10, 237, 516, 234);
 		getContentPane().add(scrollPane);
 		
 		tablaDocumento = new JTable();
+		tablaDocumento.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tablaDocumento.addMouseListener(this);
 		scrollPane.setViewportView(tablaDocumento);
 		campos();
+		tamañoColumnas();
 		mostrarDocumentos();
 		
 		btnNuevo = new JButton("Nuevo");
@@ -404,4 +414,22 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 			}	
 		}
 	}	
+	void tamañoColumnas(){
+		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		TableColumn a = tablaDocumento.getColumn("Codigo");
+		a.setPreferredWidth(50);
+		a.setCellRenderer(modelocentrar);
+		TableColumn b = tablaDocumento.getColumn("Descripcion");
+		b.setPreferredWidth(220);
+		b.setCellRenderer(modelocentrar);
+		TableColumn c = tablaDocumento.getColumn("Abreviatura");
+		c.setPreferredWidth(150);
+		c.setCellRenderer(modelocentrar);
+		TableColumn d = tablaDocumento.getColumn("Estado");
+		d.setPreferredWidth(100);
+		d.setCellRenderer(modelocentrar);
+	}
 }
