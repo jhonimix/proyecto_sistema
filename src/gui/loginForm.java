@@ -89,6 +89,9 @@ public class loginForm extends JFrame {
 						gui.principalForm nueva = new gui.principalForm();
 						nueva.setVisible(true);
 						nueva.setLocationRelativeTo(null);
+						ImageIcon icon = new ImageIcon(nueva.getClass().getResource("img/fondo-principal.png"));
+						imagenFondo fondo = new imagenFondo(icon.getImage(),750,500);
+						nueva.getContentPane().add(fondo);
 						dispose();
 					}
 				
