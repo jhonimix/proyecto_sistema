@@ -45,7 +45,7 @@ public class loginForm extends JFrame {
 				try {
 					loginForm frame = new loginForm();
 					frame.setVisible(true);
-					frame.setSize(450,350);
+					
 					frame.setLocationRelativeTo(null);
 					ImageIcon icon = new ImageIcon(frame.getClass().getResource("img/fondo-login.png"));
 					imagenFondo imagenFondo = new imagenFondo(icon.getImage(),450,350);
@@ -114,6 +114,12 @@ public class loginForm extends JFrame {
 		lblContrasea.setForeground(Color.WHITE);
 		lblContrasea.setBounds(95, 211, 78, 14);
 		contentPane.add(lblContrasea);
+		
+		JLabel lblDesarrolladoPorEl = new JLabel("Desarrollado por el Equipo 7");
+		lblDesarrolladoPorEl.setForeground(Color.WHITE);
+		lblDesarrolladoPorEl.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDesarrolladoPorEl.setBounds(209, 302, 205, 14);
+		contentPane.add(lblDesarrolladoPorEl);
 		//listar();
 	}
 	void imprimir(String s){

@@ -16,10 +16,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JLabel;
+import clases.imagenFondo;
 import javax.swing.JButton;
-import javax.swing.JSeparator;
-import javax.swing.JInternalFrame;
+
 
 public class principalForm extends JFrame implements ActionListener {	
 	
@@ -67,6 +66,9 @@ public class principalForm extends JFrame implements ActionListener {
 					principalForm frame = new principalForm();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
+					ImageIcon icon = new ImageIcon(frame.getClass().getResource("img/fondo-principal.png"));
+					imagenFondo fondo = new imagenFondo(icon.getImage(),750,500);
+					frame.getContentPane().add(fondo);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -82,7 +84,7 @@ public class principalForm extends JFrame implements ActionListener {
 		setTitle("BIENVENIDO");
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 735, 498);
+		setBounds(100, 100, 750, 544);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
