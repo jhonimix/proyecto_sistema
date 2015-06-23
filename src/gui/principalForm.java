@@ -203,7 +203,7 @@ public class principalForm extends JFrame implements ActionListener {
 		return null;
 	}
 
-	@Override
+	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Object obj = e.getSource();
@@ -253,7 +253,7 @@ public class principalForm extends JFrame implements ActionListener {
 			frmIncidencia.setVisible(true);
 			frmIncidencia.setTitle("Listado de Incidencias Registradas");
 			frmIncidencia.btnListado.setVisible(true);
-			frmIncidencia.btnLimpiar2.setVisible(true);
+			frmIncidencia.btnBuscar.setVisible(true);
 			frmIncidencia.lblMensListado1.setVisible(true);
 			frmIncidencia.lblMensListado2.setVisible(true);
 			frmIncidencia.Listado.setVisible(true);

@@ -313,17 +313,17 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	*	VALIDACIONES
 	*----------------*/
 
-	@Override
+	
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
+	
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
+	
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == txtNombres) {
@@ -599,7 +599,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		}
 		tablaUsuarios.setModel(tabla);
 	}
-	//RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
+	//RELLENAR LOS INPUTS CON LOS DATOS DE CADA FILA DE LA TABLA
 	public void LlenarInputs(int fila){		
 		
 		txtCodigo.setText(tabla.getValueAt(fila, 0).toString());

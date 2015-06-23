@@ -73,7 +73,6 @@ public class GIncidencia extends JDialog implements ActionListener{
 	public JButton btnRegistrar;
 	public JButton btnBuscar;
 	public JButton btnNuevo;
-	public JButton btnLimpiar2;
 	public JButton btnImprimir;
 	public JScrollPane Incidencia;
 	public JScrollPane Listado;
@@ -145,6 +144,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 		getContentPane().add(lblMensListado2);
 		
 		lblMensListado1 = new JLabel("");
+		lblMensListado1.setVisible(false);
 		lblMensListado1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblMensListado1.setBounds(10, 64, 319, 19);
 		getContentPane().add(lblMensListado1);
@@ -174,6 +174,12 @@ public class GIncidencia extends JDialog implements ActionListener{
 		txtIncidencia.setToolTipText("");
 		Incidencia.setViewportView(txtIncidencia);
 		
+		btnLimpiar = new JButton("LIMPIAR");
+		btnLimpiar.setVisible(false);
+		
+		btnBuscar = new JButton("BUSCAR");
+		btnBuscar.setVisible(false);
+		
 		btnNuevo = new JButton("NUEVO");
 		btnNuevo.setVisible(false);
 		btnNuevo.setIcon(new ImageIcon(GIncidencia.class.getResource("/com/sun/java/swing/plaf/windows/icons/File.gif")));
@@ -182,9 +188,11 @@ public class GIncidencia extends JDialog implements ActionListener{
 		getContentPane().add(btnNuevo);
 		
 		btnNuevo.addActionListener(this);
-		
-		btnLimpiar = new JButton("LIMPIAR");
-		btnLimpiar.setVisible(false);
+		btnBuscar.setBackground(SystemColor.controlShadow);
+		btnBuscar.setIcon(new ImageIcon(GIncidencia.class.getResource("/com/sun/java/swing/plaf/windows/icons/Directory.gif")));
+		btnBuscar.setBounds(339, 11, 228, 33);
+		getContentPane().add(btnBuscar);
+		btnBuscar.addActionListener(this);
 		btnLimpiar.setIcon(new ImageIcon(GIncidencia.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnLimpiar.setBackground(SystemColor.controlShadow);
 		btnLimpiar.setBounds(633, 11, 228, 33);
@@ -198,14 +206,6 @@ public class GIncidencia extends JDialog implements ActionListener{
 		btnRegistrar.setBounds(339, 55, 522, 37);
 		getContentPane().add(btnRegistrar);
 		btnRegistrar.addActionListener(this);
-		
-		btnBuscar = new JButton("BUSCAR");
-		btnBuscar.setVisible(false);
-		btnBuscar.setBackground(SystemColor.controlShadow);
-		btnBuscar.setIcon(new ImageIcon(GIncidencia.class.getResource("/com/sun/java/swing/plaf/windows/icons/Directory.gif")));
-		btnBuscar.setBounds(339, 11, 228, 33);
-		getContentPane().add(btnBuscar);
-		btnBuscar.addActionListener(this);
 		
 		btnModificar = new JButton("MODIFICAR");
 		btnModificar.setVisible(false);
@@ -417,14 +417,6 @@ public class GIncidencia extends JDialog implements ActionListener{
 		cboTipoInc.addItem("");
 		panel.add(cboTipoInc);
 		
-		btnLimpiar2 = new JButton("LIMPIAR");
-		btnLimpiar2.setVisible(false);
-		btnLimpiar2.addActionListener(this);
-		btnLimpiar2.setIcon(new ImageIcon(GIncidencia.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
-		btnLimpiar2.setBackground(SystemColor.controlShadow);
-		btnLimpiar2.setBounds(307, 11, 260, 37);
-		getContentPane().add(btnLimpiar2);		
-		
 		btnImprimir = new JButton("IMPRIMIR");
 		btnImprimir.addActionListener(this);
 		btnImprimir.setIcon(new ImageIcon(GIncidencia.class.getResource("/sun/print/resources/orientLandscape.png")));
@@ -453,13 +445,13 @@ public class GIncidencia extends JDialog implements ActionListener{
 	/*-------------------------
 	 * METODOS DE ACCION	  * 
 	 * -----------------------*/
-	String ComboEstado(){
-		if(getEstado()==0)		
+	String ComboEstado(int a){
+		if(a==0)		
 			return "Registrada";
-		else if (getEstado()==1) {
+		else if (a==1) {
 			return "Iniciada";
 		}
-		else if (getEstado()==2) {
+		else if (a==2) {
 			return "Cancelada";
 		}
 		else{
@@ -629,7 +621,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 	 * ACTION EVENT
 	 *-----------------------*/
 	
-	@Override
+	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==btnNuevo){
@@ -671,7 +663,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 			}
 		}
 		if (e.getSource()==btnListado) {
-			
+			mostrarIncidencias();
 		}
 		if (e.getSource()==btnImprimir){
 			JOptionPane.showConfirmDialog(null,getIncidencia(),"Sistema de Gestion de Incidencias",0);
@@ -693,7 +685,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 		}else {
 			JOptionPane.showMessageDialog(null, "La incidencia ya está registrada...!! NJD");
 		}
-		
+		mostrarIncidencias();
 	}
 	void buscar(int cod){
 		Incidencia x = inc.buscar(cod);
@@ -711,9 +703,29 @@ public class GIncidencia extends JDialog implements ActionListener{
 		setEstado(x.getEstado());
 	}
 	
-	void listado(){
-		
+	//void listado(){
+	//METODOS PARA EL FORMULARIO
+	/*public void rellenarTabla() {		
+		tabla.addRow(new Object[] { getCodigo(),getCodUsu(),getCodEsp(),getCodTipo(),getDescripcion(),
+									getObservacion(),getTiempoEstimado(),getTiempoReal(),getFecRegistro(),
+									getFecInicio(),getFecFinal(), getEstado() });
+		TablaIncidencias.setModel(tabla);
+	}*/
+
+	public void mostrarIncidencias() {	
+		ArrayList<Incidencia> lista = new ArrayList<Incidencia>();
+		lista = inc.ListarIncidencias();
+		tabla.setRowCount(0);
+		//System.out.println(lista);
+		for (Incidencia x : lista) {
+			tabla.addRow(new Object[] {x.getCodigo(),usuar.buscar(x.getCodigo()).getNameUser(),espec.buscar(x.getCodigo()).getNomEsp(),tipo.buscar(x.getCodigo()).getDesTipoInc(),
+									   x.getDescripcion(),x.getComentarios(),x.getTiempoEst(),x.getTiempoReal(),x.getFecRegistro(),
+									   x.getFecInicio(),x.getFecFin(),ComboEstado(x.getEstado())});
+
+		}
+		TablaIncidencias.setModel(tabla);
 	}
+	
 	
 	void limpiar(){
 		setCodEsp(0);
@@ -722,7 +734,6 @@ public class GIncidencia extends JDialog implements ActionListener{
 		setObservacion("");
 		setTiempoEstimado(0);
 		setTiempoReal(0);
-		setFecRegistro("");
 		setFecInicio("");
 		setFecFinal("");
 		setEstado(0);

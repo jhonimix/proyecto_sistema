@@ -96,7 +96,7 @@ public class loginForm extends JFrame {
 						gui.principalForm nueva = new gui.principalForm();
 						nueva.setVisible(true);
 						nueva.setLocationRelativeTo(null);
-						nueva.setTitle("Bienvenido al Menú Principal "+ xIngreso.getNameUser());
+						nueva.setTitle("Bienvenido al Menú Principal     "+ xIngreso.getNameUser()+" "+xIngreso.getLastnameUser());
 						nueva.objUsu = xIngreso;
 						ImageIcon icon = new ImageIcon(nueva.getClass().getResource("img/fondo-principal.png"));
 						imagenFondo fondo = new imagenFondo(icon.getImage(),750,500);

@@ -4,11 +4,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 import entidades.Incidencia;
+import entidades.Usuario;
 
 public class ArrayIncidencia {
 	
 	//CREAMOS NUESTRA VARIABLE ARRAYLIST
 	ArrayList<Incidencia> incidencia;
+	
+	public ArrayList<Incidencia> ListarIncidencias() {
+		return incidencia;
+	}
 	
 	//METODO CONSTRUCTOR
 	public ArrayIncidencia() {

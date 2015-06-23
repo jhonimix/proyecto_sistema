@@ -202,34 +202,34 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		cboEstado.addItem(obje.getNombre1());
 	}
 
-	@Override
+	
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		int fila = tablaDocumento.getSelectedRow();
 		llenarInputs(fila);
 	}
 
-	@Override
+	
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub		
 	}
 
-	@Override
+	
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub		
 	}
 
-	@Override
+	
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub		
 	}
 
-	@Override
+	
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub		
 	}
 
-	@Override
+	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnRegistrar){
 			Registrar();
@@ -391,17 +391,17 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		setEstado(-1);
 	}
 
-	@Override
+	
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub		
 	}
 
-	@Override
+	
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub		
 	}
 
-	@Override
+	
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource()==txtDescripcion){
