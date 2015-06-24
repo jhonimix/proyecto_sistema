@@ -247,9 +247,17 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 	public void actionPerformed(ActionEvent a) {
 		// TODO Auto-generated method stub
 		if (a.getSource() == btnRegistrar) {
+			if(getDescripcion().equals("") || getAbrev().equals("") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;
+			}
 			Registrar();
 			limpiar();
 		} else if (a.getSource() == btnModificar) {
+			if(getDescripcion().equals("") || getAbrev().equals("") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;
+			}
 			Modificar();
 			limpiar();
 		} else if (a.getSource() == btnBuscar) {
@@ -258,8 +266,8 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 			Eliminar();
 			limpiar();
 		} else if (a.getSource() == btnNuevo) {
-			setCodigo("" + e.GeneraCodigo());
 			limpiar();
+			setCodigo("" + e.GeneraCodigo());
 		}
 	}
 
@@ -405,22 +413,20 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		setDescripcion("");
 		setAbrev("");
 		setEstado(-1);
+		setCodigo("");
 	}
 
 	void tamañoColumnas(){
 		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
-		
+		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);		
 		
 		TableColumn a = tablaTipoIncidencia.getColumn("Codigo");
 		a.setPreferredWidth(50);
 		a.setCellRenderer(modelocentrar);
 		TableColumn b = tablaTipoIncidencia.getColumn("Descripcion");
 		b.setPreferredWidth(250);
-		b.setCellRenderer(modelocentrar);
 		TableColumn c = tablaTipoIncidencia.getColumn("Abreviatura");
 		c.setPreferredWidth(150);
-		c.setCellRenderer(modelocentrar);
 		TableColumn d = tablaTipoIncidencia.getColumn("Estado");
 		d.setPreferredWidth(100);
 		d.setCellRenderer(modelocentrar);

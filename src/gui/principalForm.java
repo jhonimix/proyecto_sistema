@@ -246,17 +246,17 @@ public class principalForm extends JFrame implements ActionListener {
 			frmIncidencia.btnNuevo.setVisible(true);
 			frmIncidencia.btnLimpiar.setVisible(true);
 			frmIncidencia.Incidencia.setVisible(true);
-			frmIncidencia.setCodUsu(objUsu.getCodUser());
+			frmIncidencia.setCodUsu(""+objUsu.getCodUser());
 		}
 		else if (obj == mntmListado) {
 			frmIncidencia = new GIncidencia();
 			frmIncidencia.setVisible(true);
 			frmIncidencia.setTitle("Listado de Incidencias Registradas");
 			frmIncidencia.btnListado.setVisible(true);
-			frmIncidencia.btnBuscar.setVisible(true);
 			frmIncidencia.lblMensListado1.setVisible(true);
 			frmIncidencia.lblMensListado2.setVisible(true);
 			frmIncidencia.Listado.setVisible(true);
+			frmIncidencia.btnImprimir.setVisible(false);
 		}
 		else if (obj == mntmUpdate) {
 			frmIncidencia = new GIncidencia();
@@ -267,6 +267,7 @@ public class principalForm extends JFrame implements ActionListener {
 			frmIncidencia.btnModificar.setVisible(true);
 			frmIncidencia.btnLimpiar.setVisible(true);
 			frmIncidencia.Incidencia.setVisible(true);
+			frmIncidencia.txtCodUsu.setEditable(true);
 		}
 	
 	}

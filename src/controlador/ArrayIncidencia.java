@@ -1,7 +1,10 @@
 package controlador;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import entidades.Incidencia;
 import entidades.Usuario;
@@ -108,10 +111,26 @@ public class ArrayIncidencia {
 		}
 	}
 	
-	//UN METODO QUE RETORNA LA CANTIDAD DE INCIDENCIAS REGISTRADAS
-	public int CantIncidencias(){
-		int c=tamaño();				
-		return c;
+	SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
+	
+	//UN METODO QUE RETORNA LA FECHA DE LA ULTIMA INCIDENCIAS REGISTRADA
+	public String ultIncidencia() {
+		Date fecEjm = null;
+		try {
+			fecEjm = sfd.parse("01-01-1000");
+
+			for (Incidencia x : incidencia) {
+				Date fec = sfd.parse(x.getFecRegistro());
+				if(fec.after(fecEjm)){
+					fecEjm = fec;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return sfd.format(fecEjm);
 	}
 	
 }

@@ -49,6 +49,17 @@ public class ArrayUsuario {
 		}
 		return null;
 	}
+	
+	// METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL NOMBRE QUE SE ENCUENTRA
+	// EN EL ARREGLO "user"
+	// CASO CONTRARIO RETORNA NULL
+	public String bnombre(int cod) {
+		for (Usuario x : user) {
+			if (x.getCodUser() == cod)
+				return x.getNameUser() + " " + x.getLastnameUser();
+		}
+		return null;
+	}
 
 	// GENERAR CODIGO
 	public int GeneraCodigo() {

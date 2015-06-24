@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -462,11 +463,25 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		if (e.getSource() == btnEliminar) {
 			do_btnEliminar_actionPerformed(e);
 		}
-		if (e.getSource() == btnModificar) {
+		if (e.getSource() == btnModificar) {if (txtNombres.getText().equals("") || txtApellidos.getText().equals("") || txtDocumento.getText().equals("")
+				|| txtCorreo.getText().equals("") || txtFechaIng.getText().equals("") || txtTelefono.getText().equals("")
+				|| cboAreaUsu.getSelectedIndex() == -1 || cboDocUsu.getSelectedIndex() == -1 
+				|| cboStatusUsu.getSelectedIndex() == -1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;				
+			}
 			do_btnModificar_actionPerformed(e);
 		}
 		if (e.getSource() == btnRegistrar) {
-			do_btnRegistrar_actionPerformed(e);
+			if (txtNombres.getText().equals("") || txtApellidos.getText().equals("") || txtDocumento.getText().equals("")
+				|| txtCorreo.getText().equals("") || txtFechaIng.getText().equals("") || txtTelefono.getText().equals("")
+				|| cboAreaUsu.getSelectedIndex() == -1 || cboDocUsu.getSelectedIndex() == -1 
+				|| cboStatusUsu.getSelectedIndex() == -1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;				
+			}
+			do_btnRegistrar_actionPerformed(e);	
+			
 		}
 		if (e.getSource() == btnNuevo) {
 			do_btnNuevo_actionPerformed(e);
@@ -500,18 +515,21 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	//ACCIONES DE LOS BOTONES
 	
 	protected void do_btnNuevo_actionPerformed(ActionEvent e) {
-		txtCodigo.setText("" + a.GeneraCodigo());
 		limpiar();				
+		txtCodigo.setText("" + a.GeneraCodigo());
 	}
 
 	protected void do_btnRegistrar_actionPerformed(ActionEvent e) {
+		
 		Usuario x = a.buscar(getCodigo());
 		if (x == null) {
-			x = new Usuario(getCodigo(), getNombre(), getApellidos(), getCodDocum(), getDocumento(), 
-							getArea(), getCorreo(), getTelefono(), getFechaIng(), getEstado());
+			x = new Usuario(getCodigo(), getNombre(), getApellidos(),
+					getCodDocum(), getDocumento(), getArea(), getCorreo(),
+					getTelefono(), getFechaIng(), getEstado());
 			a.adicionar(x);
 		} else {
-			JOptionPane.showMessageDialog(null, "El Usuario ya existe...!! NJD");
+			JOptionPane
+					.showMessageDialog(null, "El Usuario ya existe...!! NJD");
 		}
 		rellenarTabla();
 		a.grabar();
@@ -581,7 +599,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		
 	}
 	//METODOS PARA EL FORMULARIO
-	public void rellenarTabla() {		
+	public void rellenarTabla() {			
 		tabla.addRow(new Object[] { getCodigo(), getNombre(), getApellidos(), getCodDocum(), getDocumento(), 
 									getArea(), getCorreo(), getTelefono(), getFechaIng(), getEstado() });
 		tablaUsuarios.setModel(tabla);
@@ -627,6 +645,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		cboAreaUsu.setSelectedIndex(0);
 		cboDocUsu.setSelectedIndex(0);
 		cboStatusUsu.setSelectedIndex(0);
+		txtCodigo.setText("");
 	}
 	
 	void tamañoColumnas(){
@@ -638,22 +657,17 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		a.setCellRenderer(modelocentrar);
 		TableColumn b = tablaUsuarios.getColumn("Nombres");
 		b.setPreferredWidth(115);
-		b.setCellRenderer(modelocentrar);
 		TableColumn c = tablaUsuarios.getColumn("Apellidos");
 		c.setPreferredWidth(115);
-		c.setCellRenderer(modelocentrar);
 		TableColumn d = tablaUsuarios.getColumn("Tipo de Documento");
 		d.setPreferredWidth(160);
-		d.setCellRenderer(modelocentrar);
 		TableColumn e = tablaUsuarios.getColumn("Documento");
 		e.setPreferredWidth(80);
 		e.setCellRenderer(modelocentrar);
 		TableColumn f = tablaUsuarios.getColumn("Area");
 		f.setPreferredWidth(200);
-		f.setCellRenderer(modelocentrar);
 		TableColumn g = tablaUsuarios.getColumn("Correo");
 		g.setPreferredWidth(170);
-		g.setCellRenderer(modelocentrar);
 		TableColumn h = tablaUsuarios.getColumn("Telefono");
 		h.setPreferredWidth(100);
 		h.setCellRenderer(modelocentrar);

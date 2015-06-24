@@ -40,6 +40,7 @@ import entidades.*;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,7 +53,7 @@ import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class GIncidencia extends JDialog implements ActionListener{	
+public class GIncidencia extends JDialog implements ActionListener,KeyListener{	
 	
 	/*------------------------------
 	 * DECLARAMOS VARIABLES GLOBALES
@@ -79,7 +80,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 	public JLabel lblMensListado1;
 	public JLabel lblMensListado2;
 	private JTextField txtCodigo;
-	private JTextField txtCodUsu;
+	public JTextField txtCodUsu;
 	private JTextField txtTiempoEstimado;
 	private JTextField txtTiempoReal;
 	private JTextField txtFecRegistro;
@@ -137,10 +138,10 @@ public class GIncidencia extends JDialog implements ActionListener{
 		setBounds(100, 100, 887, 575);
 		getContentPane().setLayout(null);
 		
-		lblMensListado2 = new JLabel("FEC ULTIMA:");
+		lblMensListado2 = new JLabel("");
 		lblMensListado2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblMensListado2.setVisible(false);
-		lblMensListado2.setBounds(349, 64, 163, 19);
+		lblMensListado2.setBounds(349, 64, 346, 19);
 		getContentPane().add(lblMensListado2);
 		
 		lblMensListado1 = new JLabel("");
@@ -217,6 +218,14 @@ public class GIncidencia extends JDialog implements ActionListener{
 		btnListado.setBounds(10, 11, 260, 37);
 		getContentPane().add(btnListado);
 		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 111, 299, 7);
+		panel.add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(10, 294, 299, 14);
+		panel.add(separator_1);
+		
 		JLabel lblNewLabel = new JLabel("CODIGO DE USUARIO:");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(10, 36, 172, 14);
@@ -257,55 +266,43 @@ public class GIncidencia extends JDialog implements ActionListener{
 		
 		JLabel lblDescripcion = new JLabel("DESCRIPCION:");
 		lblDescripcion.setForeground(Color.WHITE);
-		lblDescripcion.setBounds(10, 123, 110, 14);
+		lblDescripcion.setBounds(10, 115, 110, 14);
 		panel.add(lblDescripcion);
 		
 		JLabel lblComentariosObservaciones = new JLabel("COMENTARIOS / OBSERVACIONES:");
 		lblComentariosObservaciones.setForeground(Color.WHITE);
-		lblComentariosObservaciones.setBounds(10, 183, 188, 14);
+		lblComentariosObservaciones.setBounds(10, 198, 188, 28);
 		panel.add(lblComentariosObservaciones);
 		
 		JLabel lblTiempoEstimadoDe = new JLabel("TIEMPO ESTIMADO DE SOLUCION:");
 		lblTiempoEstimadoDe.setForeground(Color.WHITE);
-		lblTiempoEstimadoDe.setBounds(10, 271, 203, 14);
+		lblTiempoEstimadoDe.setBounds(10, 309, 203, 14);
 		panel.add(lblTiempoEstimadoDe);
 		
 		txtTiempoEstimado = new JTextField();
-		txtTiempoEstimado.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(!Character.isDigit(e.getKeyChar()))
-					e.consume();	
-			}
-		});
+		txtTiempoEstimado.addKeyListener(this);
 		txtTiempoEstimado.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtTiempoEstimado.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTiempoEstimado.setColumns(10);
-		txtTiempoEstimado.setBounds(215, 268, 94, 17);
+		txtTiempoEstimado.setBounds(215, 306, 94, 17);
 		panel.add(txtTiempoEstimado);
 		
 		JLabel lblTiempoRealDe = new JLabel("TIEMPO REAL DE SOLUCION:");
 		lblTiempoRealDe.setForeground(Color.WHITE);
-		lblTiempoRealDe.setBounds(10, 299, 172, 14);
+		lblTiempoRealDe.setBounds(10, 337, 172, 14);
 		panel.add(lblTiempoRealDe);
 		
 		txtTiempoReal = new JTextField();
-		txtTiempoReal.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(!Character.isDigit(e.getKeyChar()))
-					e.consume();
-			}
-		});
+		txtTiempoReal.addKeyListener(this);
 		txtTiempoReal.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtTiempoReal.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtTiempoReal.setColumns(10);
-		txtTiempoReal.setBounds(215, 296, 94, 17);
+		txtTiempoReal.setBounds(215, 334, 94, 17);
 		panel.add(txtTiempoReal);
 		
 		JLabel lblFechaDeRegistro = new JLabel("FECHA DE REGISTRO:");
 		lblFechaDeRegistro.setForeground(Color.WHITE);
-		lblFechaDeRegistro.setBounds(10, 327, 172, 14);
+		lblFechaDeRegistro.setBounds(10, 365, 172, 14);
 		panel.add(lblFechaDeRegistro);
 		
 		txtFecRegistro = new JTextField();
@@ -314,95 +311,63 @@ public class GIncidencia extends JDialog implements ActionListener{
 		txtFecRegistro.setBackground(SystemColor.controlShadow);
 		txtFecRegistro.setEditable(false);
 		txtFecRegistro.setColumns(10);
-		txtFecRegistro.setBounds(181, 324, 128, 17);
+		txtFecRegistro.setBounds(181, 362, 128, 17);
 		panel.add(txtFecRegistro);
 		
 		JLabel lblFechaDeInicio = new JLabel("FECHA DE INICIO DE ATENCION:");
 		lblFechaDeInicio.setForeground(Color.WHITE);
-		lblFechaDeInicio.setBounds(10, 355, 188, 14);
+		lblFechaDeInicio.setBounds(10, 393, 188, 14);
 		panel.add(lblFechaDeInicio);
 		
 		txtFecInicio = new JTextField();
-		txtFecInicio.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-')
-					e.consume();
-			}
-		});
+		txtFecInicio.addKeyListener(this);
 		txtFecInicio.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtFecInicio.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtFecInicio.setColumns(10);
-		txtFecInicio.setBounds(209, 352, 100, 17);
+		txtFecInicio.setBounds(209, 390, 100, 17);
 		panel.add(txtFecInicio);
 		
 		JLabel lblFechaDeFin = new JLabel("FECHA FINAL DE ATENCION:");
 		lblFechaDeFin.setForeground(Color.WHITE);
-		lblFechaDeFin.setBounds(10, 383, 172, 14);
+		lblFechaDeFin.setBounds(10, 421, 172, 14);
 		panel.add(lblFechaDeFin);
 		
 		txtFecFinal = new JTextField();
-		txtFecFinal.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-')
-					e.consume();
-			}
-		});
+		txtFecFinal.addKeyListener(this);
 		txtFecFinal.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtFecFinal.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtFecFinal.setColumns(10);
-		txtFecFinal.setBounds(209, 380, 100, 17);
+		txtFecFinal.setBounds(209, 418, 100, 17);
 		panel.add(txtFecFinal);
 		
 		JLabel lblEstado = new JLabel("ESTADO:");
 		lblEstado.setForeground(Color.WHITE);
-		lblEstado.setBounds(10, 411, 86, 14);
+		lblEstado.setBounds(10, 449, 86, 14);
 		panel.add(lblEstado);
 		
 		cboEstado = new JComboBox();
 		cboEstado.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		cboEstado.setBackground(UIManager.getColor("Button.background"));
-		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"", "Registrada", "Iniciada", "Cancelada", "Cerrada"}));
-		cboEstado.setBounds(137, 408, 172, 20);
+		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"Registrada", "Iniciada", "Cancelada", "Cerrada"}));
+		cboEstado.setBounds(137, 446, 172, 20);
 		panel.add(cboEstado);
 		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 111, 299, 7);
-		panel.add(separator);
-		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 243, 299, 14);
-		panel.add(separator_1);
-		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 148, 299, 24);
+		scrollPane_1.setBounds(10, 129, 299, 69);
 		panel.add(scrollPane_1);
 		
 		txtDescripcion = new JTextArea();
-		txtDescripcion.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if(!Character.isLetter(arg0.getKeyChar()) && arg0.getKeyChar()!=' '&& arg0.getKeyChar()!='.')
-					arg0.consume();				
-			}
-		});
-		txtDescripcion.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		txtDescripcion.addKeyListener(this);
+		txtDescripcion.setFont(new Font("Arial", Font.PLAIN, 19));
 		scrollPane_1.setViewportView(txtDescripcion);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(10, 208, 299, 24);
+		scrollPane_2.setBounds(10, 220, 299, 69);
 		panel.add(scrollPane_2);
 		
 		txtObservacion = new JTextArea();
-		txtObservacion.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' '&& e.getKeyChar()!='.' && e.getKeyChar()!=',')
-					e.consume();	
-			}
-		});
-		txtObservacion.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		txtObservacion.addKeyListener(this);
+		txtObservacion.setFont(new Font("Arial", Font.PLAIN, 19));
 		scrollPane_2.setViewportView(txtObservacion);
 		
 		cboEspecialista = new JComboBox();
@@ -424,10 +389,10 @@ public class GIncidencia extends JDialog implements ActionListener{
 		getContentPane().add(btnImprimir);
 
 		Listado = new JScrollPane(TablaIncidencias);
+		Listado.setVisible(false);
 		Listado.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		JViewport viewport = new JViewport();
 		Listado.setRowHeaderView(viewport);
-		Listado.setVisible(false);
 		Listado.setBounds(10, 99, 861, 347);
 		getContentPane().add(Listado);
 		
@@ -440,6 +405,50 @@ public class GIncidencia extends JDialog implements ActionListener{
 		
 		llenaCampos();
 		
+	}
+	/*------------------------
+	 * 	VALIDACIONES
+	 * ----------------------*/
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==txtObservacion){
+			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' '&& e.getKeyChar()!='.' && e.getKeyChar()!=',')
+				e.consume();			
+		}		
+		else if (e.getSource()==txtDescripcion) {
+			if (!Character.isLetter(e.getKeyChar())	&& e.getKeyChar() != ' ' && e.getKeyChar() != '.')
+				e.consume();
+		}
+		else if (e.getSource()==txtFecFinal) {
+			if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-')
+				e.consume();
+		}
+		else if (e.getSource()==txtFecInicio) {
+			if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-')
+				e.consume();
+		}
+		else if (e.getSource()==txtTiempoReal) {
+			if(!Character.isDigit(e.getKeyChar()))
+				e.consume();
+		}
+		else if (e.getSource()==txtTiempoEstimado) {
+			if(!Character.isDigit(e.getKeyChar()))
+				e.consume();
+		}
 	}
 	
 	/*-------------------------
@@ -465,17 +474,19 @@ public class GIncidencia extends JDialog implements ActionListener{
 		ArrayList<Especialista> x1 = new ArrayList<Especialista>();
 		x1 = espec.ListarEspecialista();
 		
-		int n[] = new int[espec.tamaño()];
+		int m1[] = new int[espec.tamaño()];
+		String m2[] = new String[espec.tamaño()];
 		int indice = 0;
 
 		for (Especialista a : x1) {
-			n[indice] = a.getCodEsp();
+			m1[indice] = a.getCodEsp();
+			m2[indice] = a.getApeEsp();
 			indice++;
 		}
 
 		for (int i = 0; i < espec.tamaño(); i++) {
-			cboEspecialista.addItem(n[i]);
-			//System.out.print(n[i]+"\n");
+			cboEspecialista.addItem(m1[i]+"-"+m2[i]);			
+			System.out.print(m1[i]+"-"+m2[i]+"\n");
 		}
 		
 		// COMBO CODIGO TIPO DE INCIDENCIA
@@ -483,22 +494,29 @@ public class GIncidencia extends JDialog implements ActionListener{
 		x2 = tipo.ListarTipoIncidencia();
 
 		int n1[] = new int[espec.tamaño()];
+		String n2[] = new String[espec.tamaño()];
 		int indice1 = 0;
 
 		for (TipoIncidencia a : x2) {
-			n1[indice1] = a.getCodTipoInc();
+			n1[indice1] = a.getCodTipoInc();			
+			n2[indice1] = a.getAbTipoInc();
 			indice1++;
 		}
 
 		for (int i = 0; i < espec.tamaño(); i++) {
-			cboTipoInc.addItem(n1[i]);
+			cboTipoInc.addItem(n1[i]+"-"+n2[i]);
 			// System.out.print(n[i]+"\n");
 		}
 		
 		// LLENAMOS FECHA DE REGISTRO
 		setFecRegistro(fechaActual());
 		
-		lblMensListado1.setText("INCIDENCIAS REGISTRADAS EN TOTAL: " + "\t" + inc.CantIncidencias());
+		lblMensListado1.setText("INCIDENCIAS REGISTRADAS EN TOTAL: " + "\t" + inc.tamaño());
+		if(inc.ultIncidencia()!=null)		
+			lblMensListado2.setText("LA ULTIMA FECHA REGISTRADA FUE: " + "\t"+ inc.ultIncidencia());
+		else {
+			lblMensListado2.setText("NUNCA SE REGISTRO UNA INCIDENCIA.");
+		}
 	}
 	
 	public static String fechaActual(){
@@ -523,12 +541,12 @@ public class GIncidencia extends JDialog implements ActionListener{
 		return Integer.parseInt(txtCodUsu.getText());
 	}
 
-	public void setCodUsu(int txtCodUsu) {
-		this.txtCodUsu.setText(""+txtCodUsu);
+	public void setCodUsu(String txtCodUsu) {
+		this.txtCodUsu.setText(txtCodUsu);
 	}
 	
 	public int getCodEsp(){
-		return Integer.parseInt(cboEspecialista.getSelectedItem().toString());
+		return cboEspecialista.getSelectedIndex();
 	}
 	
 	public void setCodEsp(int pos){
@@ -536,7 +554,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 	}
 	
 	public int getCodTipo(){
-		return Integer.parseInt(cboTipoInc.getSelectedItem().toString());
+		return cboTipoInc.getSelectedIndex();
 	}
 	
 	public void setCodTipo(int pos){
@@ -547,16 +565,16 @@ public class GIncidencia extends JDialog implements ActionListener{
 		return Integer.parseInt(txtTiempoEstimado.getText());
 	}
 
-	public void setTiempoEstimado(int txtTiempoEstimado) {
-		this.txtTiempoEstimado.setText(""+txtTiempoEstimado);
+	public void setTiempoEstimado(String txtTiempoEstimado) {
+		this.txtTiempoEstimado.setText(txtTiempoEstimado);
 	}
 
 	public int getTiempoReal() {
 		return Integer.parseInt(txtTiempoReal.getText());
 	}
 
-	public void setTiempoReal(int txtTiempoReal) {
-		this.txtTiempoReal.setText(""+txtTiempoReal);
+	public void setTiempoReal(String txtTiempoReal) {
+		this.txtTiempoReal.setText(txtTiempoReal);
 	}
 
 	public String getFecRegistro() {
@@ -606,7 +624,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 	}
 
 	public void setDescripcion(String txtDescripcion) {
-		this.txtDescripcion.append(txtDescripcion);
+		this.txtDescripcion.setText(txtDescripcion);
 	}
 
 	public String getObservacion() {
@@ -614,7 +632,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 	}
 
 	public void setObservacion(String txtObservacion) {
-		this.txtObservacion.append(txtObservacion);
+		this.txtObservacion.setText(txtObservacion);
 	}
 	
 	/*-----------------------
@@ -625,8 +643,8 @@ public class GIncidencia extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==btnNuevo){
-			setCodigo(inc.GeneraCodigo());
 			limpiar();
+			setCodigo(inc.GeneraCodigo());
 		}
 		if (e.getSource()==btnLimpiar) {
 			limpiar();
@@ -641,9 +659,21 @@ public class GIncidencia extends JDialog implements ActionListener{
 			}
 		}
 		if (e.getSource()==btnRegistrar) {
+			if (getCodUsu()==-1 || getCodEsp()==-1 || getCodTipo()==-1 || getDescripcion().equals("") || getObservacion().equals("")
+				|| txtTiempoEstimado.equals("") || txtTiempoReal.equals("") || getFecRegistro().equals("") || getFecInicio().equals("")
+				|| getFecFinal().equals("") || getEstado() == -1) {
+				JOptionPane.showMessageDialog(null, "Faltan Ingresar Datos ", "System Error", 0);
+				return;
+			}
 			registrar();
 		}
 		if (e.getSource()==btnModificar) {
+			if (getCodUsu()==-1 || getCodEsp()==-1 || getCodTipo()==-1 || getDescripcion().equals("") || getObservacion().equals("")
+				|| txtTiempoEstimado.equals("") || txtTiempoReal.equals("") || getFecRegistro().equals("") || getFecInicio().equals("")
+				|| getFecFinal().equals("") || getEstado() == -1) {
+				JOptionPane.showMessageDialog(null, "Faltan Ingresar Datos ", "System Error", 0);
+				return;
+			}
 			Incidencia x = inc.buscar(getCodigo());
 			if(x == null){
 				JOptionPane.showConfirmDialog(null, "El Codigo no existe...!!!");
@@ -661,6 +691,7 @@ public class GIncidencia extends JDialog implements ActionListener{
 				x.setFecFin(getFecFinal());
 				x.setEstado(getEstado());
 			}
+			inc.grabar();
 		}
 		if (e.getSource()==btnListado) {
 			mostrarIncidencias();
@@ -677,26 +708,28 @@ public class GIncidencia extends JDialog implements ActionListener{
 		Incidencia x = inc.buscar(getCodigo());
 		if(x==null){
 			
-			Incidencia objInc = new Incidencia(getCodigo(),getCodUsu(),getCodEsp(),getCodTipo(),getDescripcion(),
-					   getObservacion(),getTiempoEstimado(),getTiempoReal(),getFecRegistro(),
-					   getFecInicio(),getFecFinal(),getEstado());
-			inc.adicionar(objInc);
-			listar(objInc);
+			x = new Incidencia(
+						getCodigo(),getCodUsu(),getCodEsp(),getCodTipo(),getDescripcion(),
+						getObservacion(),getTiempoEstimado(),getTiempoReal(),getFecRegistro(),
+						getFecInicio(),getFecFinal(),getEstado());
+			inc.adicionar(x);
 		}else {
 			JOptionPane.showMessageDialog(null, "La incidencia ya está registrada...!! NJD");
 		}
-		mostrarIncidencias();
+		listar(x);
+		inc.grabar();
 	}
+	
 	void buscar(int cod){
 		Incidencia x = inc.buscar(cod);
 		setCodigo(x.getCodigo());
-		setCodUsu(x.getCodUsu());
+		setCodUsu(""+x.getCodUsu());
 		setCodEsp(x.getCodEsp());
 		setCodTipo(x.getCodTipInc());
 		setDescripcion(x.getDescripcion());
 		setObservacion(x.getComentarios());
-		setTiempoEstimado(x.getTiempoEst());
-		setTiempoReal(x.getTiempoReal());
+		setTiempoEstimado(""+x.getTiempoEst());
+		setTiempoReal(""+x.getTiempoReal());
 		setFecRegistro(x.getFecRegistro());
 		setFecInicio(x.getFecInicio());
 		setFecFinal(x.getFecFin());
@@ -714,82 +747,93 @@ public class GIncidencia extends JDialog implements ActionListener{
 
 	public void mostrarIncidencias() {	
 		ArrayList<Incidencia> lista = new ArrayList<Incidencia>();
+		Usuario a; Especialista b; TipoIncidencia c;
 		lista = inc.ListarIncidencias();
 		tabla.setRowCount(0);
 		//System.out.println(lista);
 		for (Incidencia x : lista) {
-			tabla.addRow(new Object[] {x.getCodigo(),usuar.buscar(x.getCodigo()).getNameUser(),espec.buscar(x.getCodigo()).getNomEsp(),tipo.buscar(x.getCodigo()).getDesTipoInc(),
-									   x.getDescripcion(),x.getComentarios(),x.getTiempoEst(),x.getTiempoReal(),x.getFecRegistro(),
-									   x.getFecInicio(),x.getFecFin(),ComboEstado(x.getEstado())});
-
+			tabla.addRow(new Object[] {x.getCodigo(),usuar.bnombre(x.getCodUsu()),espec.bnombre(x.getCodEsp()),tipo.bnombre(x.getCodTipInc()),
+									   x.getDescripcion(),x.getComentarios(),x.getTiempoEst(),x.getTiempoReal(),x.getFecRegistro(),x.getFecInicio(),
+									   x.getFecFin(),ComboEstado(x.getEstado())});
 		}
 		TablaIncidencias.setModel(tabla);
 	}
 	
 	
 	void limpiar(){
-		setCodEsp(0);
-		setCodTipo(0);
-		setDescripcion("");
-		setObservacion("");
-		setTiempoEstimado(0);
-		setTiempoReal(0);
-		setFecInicio("");
-		setFecFinal("");
-		setEstado(0);
-		setIncidencia("");
+		if(btnModificar.isVisible()==true){
+			setCodUsu("");
+			setCodEsp(0);
+			setCodTipo(0);
+			setDescripcion("");
+			setObservacion("");
+			setTiempoEstimado("");
+			setTiempoReal("");
+			setFecInicio("");
+			setFecFinal("");
+			setEstado(0);
+			txtIncidencia.setText("");
+		}
+		else {
+			setCodEsp(0);
+			setCodTipo(0);
+			setDescripcion("");
+			setObservacion("");
+			setTiempoEstimado("");
+			setTiempoReal("");
+			setFecInicio("");
+			setFecFinal("");
+			setEstado(0);
+			txtIncidencia.setText("");
+		
+		}		
 	}
 
 	void tamañoColumnas() {
-		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+		DefaultTableCellRenderer center = new DefaultTableCellRenderer();
+		center.setHorizontalAlignment(SwingConstants.CENTER);		
 
 		TableColumn a = TablaIncidencias.getColumn("Codigo de Inc.");
 		a.setPreferredWidth(90);
-		a.setCellRenderer(modelocentrar);
+		a.setCellRenderer(center);
 		TableColumn b = TablaIncidencias.getColumn("Nombre de Usuario");
-		b.setPreferredWidth(170);
-		b.setCellRenderer(modelocentrar);
+		b.setPreferredWidth(180);
 		TableColumn c = TablaIncidencias.getColumn("Nombre de Especialista");
-		c.setPreferredWidth(170);
-		c.setCellRenderer(modelocentrar);
+		c.setPreferredWidth(185);
 		TableColumn d = TablaIncidencias.getColumn("Tipo de Incidencia");
-		d.setPreferredWidth(120);
-		d.setCellRenderer(modelocentrar);
+		d.setPreferredWidth(210);
 		TableColumn e = TablaIncidencias.getColumn("Descripcion");
-		e.setPreferredWidth(300);
-		e.setCellRenderer(modelocentrar);
+		e.setPreferredWidth(370);
 		TableColumn f = TablaIncidencias.getColumn("Comentarios u Observaciones");
-		f.setPreferredWidth(300);
-		f.setCellRenderer(modelocentrar);
+		f.setPreferredWidth(280);
 		TableColumn g = TablaIncidencias.getColumn("Tiempo Estimado");
 		g.setPreferredWidth(110);
-		g.setCellRenderer(modelocentrar);
+		g.setCellRenderer(center);
 		TableColumn h = TablaIncidencias.getColumn("Tiempo Real");
 		h.setPreferredWidth(90);
-		h.setCellRenderer(modelocentrar);
+		h.setCellRenderer(center);
 		TableColumn i = TablaIncidencias.getColumn("Fecha de Registro");
 		i.setPreferredWidth(125);
-		i.setCellRenderer(modelocentrar);
+		i.setCellRenderer(center);
 		TableColumn j = TablaIncidencias.getColumn("Fecha de Inicio");
 		j.setPreferredWidth(125);
-		j.setCellRenderer(modelocentrar);
+		j.setCellRenderer(center);
 		TableColumn k = TablaIncidencias.getColumn("Fecha de Fin");
 		k.setPreferredWidth(125);
-		k.setCellRenderer(modelocentrar);
+		k.setCellRenderer(center);
 		TableColumn l = TablaIncidencias.getColumn("Estado de Incidencia");
 		l.setPreferredWidth(120);
-		l.setCellRenderer(modelocentrar);
+		l.setCellRenderer(center);
 	}
 	
 	void listar(Incidencia z){
 		imprimir("");
 		imprimir("\t"+"   REGISTRO DE INCIDENCIAS");
-		imprimir("");
+		imprimir("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
 		imprimir("INCIDENCIA NUMERO: " + "\t"+"\t"+ z.getCodigo());
-		imprimir("CODIGO DE USUARIO: " + "\t"+"\t"+ z.getCodUsu());
-		imprimir("CODIGO DE ESPECIALISTA: " + "\t"+ z.getCodEsp());
-		imprimir("CODIGO DEL TIPO DE INCIDENCIA: " + "\t"+ z.getCodTipInc());
+		imprimir("NOMBRE DE USUARIO: " + "\t"+"\t"+ usuar.buscar(z.getCodUsu()).getNameUser()+" "+usuar.buscar(z.getCodUsu()).getLastnameUser());
+		imprimir("NOMBRE DE ESPECIALISTA: " + "\t"+ espec.buscar(z.getCodEsp()).getNomEsp()+" "+espec.buscar(z.getCodEsp()).getApeEsp());
+		imprimir("TIPO DE INCIDENCIA: " + "\t"+ "\t"+ tipo.buscar(z.getCodTipInc()).getDesTipoInc());
 		imprimir("DESCRIPCION: " + "\t"+ "\t"+z.getDescripcion());
 		imprimir("OBSERVACION / COMENTARIOS: " + "\t"+ z.getComentarios());
 		imprimir("TIEMPO ESTIMADO DE SOLUCION: " + "\t"+ z.getTiempoEst());
@@ -797,7 +841,9 @@ public class GIncidencia extends JDialog implements ActionListener{
 		imprimir("FECHA DE REGISTRO: " + "\t"+ "\t"+ z.getFecRegistro());
 		imprimir("FECHA DE INICIO DE ATENCION: " + "\t"+ z.getFecInicio());
 		imprimir("FECHA DE FINAL DE ATENCION: " + "\t"+ z.getFecFin());
-		imprimir("ESTADO DE LA INCIDENCIA: " + "\t"+ z.getEstado());
+		imprimir("ESTADO DE LA INCIDENCIA: " + "\t"+ ComboEstado(z.getEstado()));
+		imprimir("");
+		imprimir("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
 	}
 	
 	void imprimir(String s){

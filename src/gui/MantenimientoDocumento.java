@@ -232,10 +232,18 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnRegistrar){
+			if(getDescripcion().equals("") || getAbrev().equals("") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;
+			}
 			Registrar();
 			limpiar();
 		}
 		else if(e.getSource()==btnModificar){
+			if(getDescripcion().equals("") || getAbrev().equals("") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;
+			}
 			Modificar();
 			limpiar();
 		}
@@ -247,8 +255,8 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 			limpiar();
 		}
 		else if(e.getSource()==btnNuevo){
-			setCodigo(""+c.GeneraCodigo());
 			limpiar();
+			setCodigo(""+c.GeneraCodigo());
 		}
 		
 	}
@@ -389,6 +397,7 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		setDescripcion("");
 		setAbrev("");
 		setEstado(-1);
+		setCodigo("");
 	}
 
 	
@@ -425,10 +434,8 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		a.setCellRenderer(modelocentrar);
 		TableColumn b = tablaDocumento.getColumn("Descripcion");
 		b.setPreferredWidth(220);
-		b.setCellRenderer(modelocentrar);
 		TableColumn c = tablaDocumento.getColumn("Abreviatura");
 		c.setPreferredWidth(150);
-		c.setCellRenderer(modelocentrar);
 		TableColumn d = tablaDocumento.getColumn("Estado");
 		d.setPreferredWidth(100);
 		d.setCellRenderer(modelocentrar);

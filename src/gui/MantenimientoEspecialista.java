@@ -122,7 +122,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		getContentPane().add(lblApellidos);
 		
 		JLabel lblEspecialidad = new JLabel("Especialidad :");
-		lblEspecialidad.setBounds(26, 183, 73, 22);
+		lblEspecialidad.setBounds(26, 183, 85, 22);
 		getContentPane().add(lblEspecialidad);
 		
 		JLabel lblAnexo = new JLabel("Anexo :");
@@ -319,10 +319,20 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==btnRegistrar){
+			if(getNombres().equals("") || getApellidos().equals("") || getEspecialidad().equals("") ||
+			   getAnexo().equals("") || getFecha().equals("") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;
+			}
 			Registrar();
 			limpiar();
 		}
 		else if(e.getSource()==btnModificar){
+			if(getNombres().equals("") || getApellidos().equals("") || getEspecialidad().equals("") ||
+			   getAnexo().equals("") || getFecha().equals("") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;					
+			}
 			Modificar();
 			limpiar();
 		}
@@ -334,8 +344,8 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 			limpiar();
 		}
 		else if(e.getSource()==btnNuevo){
-			setCodigo(""+d.GeneraCodigo());
 			limpiar();
+			setCodigo(""+d.GeneraCodigo());
 			mensaje1.setVisible(false);
 			lblmensaje01.setVisible(false);
 			
@@ -511,6 +521,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		setAnexo("");
 		setFecha("");
 		setEstado(-1);
+		setCodigo("");
 	}
 
 
@@ -523,13 +534,10 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		a.setCellRenderer(modelocentrar);
 		TableColumn b = TablaEspecialista.getColumn("Nombres");
 		b.setPreferredWidth(120);
-		b.setCellRenderer(modelocentrar);
 		TableColumn c = TablaEspecialista.getColumn("Apellidos");
 		c.setPreferredWidth(120);
-		c.setCellRenderer(modelocentrar);
 		TableColumn d = TablaEspecialista.getColumn("Especialidad");
-		d.setPreferredWidth(200);
-		d.setCellRenderer(modelocentrar);		
+		d.setPreferredWidth(200);		
 		TableColumn e = TablaEspecialista.getColumn("Anexo");
 		e.setPreferredWidth(60);
 		e.setCellRenderer(modelocentrar);

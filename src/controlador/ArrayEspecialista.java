@@ -53,6 +53,17 @@ public class ArrayEspecialista {
 		return null;
 	}
 
+	// METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL NOMBRE QUE SE ENCUENTRA
+	// EN EL ARREGLO "esp"
+	// CASO CONTRARIO RETORNA NULL
+	public String bnombre(int cod) {
+		for (Especialista x : esp) {
+			if (x.getCodEsp() == cod)
+				return x.getNomEsp()+" "+ x.getApeEsp();
+		}
+		return null;
+	}
+	
 	// //////////////////////////////
 	// GENERAR CODIGO AUTOMATICO //
 	// //////////////////////////////

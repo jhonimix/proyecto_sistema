@@ -52,6 +52,17 @@ public class ArrayTipoIncidencia {
 		}
 		return null;
 	}
+	
+	// METODO QUE RECIBA UN CODIGO A BUSCAR Y RETORNE EL NOMBRE QUE SE ENCUENTRA
+	// EN EL ARREGLO "tipoInc"
+	// CASO CONTRARIO RETORNA NULL
+	public String bnombre(int cod) {
+		for (TipoIncidencia x : tipoInc) {
+			if (x.getCodTipoInc() == cod)
+				return x.getDesTipoInc();
+		}
+		return null;
+	}
 
 	// //////////////////////////////
 	// GENERAR CODIGO AUTOMATICO //
