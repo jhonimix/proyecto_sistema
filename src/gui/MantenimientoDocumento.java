@@ -52,12 +52,17 @@ import java.awt.Toolkit;
 
 public class MantenimientoDocumento extends JDialog implements ActionListener, MouseListener, KeyListener {
 
-	//DECLARAMOS ATRIBUTOS GLOBALES CREAMOS EL ARRAY
-	ArrayDocumento c = new ArrayDocumento();
-	DefaultTableModel tabla = new DefaultTableModel();
-
-	Estado obje = new Estado();
+	/*------------------------------
+	 * DECLARAMOS VARIABLES GLOBALES
+	 * -----------------------------*/
+	/*------------------------------*/
 	
+	ArrayDocumento c = new ArrayDocumento();
+	
+	DefaultTableModel tabla = new DefaultTableModel();
+	Estado obje = new Estado();
+
+	/*------------------------------*/
 	private JTextField txtCodigo;
 	private JTextField txtDescripcion;
 	private JTextField txtAbrev;
@@ -202,6 +207,73 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		cboEstado.addItem(obje.getNombre1());
 	}
 
+	/*-------------------------------------
+	 * 		METODOS GET/SET DE LOS TEXTBOX
+	 * -----------------------------------*/
+
+	public int getCodigo() {
+		return Integer.parseInt(txtCodigo.getText());
+	}
+
+	public void setCodigo(String txtString) {
+		this.txtCodigo.setText("" + txtString);
+	}
+
+	public String getDescripcion() {
+		return txtDescripcion.getText();
+	}
+
+	public void setDescripcion(String txtDescripcion) {
+		this.txtDescripcion.setText(txtDescripcion);
+	}
+
+	public String getAbrev() {
+		return txtAbrev.getText();
+	}
+
+	public void setAbrev(String txtAbrev) {
+		this.txtAbrev.setText(txtAbrev);
+	}
+
+	public int getEstado() {
+		return cboEstado.getSelectedIndex();
+	}
+
+	public void setEstado(int cboEstado) {
+		this.cboEstado.setSelectedIndex(cboEstado);
+	}
+
+	/*----------------------------------
+	 * 	VALIDACIONES PARA LOS TEXTBOX
+	 * --------------------------------*/
+	
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub		
+	}
+
+	
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub		
+	}
+
+	
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==txtDescripcion){
+			if(!Character.isLetter(arg0.getKeyChar()) && arg0.getKeyChar()!=' ' && arg0.getKeyChar()!='.'){			
+				arg0.consume();		
+			}	
+		}
+		else if (arg0.getSource()==txtAbrev){
+			if(!Character.isLetter(arg0.getKeyChar()) && arg0.getKeyChar()!=' ' && arg0.getKeyChar()!='.'){			
+				arg0.consume();		
+			}	
+		}
+	}
+	
+	/*----------------------------------
+	 * 		ACCIONES PARA LA TABLA
+	 * --------------------------------*/
 	
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -228,7 +300,10 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub		
 	}
-
+	
+	/*----------------------------------
+	 * 		ACCIONES PARA LOS BOTONES
+	 * --------------------------------*/
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnRegistrar){
@@ -261,42 +336,9 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		
 	}
 
-	//METODOS PARA LOS INPUTS DE LOS FORMULARIOS
-	
-	public int getCodigo() {
-		return Integer.parseInt(txtCodigo.getText());
-	}
-	
-	public void setCodigo(String txtString){
-		this.txtCodigo.setText(""+txtString);
-	}
-
-	public String getDescripcion() {
-		return txtDescripcion.getText();
-	}
-
-	public void setDescripcion(String txtDescripcion) {
-		this.txtDescripcion.setText(txtDescripcion);
-	}
-
-	public String getAbrev() {
-		return txtAbrev.getText();
-	}
-
-	public void setAbrev(String txtAbrev) {
-		this.txtAbrev.setText(txtAbrev);
-	}	
-
-	public int getEstado() {
-		return cboEstado.getSelectedIndex();
-	}
-
-	public void setEstado(int cboEstado) {
-		this.cboEstado.setSelectedIndex(cboEstado);
-	}
-	
-	//------------------------------------------------------------------------------
-	//------------------------------------------------------------------------------
+	/*------------------------------------------------------------------------------
+	*-------------------------------------------------------------------------------
+	*-------------------------------------------------------------------------------*/
 	
 	public void Registrar(){
 		TipoDocumento x = c.buscar(getCodigo());
@@ -364,8 +406,9 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		
 	}
 	
-	
-	//METODOS PARA EL FORMULARIO
+	/*------------------------------------------------------------------------------
+	*-------------------- METODOS PARA EL FORMULARIO---------------------------------
+	*-------------------------------------------------------------------------------*/
 	
 	public void llenarTabla() {
 		tabla.addRow(new Object[] { getCodigo(), getDescripcion(), getAbrev() , getEstado() });
@@ -383,7 +426,10 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		tablaDocumento.setModel(tabla);
 	}
 
-	// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
+	/*------------------------------------------------------------------------------
+	*---------RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA------------
+	*-------------------------------------------------------------------------------*/
+	
 	public void llenarInputs(int fila){
 		setCodigo(tabla.getValueAt(fila, 0).toString());
 		TipoDocumento x = c.buscar(getCodigo());
@@ -399,31 +445,7 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		setEstado(-1);
 		setCodigo("");
 	}
-
-	
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub		
-	}
-
-	
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub		
-	}
-
-	
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		if(arg0.getSource()==txtDescripcion){
-			if(!Character.isLetter(arg0.getKeyChar()) && arg0.getKeyChar()!=' ' && arg0.getKeyChar()!='.'){			
-				arg0.consume();		
-			}	
-		}
-		else if (arg0.getSource()==txtAbrev){
-			if(!Character.isLetter(arg0.getKeyChar()) && arg0.getKeyChar()!=' ' && arg0.getKeyChar()!='.'){			
-				arg0.consume();		
-			}	
-		}
-	}	
+		
 	void tamañoColumnas(){
 		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
 		modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);

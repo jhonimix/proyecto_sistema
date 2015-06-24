@@ -1,3 +1,4 @@
-1,Sistemas,Soporte Técnico,Area Sistemas, Area de Sistemas y Informatica,1
-2,RR.HH,Personal,Area RR.HH, Area de Recursos Humanos,1
-3,Finazas,Contabilidad,Area Contabilidad, Area de Recursos Contables,1
+1,Sistemas,Soporte Técnico,Area Sistemas,Area de Sistemas y Informatica,1
+2,RR.HH,Personal,Area RR.HH,Area de Recursos Humanos,1
+3,Finazas,Contabilidad,Area Contabilidad,Area de Recursos Contables,1
+4,Logística,El Producto debe llegar en perfecto estado al cliente.,Area Logistica,Area de Logística y Almacén,1

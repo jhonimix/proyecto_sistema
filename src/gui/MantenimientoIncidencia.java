@@ -38,12 +38,17 @@ import java.awt.Toolkit;
 
 public class MantenimientoIncidencia extends JDialog implements ActionListener, MouseListener,KeyListener{
 	
-	//DECLARAMOS ATRIBUTOS GLOBALES CREAMOS EL ARRAY		
-	ArrayTipoIncidencia e = new ArrayTipoIncidencia();		
+	/*------------------------------
+	 * DECLARAMOS VARIABLES GLOBALES
+	 * -----------------------------*/
+	/*------------------------------*/
+	
+	ArrayTipoIncidencia e = new ArrayTipoIncidencia();	
+	
 	DefaultTableModel tabla = new DefaultTableModel();	
-
 	Estado obje = new Estado();
-		
+
+	/*------------------------------*/
 	private JTextField txtCodigo;
 	private JTextField txtDescripcion;
 	private JTextField txtAbrev;
@@ -187,91 +192,9 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		cboEstado.addItem(obje.getNombre1());
 	}
 
-
-	
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub		
-	}
-
-
-	
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub		
-	}
-
-
-	
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==txtDescripcion){
-			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-				e.consume();		
-			}	
-		}
-		else if (e.getSource()==txtAbrev){
-			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
-				e.consume();		
-			}	
-		}
-	}
-
-	
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		int fila = tablaTipoIncidencia.getSelectedRow();
-		llenarInputs(fila);
-	}
-
-
-	
-	public void mouseEntered(MouseEvent e) {// TODO Auto-generated method stub		
-	}
-
-
-	
-	public void mouseExited(MouseEvent e) {// TODO Auto-generated method stub		
-	}
-
-
-	
-	public void mousePressed(MouseEvent e) {// TODO Auto-generated method stub		
-	}
-
-
-	
-	public void mouseReleased(MouseEvent e) {// TODO Auto-generated method stub		
-	}
-
-
-	
-	public void actionPerformed(ActionEvent a) {
-		// TODO Auto-generated method stub
-		if (a.getSource() == btnRegistrar) {
-			if(getDescripcion().equals("") || getAbrev().equals("") || getEstado()==-1){
-				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
-				return;
-			}
-			Registrar();
-			limpiar();
-		} else if (a.getSource() == btnModificar) {
-			if(getDescripcion().equals("") || getAbrev().equals("") || getEstado()==-1){
-				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
-				return;
-			}
-			Modificar();
-			limpiar();
-		} else if (a.getSource() == btnBuscar) {
-			Buscar();
-		} else if (a.getSource() == btnEliminar) {
-			Eliminar();
-			limpiar();
-		} else if (a.getSource() == btnNuevo) {
-			limpiar();
-			setCodigo("" + e.GeneraCodigo());
-		}
-	}
-
-	// METODOS PARA LOS INPUTS DE LOS FORMULARIOS
+	/*-------------------------------------
+	 * 		METODOS GET/SET DE LOS TEXTBOX
+	 * -----------------------------------*/	
 
 	public int getCodigo() {
 		return Integer.parseInt(txtCodigo.getText());
@@ -304,9 +227,102 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 	public void setEstado(int cboEstado) {
 		this.cboEstado.setSelectedIndex(cboEstado);
 	}
+	
+	/*----------------------------------
+	 * 	VALIDACIONES PARA LOS TEXTBOX
+	 * --------------------------------*/
+	
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub		
+	}
 
-	// ------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------
+
+	
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub		
+	}
+
+
+	
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==txtDescripcion){
+			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+				e.consume();		
+			}	
+		}
+		else if (e.getSource()==txtAbrev){
+			if(!Character.isLetter(e.getKeyChar()) && e.getKeyChar()!=' ' && e.getKeyChar()!='.'){			
+				e.consume();		
+			}	
+		}
+	}
+	
+	/*----------------------------------
+	 * 		ACCIONES PARA LA TABLA
+	 * --------------------------------*/	
+	
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int fila = tablaTipoIncidencia.getSelectedRow();
+		llenarInputs(fila);
+	}
+
+
+	
+	public void mouseEntered(MouseEvent e) {// TODO Auto-generated method stub		
+	}
+
+
+	
+	public void mouseExited(MouseEvent e) {// TODO Auto-generated method stub		
+	}
+
+
+	
+	public void mousePressed(MouseEvent e) {// TODO Auto-generated method stub		
+	}
+
+
+	
+	public void mouseReleased(MouseEvent e) {// TODO Auto-generated method stub		
+	}
+
+	/*----------------------------------
+	 * 		ACCIONES PARA LOS BOTONES
+	 * --------------------------------*/
+	
+	public void actionPerformed(ActionEvent a) {
+		// TODO Auto-generated method stub
+		if (a.getSource() == btnRegistrar) {
+			if(getDescripcion().equals("") || getAbrev().equals("") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;
+			}
+			Registrar();
+			limpiar();
+		} else if (a.getSource() == btnModificar) {
+			if(getDescripcion().equals("") || getAbrev().equals("") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				return;
+			}
+			Modificar();
+			limpiar();
+		} else if (a.getSource() == btnBuscar) {
+			Buscar();
+		} else if (a.getSource() == btnEliminar) {
+			Eliminar();
+			limpiar();
+		} else if (a.getSource() == btnNuevo) {
+			limpiar();
+			setCodigo("" + e.GeneraCodigo());
+		}
+	}
+	
+	/*------------------------------------------------------------------------------
+	*-------------------------------------------------------------------------------
+	*-------------------------------------------------------------------------------*/
+	
 	public void Registrar() {
 		TipoIncidencia x = e.buscar(getCodigo());
 		if (x == null) {
@@ -379,7 +395,9 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 
 	}
 
-	// METODOS PARA EL FORMULARIO
+	/*------------------------------------------------------------------------------
+	*-------------------- METODOS PARA EL FORMULARIO---------------------------------
+	*-------------------------------------------------------------------------------*/
 
 	public void llenarTabla() {
 		tabla.addRow(new Object[] { getCodigo(), getDescripcion(), getAbrev(),
@@ -399,7 +417,10 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		tablaTipoIncidencia.setModel(tabla);
 	}
 
-	// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
+	/*------------------------------------------------------------------------------
+	*---------RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA------------
+	*-------------------------------------------------------------------------------*/
+	
 	public void llenarInputs(int fila) {
 		setCodigo(tabla.getValueAt(fila, 0).toString());
 		TipoIncidencia x = e.buscar(getCodigo());

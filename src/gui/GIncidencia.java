@@ -27,6 +27,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -53,11 +54,15 @@ import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFormattedTextField;
+
 public class GIncidencia extends JDialog implements ActionListener,KeyListener{	
 	
 	/*------------------------------
 	 * DECLARAMOS VARIABLES GLOBALES
 	 * -----------------------------*/
+	/*------------------------------*/
+	
 	ArrayIncidencia inc = new ArrayIncidencia();
 	ArrayUsuario usuar = new ArrayUsuario();
 	ArrayEspecialista espec = new ArrayEspecialista();
@@ -84,8 +89,6 @@ public class GIncidencia extends JDialog implements ActionListener,KeyListener{
 	private JTextField txtTiempoEstimado;
 	private JTextField txtTiempoReal;
 	private JTextField txtFecRegistro;
-	private JTextField txtFecInicio;
-	private JTextField txtFecFinal;
 	private JTextArea txtIncidencia;
 	private JTextArea txtDescripcion;
 	private JTextArea txtObservacion;
@@ -93,6 +96,8 @@ public class GIncidencia extends JDialog implements ActionListener,KeyListener{
 	private JComboBox cboEspecialista;
 	private JComboBox cboEstado;
 	private JTable TablaIncidencias;
+	private JFormattedTextField txtFecInicio;
+	private JFormattedTextField txtFecFinal;
 	
 	public void columnas() {
 		tabla.addColumn("Codigo de Inc.");
@@ -319,26 +324,34 @@ public class GIncidencia extends JDialog implements ActionListener,KeyListener{
 		lblFechaDeInicio.setBounds(10, 393, 188, 14);
 		panel.add(lblFechaDeInicio);
 		
-		txtFecInicio = new JTextField();
-		txtFecInicio.addKeyListener(this);
-		txtFecInicio.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtFecInicio.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtFecInicio.setColumns(10);
-		txtFecInicio.setBounds(209, 390, 100, 17);
-		panel.add(txtFecInicio);
+		try {
+			MaskFormatter mascara = new MaskFormatter("##-##-####");
+			mascara.setPlaceholderCharacter(' ');
+			txtFecInicio = new JFormattedTextField(mascara);
+			txtFecInicio.setHorizontalAlignment(SwingConstants.RIGHT);
+			txtFecInicio.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			txtFecInicio.setBounds(215, 390, 100, 17);
+			panel.add(txtFecInicio);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		JLabel lblFechaDeFin = new JLabel("FECHA FINAL DE ATENCION:");
 		lblFechaDeFin.setForeground(Color.WHITE);
 		lblFechaDeFin.setBounds(10, 421, 172, 14);
 		panel.add(lblFechaDeFin);
 		
-		txtFecFinal = new JTextField();
-		txtFecFinal.addKeyListener(this);
-		txtFecFinal.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtFecFinal.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtFecFinal.setColumns(10);
-		txtFecFinal.setBounds(209, 418, 100, 17);
-		panel.add(txtFecFinal);
+		try {
+			MaskFormatter mascara = new MaskFormatter("##-##-####");
+			mascara.setPlaceholderCharacter(' ');
+			txtFecFinal = new JFormattedTextField(mascara);
+			txtFecFinal.setHorizontalAlignment(SwingConstants.RIGHT);
+			txtFecFinal.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			txtFecFinal.setBounds(215, 418, 100, 17);
+			panel.add(txtFecFinal);			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		JLabel lblEstado = new JLabel("ESTADO:");
 		lblEstado.setForeground(Color.WHITE);
@@ -433,14 +446,6 @@ public class GIncidencia extends JDialog implements ActionListener,KeyListener{
 			if (!Character.isLetter(e.getKeyChar())	&& e.getKeyChar() != ' ' && e.getKeyChar() != '.')
 				e.consume();
 		}
-		else if (e.getSource()==txtFecFinal) {
-			if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-')
-				e.consume();
-		}
-		else if (e.getSource()==txtFecInicio) {
-			if(!Character.isDigit(e.getKeyChar()) && e.getKeyChar()!='-')
-				e.consume();
-		}
 		else if (e.getSource()==txtTiempoReal) {
 			if(!Character.isDigit(e.getKeyChar()))
 				e.consume();
@@ -449,7 +454,7 @@ public class GIncidencia extends JDialog implements ActionListener,KeyListener{
 			if(!Character.isDigit(e.getKeyChar()))
 				e.consume();
 		}
-	}
+	}	
 	
 	/*-------------------------
 	 * METODOS DE ACCION	  * 
@@ -660,8 +665,8 @@ public class GIncidencia extends JDialog implements ActionListener,KeyListener{
 		}
 		if (e.getSource()==btnRegistrar) {
 			if (getCodUsu()==-1 || getCodEsp()==-1 || getCodTipo()==-1 || getDescripcion().equals("") || getObservacion().equals("")
-				|| txtTiempoEstimado.equals("") || txtTiempoReal.equals("") || getFecRegistro().equals("") || getFecInicio().equals("")
-				|| getFecFinal().equals("") || getEstado() == -1) {
+				|| txtTiempoEstimado.equals("") || txtTiempoReal.equals("") || getFecRegistro().equals("") || getFecInicio().equals("  -  -    ")
+				|| getFecFinal().equals("  -  -    ") || getEstado() == -1) {
 				JOptionPane.showMessageDialog(null, "Faltan Ingresar Datos ", "System Error", 0);
 				return;
 			}
@@ -669,8 +674,8 @@ public class GIncidencia extends JDialog implements ActionListener,KeyListener{
 		}
 		if (e.getSource()==btnModificar) {
 			if (getCodUsu()==-1 || getCodEsp()==-1 || getCodTipo()==-1 || getDescripcion().equals("") || getObservacion().equals("")
-				|| txtTiempoEstimado.equals("") || txtTiempoReal.equals("") || getFecRegistro().equals("") || getFecInicio().equals("")
-				|| getFecFinal().equals("") || getEstado() == -1) {
+				|| txtTiempoEstimado.equals("") || txtTiempoReal.equals("") || getFecRegistro().equals("") || getFecInicio().equals("  -  -    ")
+				|| getFecFinal().equals("  -  -    ") || getEstado() == -1) {
 				JOptionPane.showMessageDialog(null, "Faltan Ingresar Datos ", "System Error", 0);
 				return;
 			}
@@ -769,8 +774,8 @@ public class GIncidencia extends JDialog implements ActionListener,KeyListener{
 			setObservacion("");
 			setTiempoEstimado("");
 			setTiempoReal("");
-			setFecInicio("");
-			setFecFinal("");
+			setFecInicio("  -  -    ");
+			setFecFinal("  -  -    ");
 			setEstado(0);
 			txtIncidencia.setText("");
 		}

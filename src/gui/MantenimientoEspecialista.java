@@ -2,7 +2,6 @@ package gui;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JViewport;
@@ -23,6 +22,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JTable;
 
 import clases.Estado;
@@ -34,28 +34,33 @@ import java.util.ArrayList;
 import javax.swing.JSeparator;
 import javax.swing.border.SoftBevelBorder;
 
-import java.awt.event.KeyAdapter;
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
 
-import java.awt.Window.Type;
 import java.awt.Toolkit;
+
+import javax.swing.JFormattedTextField;
 
 public class MantenimientoEspecialista extends JDialog implements ActionListener,MouseListener,KeyListener{
 	
-	//DECLARAMOS ATRIBUTOS GLOBALES CREAMOS EL ARRAY
-	ArrayEspecialista d = new ArrayEspecialista();
-	DefaultTableModel tabla = new DefaultTableModel();
+	/*------------------------------
+	 * DECLARAMOS VARIABLES GLOBALES
+	 * -----------------------------*/
+	/*------------------------------*/
 
+	ArrayEspecialista d = new ArrayEspecialista();
+	
+	DefaultTableModel tabla = new DefaultTableModel();
 	Estado obje = new Estado();
+		
+	/*------------------------------*/
 	
 	private JTextField txtCodigo;
 	private JTextField txtNombres;
 	private JTextField txtApellidos;
 	private JTextField txtEspecialidad;
 	private JTextField txtAnexo;
-	private JTextField txtFecha;
 	private JTable TablaEspecialista;
 	private JButton btnNuevo;
 	private JButton btnRegistrar;
@@ -66,6 +71,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 	private JSeparator separator;
 	private JLabel mensaje1;
 	private JLabel lblmensaje01;
+	private JFormattedTextField txtFecha;
 	
 	public void campos() {
 		tabla.addColumn("Codigo");
@@ -96,6 +102,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 	 * Create the dialog.
 	 */
 	public MantenimientoEspecialista() {
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MantenimientoEspecialista.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
 		setResizable(false);
 		setType(Type.POPUP);
@@ -110,23 +117,23 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		getContentPane().add(mensaje1);
 		
 		JLabel lblCodigo = new JLabel("Codigo :");
-		lblCodigo.setBounds(26, 62, 64, 22);
+		lblCodigo.setBounds(26, 62, 85, 22);
 		getContentPane().add(lblCodigo);
 		
 		JLabel lblNombres = new JLabel("Nombres :");
-		lblNombres.setBounds(26, 108, 64, 22);
+		lblNombres.setBounds(26, 108, 85, 22);
 		getContentPane().add(lblNombres);
 		
 		JLabel lblApellidos = new JLabel("Apellidos :");
-		lblApellidos.setBounds(26, 141, 59, 31);
+		lblApellidos.setBounds(26, 141, 85, 31);
 		getContentPane().add(lblApellidos);
 		
 		JLabel lblEspecialidad = new JLabel("Especialidad :");
-		lblEspecialidad.setBounds(26, 183, 85, 22);
+		lblEspecialidad.setBounds(26, 183, 95, 22);
 		getContentPane().add(lblEspecialidad);
 		
 		JLabel lblAnexo = new JLabel("Anexo :");
-		lblAnexo.setBounds(26, 216, 64, 31);
+		lblAnexo.setBounds(26, 216, 85, 31);
 		getContentPane().add(lblAnexo);
 		
 		JLabel lblFechaDeIngreso = new JLabel("Fecha de Ingreso: ");
@@ -134,7 +141,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		getContentPane().add(lblFechaDeIngreso);
 		
 		JLabel lblEstado = new JLabel("Estado :");
-		lblEstado.setBounds(289, 216, 64, 31);
+		lblEstado.setBounds(289, 216, 86, 31);
 		getContentPane().add(lblEstado);
 		
 		JLabel lblMantenimientoEspecialista = new JLabel("MANTENIMIENTO ESPECIALISTAS");
@@ -198,11 +205,18 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		txtAnexo.setBounds(100, 221, 112, 20);
 		getContentPane().add(txtAnexo);
 		
-		txtFecha = new JTextField();
-		txtFecha.addKeyListener(this);
-		txtFecha.setColumns(10);
-		txtFecha.setBounds(398, 184, 148, 20);
-		getContentPane().add(txtFecha);
+		try {
+			MaskFormatter mascara = new MaskFormatter("##-##-####");
+			mascara.setPlaceholderCharacter(' ');
+			txtFecha = new JFormattedTextField(mascara);
+			txtFecha.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			txtFecha.setBounds(398, 184, 89, 20);
+			getContentPane().add(txtFecha);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		
 		JScrollPane scrollPane = new JScrollPane(TablaEspecialista);
 		JViewport viewport = new JViewport();
@@ -242,117 +256,11 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		cboEstado.addItem(obje.getNombre0());
 		cboEstado.addItem(obje.getNombre1());
 	}
-
 	
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
-
+	/*-------------------------------------
+	 * 		METODOS GET/SET DE LOS TEXTBOX
+	 * -----------------------------------*/
 	
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-		if (e.getSource() == txtNombres) {
-			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
-				e.consume();
-			}
-		} else if (e.getSource() == txtApellidos) {
-			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
-				e.consume();
-			}
-		} else if (e.getSource() == txtEspecialidad) {
-			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
-				e.consume();
-			}
-		} else if (e.getSource() == txtAnexo) {
-			if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '*' || txtAnexo.getText().length()==7) {
-				e.consume();
-			}
-		} else if (e.getSource() == txtFecha) {
-			if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '-') {
-				e.consume();
-			}
-			if (txtFecha.getText().length() == 10) {
-				mensaje1.setVisible(true);
-				lblmensaje01.setVisible(true);
-				e.consume();
-			}
-		}
-	}
-	
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		int fila = TablaEspecialista.getSelectedRow();
-		llenarInputs(fila);
-	}
-
-	
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==btnRegistrar){
-			if(getNombres().equals("") || getApellidos().equals("") || getEspecialidad().equals("") ||
-			   getAnexo().equals("") || getFecha().equals("") || getEstado()==-1){
-				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
-				return;
-			}
-			Registrar();
-			limpiar();
-		}
-		else if(e.getSource()==btnModificar){
-			if(getNombres().equals("") || getApellidos().equals("") || getEspecialidad().equals("") ||
-			   getAnexo().equals("") || getFecha().equals("") || getEstado()==-1){
-				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
-				return;					
-			}
-			Modificar();
-			limpiar();
-		}
-		else if(e.getSource()==btnBuscar){
-			Buscar();
-		}
-		else if(e.getSource()==btnEliminar){
-			Eliminar();
-			limpiar();
-		}
-		else if(e.getSource()==btnNuevo){
-			limpiar();
-			setCodigo(""+d.GeneraCodigo());
-			mensaje1.setVisible(false);
-			lblmensaje01.setVisible(false);
-			
-		}
-	}
-
-	// METODOS GET/SET DE LOS TXTBOX
 	public int getCodigo() {
 		return Integer.parseInt(txtCodigo.getText());
 	}
@@ -409,8 +317,127 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		this.cboEstado.setSelectedIndex(cboEstado);
 	}
 	
-	//------------------------------------------------------------------------------
-	//------------------------------------------------------------------------------
+	/*----------------------------------
+	 * 	VALIDACIONES PARA LOS TEXTBOX
+	 * --------------------------------*/
+	
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+		if (e.getSource() == txtNombres) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
+				e.consume();
+			}
+		} 
+		if (e.getSource() == txtApellidos) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
+				e.consume();
+			}
+		} 
+		if (e.getSource() == txtEspecialidad) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ' && e.getKeyChar() != '.') {
+				e.consume();
+			}
+		} 
+		if (e.getSource() == txtAnexo) {
+			if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '*' || getAnexo().length()==7) {
+				e.consume();
+			}
+		}
+		
+	}
+	
+	/*----------------------------------
+	 * 		ACCIONES PARA LA TABLA
+	 * --------------------------------*/	
+	
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int fila = TablaEspecialista.getSelectedRow();
+		llenarInputs(fila);
+	}
+
+	
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/*----------------------------------
+	 * 		ACCIONES PARA LOS BOTONES
+	 * --------------------------------*/
+	
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==btnRegistrar){
+			if(getNombres().equals("") || getApellidos().equals("") || getEspecialidad().equals("") ||
+			   getAnexo().equals("") || getFecha().equals("  -  -    ") || getEstado()==-1){
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				mensaje1.setVisible(true);
+				return;
+			}
+			Registrar();
+			limpiar();
+		}
+		else if(e.getSource()==btnModificar){
+			if(getNombres().equals("") || getApellidos().equals("") || getEspecialidad().equals("") ||
+			   getAnexo().equals("") || getFecha().equals("  -  -    ") || getEstado()==-1){				
+				JOptionPane.showMessageDialog(null,"Faltan Ingresar Datos ","System Error",0);
+				mensaje1.setVisible(true);
+				return;
+			}
+			Modificar();
+			limpiar();
+		}
+		else if(e.getSource()==btnBuscar){
+			Buscar();
+		}
+		else if(e.getSource()==btnEliminar){
+			Eliminar();
+			limpiar();
+		}
+		else if(e.getSource()==btnNuevo){
+			limpiar();
+			setCodigo(""+d.GeneraCodigo());
+			mensaje1.setVisible(false);
+			lblmensaje01.setVisible(false);
+			
+		}
+	}
+	
+	
+	
+	/*------------------------------------------------------------------------------
+	*-------------------------------------------------------------------------------
+	*-------------------------------------------------------------------------------*/
 	public void Registrar(){
 		Especialista x = d.buscar(getCodigo());
 		if (x == null) {
@@ -480,7 +507,9 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		
 	}
 	
-	// METODOS PARA EL FORMULARIO
+	/*------------------------------------------------------------------------------
+	*-------------------- METODOS PARA EL FORMULARIO---------------------------------
+	*-------------------------------------------------------------------------------*/
 
 	public void llenarTabla() {
 		tabla.addRow(new Object[] { getCodigo(), getNombres(), getApellidos(),
@@ -500,8 +529,11 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		}
 		TablaEspecialista.setModel(tabla);
 	}
-
-	// RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA
+	
+	/*------------------------------------------------------------------------------
+	*---------RELLENAR LOS INPUTS CON LOS DATOS DE CADA FINA DE LA TABLA------------
+	*-------------------------------------------------------------------------------*/
+	
 	public void llenarInputs(int fila) {
 		setCodigo(tabla.getValueAt(fila, 0).toString());
 		Especialista x = d.buscar(getCodigo());

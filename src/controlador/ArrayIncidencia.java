@@ -14,6 +14,8 @@ public class ArrayIncidencia {
 	//CREAMOS NUESTRA VARIABLE ARRAYLIST
 	ArrayList<Incidencia> incidencia;
 	
+	SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
+	
 	public ArrayList<Incidencia> ListarIncidencias() {
 		return incidencia;
 	}
@@ -110,8 +112,6 @@ public class ArrayIncidencia {
 			e.printStackTrace();
 		}
 	}
-	
-	SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
 	
 	//UN METODO QUE RETORNA LA FECHA DE LA ULTIMA INCIDENCIAS REGISTRADA
 	public String ultIncidencia() {
