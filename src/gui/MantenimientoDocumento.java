@@ -39,8 +39,6 @@ import java.util.ArrayList;
 import entidades.TipoDocumento;
 import controlador.ArrayDocumento;
 import clases.Estado;
-import clases.principalMetodos;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import javax.swing.border.SoftBevelBorder;

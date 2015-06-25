@@ -25,6 +25,7 @@ import entidades.TipoDocumento;
 import entidades.Usuario;
 import clases.Estado;
 import clases.ValidarEmail;
+import clases.general;
 import controlador.ArrayArea;
 import controlador.ArrayDocumento;
 import controlador.ArrayUsuario;
@@ -89,10 +90,8 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 	private JButton btnNuevo;
 	private JButton btnRegistrar;
 	private JTable tablaUsuarios;
-	private JLabel lblNewLabel;
 	private JButton btnBuscar;
 	private JComboBox cboDocUsu,cboAreaUsu,cboStatusUsu;
-	private JSeparator separator;
 	private JLabel mensaje1;
 
 	public void campos() {
@@ -130,36 +129,37 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		setType(Type.POPUP);
 		setTitle("Mantenimiento de Usuario");
 
-		setBounds(100, 100, 981, 711);
+		setBounds(100, 100, 780, 711);
 		getContentPane().setLayout(null);
 		
 		mensaje1 = new JLabel("Formato de Fecha \"dd-MM-yyyyy\"");
+		mensaje1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		mensaje1.setIcon(new ImageIcon(MantenimientoUsuarios.class.getResource("/com/sun/deploy/uitoolkit/impl/fx/ui/resources/image/graybox_error.png")));
 		mensaje1.setForeground(Color.RED);
-		mensaje1.setBounds(483, 216, 211, 25);
+		mensaje1.setBounds(582, 280, 182, 25);
 		getContentPane().add(mensaje1);
 		mensaje1.setVisible(false);
 
 		lblCodigo = new JLabel("Codigo de Usuario :");
-		lblCodigo.setBounds(10, 90, 130, 25);
+		lblCodigo.setBounds(10, 172, 130, 25);
 		getContentPane().add(lblCodigo);
 
 		lblNombres = new JLabel("Nombres :");
-		lblNombres.setBounds(10, 126, 130, 25);
+		lblNombres.setBounds(10, 208, 130, 25);
 		getContentPane().add(lblNombres);
 
 		lblApellidos = new JLabel("Apellidos :");
-		lblApellidos.setBounds(10, 162, 130, 25);
+		lblApellidos.setBounds(10, 244, 130, 25);
 		getContentPane().add(lblApellidos);
 
 		lblCodigoDoc = new JLabel("Codigo de Tipo Documento :");
-		lblCodigoDoc.setBounds(10, 198, 157, 25);
+		lblCodigoDoc.setBounds(10, 280, 157, 25);
 		getContentPane().add(lblCodigoDoc);
 
 		txtNombres = new JTextField();
 		txtNombres.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtNombres.addKeyListener(this);
-		txtNombres.setBounds(177, 126, 157, 25);
+		txtNombres.setBounds(177, 208, 157, 25);
 		getContentPane().add(txtNombres);
 		txtNombres.setColumns(10);
 
@@ -167,7 +167,7 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtApellidos.addKeyListener(this);
 		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(177, 162, 157, 25);
+		txtApellidos.setBounds(177, 244, 157, 25);
 		getContentPane().add(txtApellidos);
 
 		txtCodigo = new JTextField();
@@ -175,30 +175,30 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		txtCodigo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(178, 90, 50, 25);
+		txtCodigo.setBounds(178, 172, 50, 25);
 		getContentPane().add(txtCodigo);
 
 		lblDocumentoDeIndentidad = new JLabel("Documento de Indentidad :");
-		lblDocumentoDeIndentidad.setBounds(10, 234, 168, 25);
+		lblDocumentoDeIndentidad.setBounds(10, 316, 168, 25);
 		getContentPane().add(lblDocumentoDeIndentidad);
 
 		lblArea = new JLabel("Area :");
-		lblArea.setBounds(367, 90, 89, 25);
+		lblArea.setBounds(367, 172, 89, 25);
 		getContentPane().add(lblArea);
 
 		lblCorreo = new JLabel("Correo :");
-		lblCorreo.setBounds(367, 126, 97, 25);
+		lblCorreo.setBounds(367, 208, 97, 25);
 		getContentPane().add(lblCorreo);
 
 		lblTelfono = new JLabel("Telefono :");
-		lblTelfono.setBounds(367, 162, 97, 25);
+		lblTelfono.setBounds(367, 244, 97, 25);
 		getContentPane().add(lblTelfono);
 
 		txtDocumento = new JTextField();
 		txtDocumento.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtDocumento.addKeyListener(this);
 		txtDocumento.setColumns(10);
-		txtDocumento.setBounds(177, 234, 120, 25);
+		txtDocumento.setBounds(177, 316, 120, 25);
 		getContentPane().add(txtDocumento);
 
 		txtCorreo = new JTextField();
@@ -217,45 +217,48 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		});
 		txtCorreo.addKeyListener(this);
 		txtCorreo.setColumns(10);
-		txtCorreo.setBounds(483, 126, 195, 25);
+		txtCorreo.setBounds(483, 208, 195, 25);
 		getContentPane().add(txtCorreo);
 
 		txtTelefono = new JTextField();
 		txtTelefono.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtTelefono.addKeyListener(this);
 		txtTelefono.setColumns(10);
-		txtTelefono.setBounds(483, 162, 97, 25);
+		txtTelefono.setBounds(483, 244, 97, 25);
 		getContentPane().add(txtTelefono);
 
-		lblMantenimientoDeUsuarios = new JLabel("MANTENIMIENTO DE USUARIOS");
-		lblMantenimientoDeUsuarios.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblMantenimientoDeUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMantenimientoDeUsuarios.setBounds(10, 11, 948, 40);
+		lblMantenimientoDeUsuarios = new JLabel("");
+		lblMantenimientoDeUsuarios.setOpaque(true);
+		//lblMantenimientoDeUsuarios.setFont(new Font("Tahoma", Font.BOLD, 24));
+		//lblMantenimientoDeUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMantenimientoDeUsuarios.setBounds(0, 0, 774, 150);
+		general img = new general();
+		lblMantenimientoDeUsuarios.setIcon(img.getIcon("usuarios.png", "fondos"));
 		getContentPane().add(lblMantenimientoDeUsuarios);
 
 		lblFechaDeIngreso = new JLabel("Fecha de Ingreso :");
-		lblFechaDeIngreso.setBounds(367, 198, 114, 25);
+		lblFechaDeIngreso.setBounds(367, 280, 114, 25);
 		getContentPane().add(lblFechaDeIngreso);
 
 		lblEstado = new JLabel("Estado :");
-		lblEstado.setBounds(367, 234, 89, 25);
+		lblEstado.setBounds(367, 316, 89, 25);
 		getContentPane().add(lblEstado);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(this);
-		btnModificar.setBounds(208, 302, 89, 23);
+		btnModificar.setBounds(208, 361, 89, 23);
 		getContentPane().add(btnModificar);
 
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(406, 302, 89, 23);
+		btnEliminar.setBounds(406, 361, 89, 23);
 		getContentPane().add(btnEliminar);
 
 		scrollPane = new JScrollPane(tablaUsuarios);
 		JViewport viewport = new JViewport();
 		scrollPane.setRowHeaderView(viewport);
 		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		scrollPane.setBounds(10, 359, 955, 271);
+		scrollPane.setBounds(10, 395, 754, 276);
 		getContentPane().add(scrollPane);
 		
 		tablaUsuarios = new JTable(tabla);
@@ -269,51 +272,42 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.addActionListener(this);
-		btnNuevo.setBounds(10, 302, 89, 23);
+		btnNuevo.setBounds(10, 361, 89, 23);
 		getContentPane().add(btnNuevo);
 
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.addActionListener(this);
-		btnRegistrar.setBounds(109, 302, 89, 23);
+		btnRegistrar.setBounds(109, 361, 89, 23);
 		getContentPane().add(btnRegistrar);
-
-		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		lblNewLabel.setBounds(716, 95, 211, 214);
-		getContentPane().add(lblNewLabel);
 
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(this);
-		btnBuscar.setBounds(307, 302, 89, 23);
+		btnBuscar.setBounds(307, 361, 89, 23);
 		getContentPane().add(btnBuscar);
 
 		cboAreaUsu = new JComboBox<String>();
 		cboAreaUsu.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		cboAreaUsu.setBounds(483, 92, 195, 20);
+		cboAreaUsu.setBounds(480, 175, 195, 20);
 		cboAreaUsu.addItem("");
 		getContentPane().add(cboAreaUsu);
 
 		cboStatusUsu = new JComboBox();
 		cboStatusUsu.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		cboStatusUsu.setBounds(483, 236, 140, 20);
+		cboStatusUsu.setBounds(483, 318, 140, 20);
 		getContentPane().add(cboStatusUsu);
 
 		cboDocUsu = new JComboBox<String>();
 		cboDocUsu.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		cboDocUsu.setBounds(177, 200, 120, 20);
+		cboDocUsu.setBounds(177, 282, 120, 20);
 		cboDocUsu.addItem("");
 		getContentPane().add(cboDocUsu);
-		
-		separator = new JSeparator();
-		separator.setBounds(10, 62, 948, 7);
-		getContentPane().add(separator);
 		
 		try {
 			MaskFormatter mascara = new MaskFormatter("##-##-####");
 			mascara.setPlaceholderCharacter(' ');
 			txtFecha = new JFormattedTextField(mascara);
 			txtFecha.setFont(new Font("Tahoma", Font.PLAIN, 13));
-			txtFecha.setBounds(483, 198, 89, 25);
+			txtFecha.setBounds(483, 280, 89, 25);
 			getContentPane().add(txtFecha);
 
 		} catch (Exception e) {
@@ -701,4 +695,5 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		j.setPreferredWidth(100);		
 		j.setCellRenderer(modelocentrar);	
 	}
+	
 }

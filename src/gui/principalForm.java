@@ -17,15 +17,18 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import clases.general;
 import clases.imagenFondo;
 
 import javax.swing.JButton;
+
 import java.awt.Font;
 
 
 public class principalForm extends JFrame implements ActionListener {	
 	
 	gui.loginForm login = new gui.loginForm();
+	general img = new general();
 	
 	Usuario objUsu;
 
@@ -119,7 +122,7 @@ public class principalForm extends JFrame implements ActionListener {
 
 		mnSistema.add(mntmSalir);
 
-		mntmSalir.setIcon(getIcon("exit.png", null));
+		mntmSalir.setIcon(img.getIcon("exit.png", null));
 
 		mnMantenimiento = new JMenu("Mantenimiento");
 		mnPrincipal.add(mnMantenimiento);
@@ -128,27 +131,27 @@ public class principalForm extends JFrame implements ActionListener {
 		mntmUser.addActionListener(this);
 		mnMantenimiento.add(mntmUser);
 
-		mntmUser.setIcon(getIcon("user.png", null));
+		mntmUser.setIcon(img.getIcon("user.png", null));
 
 		mntmArea = new JMenuItem("Area");
 		mntmArea.addActionListener(this);
 		mnMantenimiento.add(mntmArea);
-		mntmArea.setIcon(getIcon("house.png", null));
+		mntmArea.setIcon(img.getIcon("house.png", null));
 
 		mntmTipoIncidencia = new JMenuItem("Tipo de incidencia");
 		mntmTipoIncidencia.addActionListener(this);
 		mnMantenimiento.add(mntmTipoIncidencia);
-		mntmTipoIncidencia.setIcon(getIcon("report_add.png", null));
+		mntmTipoIncidencia.setIcon(img.getIcon("report_add.png", null));
 
 		mntmTipoDocumento = new JMenuItem("Tipo de documento");
 		mntmTipoDocumento.addActionListener(this);
 		mnMantenimiento.add(mntmTipoDocumento);
-		mntmTipoDocumento.setIcon(getIcon("document.png", null));
+		mntmTipoDocumento.setIcon(img.getIcon("document.png", null));
 
 		mntmEspecialista = new JMenuItem("Especialista");
 		mntmEspecialista.addActionListener(this);
 		mnMantenimiento.add(mntmEspecialista);
-		mntmEspecialista.setIcon(getIcon("new.png", null));
+		mntmEspecialista.setIcon(img.getIcon("new.png", null));
 
 		mnIncidencia = new JMenu("Incidencia");
 		mnPrincipal.add(mnIncidencia);
@@ -185,24 +188,8 @@ public class principalForm extends JFrame implements ActionListener {
 
 		mntmAyuda = new JMenuItem("Acerca del programa");
 		mnAyuda.add(mntmAyuda);
-		mntmAyuda.setIcon(getIcon("help.png", null));
+		mntmAyuda.setIcon(img.getIcon("help.png", null));
 	}
-
-	// METODOS PARA SACAR LAS IMAGENES
-
-	public ImageIcon getIcon(String icono, String size) {
-		size = "16";
-		java.net.URL imgUrl = getClass().getResource(
-				"img/" + size + "/" + icono);
-		if (imgUrl != null) {
-			ImageIcon imgIcon = new ImageIcon(imgUrl);
-			return imgIcon;
-		} else {
-			System.out.println("Error no se encontro el archivo " + icono);
-		}
-		return null;
-	}
-
 	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
