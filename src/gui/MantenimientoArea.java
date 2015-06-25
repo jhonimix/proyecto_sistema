@@ -31,6 +31,7 @@ import javax.swing.JTable;
 import clases.Estado;
 import controlador.ArrayArea;
 import entidades.Area;
+import clases.general;
 
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class MantenimientoArea extends JDialog implements ActionListener,MouseLi
 	 * -----------------------------*/
 	/*------------------------------*/
 	ArrayArea b = new ArrayArea();
+	general img = new general();
 	
 	DefaultTableModel tabla = new DefaultTableModel();
 	Estado obje = new Estado();
@@ -96,75 +98,76 @@ public class MantenimientoArea extends JDialog implements ActionListener,MouseLi
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MantenimientoArea.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
 		setResizable(false);		
 		setTitle("Mantenimiento de Areas");
-		setBounds(100, 100, 600, 645);
+		setBounds(100, 100, 650, 645);
 		getContentPane().setLayout(null);
 		
-		JLabel lblMantenimientoDeAreas = new JLabel("MANTENIMIENTO DE AREAS");
-		lblMantenimientoDeAreas.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblMantenimientoDeAreas.setBounds(143, 11, 355, 40);
+		JLabel lblMantenimientoDeAreas = new JLabel("");
+		lblMantenimientoDeAreas.setIcon(img.getIcon("areas.png", "fondos"));
+		//lblMantenimientoDeAreas.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblMantenimientoDeAreas.setBounds(0, 0, 644, 149);
 		getContentPane().add(lblMantenimientoDeAreas);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 55, 561, 2);
+		separator.setBounds(25, 171, 594, 9);
 		getContentPane().add(separator);
 		
 		JLabel lblCodigo = new JLabel("Codigo :");
-		lblCodigo.setBounds(20, 68, 85, 22);
+		lblCodigo.setBounds(25, 191, 85, 22);
 		getContentPane().add(lblCodigo);
 		
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(115, 68, 102, 20);
+		txtCodigo.setBounds(120, 191, 102, 20);
 		getContentPane().add(txtCodigo);
 		
 		JLabel lblNombre = new JLabel("Nombre :");
-		lblNombre.setBounds(20, 101, 85, 22);
+		lblNombre.setBounds(25, 224, 85, 22);
 		getContentPane().add(lblNombre);
 		
 		txtNombre = new JTextField();
 		txtNombre.addKeyListener(this);
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(115, 101, 278, 20);
+		txtNombre.setBounds(120, 224, 278, 20);
 		getContentPane().add(txtNombre);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion :");
-		lblDescripcion.setBounds(20, 134, 85, 31);
+		lblDescripcion.setBounds(25, 257, 85, 31);
 		getContentPane().add(lblDescripcion);
 		
 		txtDescripcion = new JTextField();
 		txtDescripcion.addKeyListener(this);
 		txtDescripcion.setColumns(10);
-		txtDescripcion.setBounds(115, 138, 278, 20);
+		txtDescripcion.setBounds(120, 261, 278, 20);
 		getContentPane().add(txtDescripcion);
 		
 		JLabel lblNombreCorto = new JLabel("Nombre Corto :");
-		lblNombreCorto.setBounds(20, 176, 95, 22);
+		lblNombreCorto.setBounds(25, 299, 95, 22);
 		getContentPane().add(lblNombreCorto);
 		
 		txtNomCorto = new JTextField();
 		txtNomCorto.addKeyListener(this);
 		txtNomCorto.setColumns(10);
-		txtNomCorto.setBounds(115, 176, 112, 20);
+		txtNomCorto.setBounds(120, 299, 112, 20);
 		getContentPane().add(txtNomCorto);
 		
 		JLabel lblNombreLargo = new JLabel("Nombre Largo :");
-		lblNombreLargo.setBounds(20, 209, 112, 31);
+		lblNombreLargo.setBounds(250, 292, 102, 31);
 		getContentPane().add(lblNombreLargo);
 		
 		txtNomLargo = new JTextField();
 		txtNomLargo.addKeyListener(this);
 		txtNomLargo.setColumns(10);
-		txtNomLargo.setBounds(115, 213, 278, 20);
+		txtNomLargo.setBounds(356, 300, 252, 20);
 		getContentPane().add(txtNomLargo);
 		
 		JLabel lblEstado = new JLabel("Estado :");
-		lblEstado.setBounds(20, 244, 86, 31);
+		lblEstado.setBounds(418, 257, 59, 31);
 		getContentPane().add(lblEstado);
 		
 		cboEstado = new JComboBox();
-		cboEstado.setBounds(115, 249, 149, 20);
+		cboEstado.setBounds(482, 262, 126, 20);
 		getContentPane().add(cboEstado);
 		
 		// COMBO ESTADO
@@ -173,34 +176,34 @@ public class MantenimientoArea extends JDialog implements ActionListener,MouseLi
 		
 		btnNuevo = new JButton("NUEVO");
 		btnNuevo.addActionListener(this);
-		btnNuevo.setBounds(20, 286, 89, 23);
+		btnNuevo.setBounds(35, 346, 89, 23);
 		getContentPane().add(btnNuevo);
 		
 		btnRegistrar = new JButton("REGISTRAR");
 		btnRegistrar.addActionListener(this);
-		btnRegistrar.setBounds(123, 286, 112, 23);
+		btnRegistrar.setBounds(138, 346, 112, 23);
 		getContentPane().add(btnRegistrar);
 		
 		btnModificar = new JButton("MODIFICAR");
 		btnModificar.addActionListener(this);
-		btnModificar.setBounds(245, 286, 113, 23);
+		btnModificar.setBounds(260, 346, 113, 23);
 		getContentPane().add(btnModificar);
 		
 		btnBuscar = new JButton("BUSCAR");
 		btnBuscar.addActionListener(this);
-		btnBuscar.setBounds(368, 286, 89, 23);
+		btnBuscar.setBounds(383, 346, 89, 23);
 		getContentPane().add(btnBuscar);
 		
 		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(467, 286, 89, 23);
+		btnEliminar.setBounds(482, 346, 89, 23);
 		getContentPane().add(btnEliminar);
 		
 		JScrollPane scrollPane = new JScrollPane(TablaAreas);
 		JViewport viewport = new JViewport();
 		scrollPane.setRowHeaderView(viewport);
 		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		scrollPane.setBounds(10, 320, 561, 257);
+		scrollPane.setBounds(10, 393, 624, 212);
 		getContentPane().add(scrollPane);
 		
 		TablaAreas = new JTable();

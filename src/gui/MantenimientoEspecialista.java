@@ -26,6 +26,7 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.JTable;
 
 import clases.Estado;
+import clases.general;
 import controlador.ArrayEspecialista;
 import entidades.Especialista;
 
@@ -50,6 +51,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 	/*------------------------------*/
 
 	ArrayEspecialista d = new ArrayEspecialista();
+	general img = new general();
 	
 	DefaultTableModel tabla = new DefaultTableModel();
 	Estado obje = new Estado();
@@ -111,98 +113,99 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		getContentPane().setLayout(null);
 		
 		mensaje1 = new JLabel("Formato de fecha \"dd-MM-yyyy\"");
+		mensaje1.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		mensaje1.setForeground(Color.RED);
-		mensaje1.setBounds(385, 196, 186, 31);
+		mensaje1.setBounds(440, 253, 141, 22);
 		mensaje1.setVisible(false);
 		getContentPane().add(mensaje1);
 		
 		JLabel lblCodigo = new JLabel("Codigo :");
-		lblCodigo.setBounds(26, 62, 85, 22);
+		lblCodigo.setBounds(26, 145, 71, 22);
 		getContentPane().add(lblCodigo);
 		
 		JLabel lblNombres = new JLabel("Nombres :");
-		lblNombres.setBounds(26, 108, 85, 22);
+		lblNombres.setBounds(26, 178, 71, 22);
 		getContentPane().add(lblNombres);
 		
 		JLabel lblApellidos = new JLabel("Apellidos :");
-		lblApellidos.setBounds(26, 141, 85, 31);
+		lblApellidos.setBounds(26, 211, 71, 31);
 		getContentPane().add(lblApellidos);
 		
 		JLabel lblEspecialidad = new JLabel("Especialidad :");
-		lblEspecialidad.setBounds(26, 183, 95, 22);
+		lblEspecialidad.setBounds(26, 253, 85, 22);
 		getContentPane().add(lblEspecialidad);
 		
 		JLabel lblAnexo = new JLabel("Anexo :");
-		lblAnexo.setBounds(26, 216, 85, 31);
+		lblAnexo.setBounds(27, 287, 62, 31);
 		getContentPane().add(lblAnexo);
 		
 		JLabel lblFechaDeIngreso = new JLabel("Fecha de Ingreso: ");
-		lblFechaDeIngreso.setBounds(289, 179, 113, 31);
+		lblFechaDeIngreso.setBounds(237, 249, 103, 31);
 		getContentPane().add(lblFechaDeIngreso);
 		
 		JLabel lblEstado = new JLabel("Estado :");
-		lblEstado.setBounds(289, 216, 86, 31);
+		lblEstado.setBounds(283, 291, 57, 22);
 		getContentPane().add(lblEstado);
 		
-		JLabel lblMantenimientoEspecialista = new JLabel("MANTENIMIENTO ESPECIALISTAS");
-		lblMantenimientoEspecialista.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblMantenimientoEspecialista.setBounds(110, 0, 355, 40);
+		JLabel lblMantenimientoEspecialista = new JLabel("");
+		lblMantenimientoEspecialista.setIcon(img.getIcon("especialista.png", "fondos"));
+		lblMantenimientoEspecialista.setBounds(0, 0, 591, 121);
 		getContentPane().add(lblMantenimientoEspecialista);
 		
 		btnNuevo = new JButton("NUEVO");
 		btnNuevo.addActionListener(this);
-		btnNuevo.setBounds(22, 258, 89, 23);
+		btnNuevo.setBounds(10, 329, 89, 23);
 		getContentPane().add(btnNuevo);
 		
 		btnRegistrar = new JButton("REGISTRAR");
 		btnRegistrar.addActionListener(this);
-		btnRegistrar.setBounds(125, 258, 112, 23);
+		btnRegistrar.setBounds(115, 329, 112, 23);
 		getContentPane().add(btnRegistrar);
 		
 		btnModificar = new JButton("MODIFICAR");
 		btnModificar.addActionListener(this);
-		btnModificar.setBounds(247, 258, 113, 23);
+		btnModificar.setBounds(243, 329, 113, 23);
 		getContentPane().add(btnModificar);
 		
 		btnBuscar = new JButton("BUSCAR");
 		btnBuscar.addActionListener(this);
-		btnBuscar.setBounds(370, 258, 89, 23);
+		btnBuscar.setBounds(372, 329, 89, 23);
 		getContentPane().add(btnBuscar);
 		
 		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(469, 258, 89, 23);
+		btnEliminar.setBounds(477, 329, 89, 23);
 		getContentPane().add(btnEliminar);
 		
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCodigo.setEditable(false);
-		txtCodigo.setBounds(100, 63, 102, 20);
+		txtCodigo.setBounds(107, 146, 57, 20);
 		getContentPane().add(txtCodigo);
 		txtCodigo.setColumns(10);
 		
 		txtNombres = new JTextField();
 		txtNombres.addKeyListener(this);
 		txtNombres.setColumns(10);
-		txtNombres.setBounds(100, 109, 278, 20);
+		txtNombres.setBounds(107, 179, 238, 20);
 		getContentPane().add(txtNombres);
 		
 		txtApellidos = new JTextField();
 		txtApellidos.addKeyListener(this);
 		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(100, 146, 278, 20);
+		txtApellidos.setBounds(110, 216, 238, 20);
 		getContentPane().add(txtApellidos);
 		
 		txtEspecialidad = new JTextField();
 		txtEspecialidad.addKeyListener(this);
 		txtEspecialidad.setColumns(10);
-		txtEspecialidad.setBounds(100, 184, 112, 20);
+		txtEspecialidad.setBounds(115, 254, 112, 20);
 		getContentPane().add(txtEspecialidad);
 		
 		txtAnexo = new JTextField();
 		txtAnexo.addKeyListener(this);
 		txtAnexo.setColumns(10);
-		txtAnexo.setBounds(100, 221, 112, 20);
+		txtAnexo.setBounds(114, 292, 113, 20);
 		getContentPane().add(txtAnexo);
 		
 		try {
@@ -210,7 +213,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 			mascara.setPlaceholderCharacter(' ');
 			txtFecha = new JFormattedTextField(mascara);
 			txtFecha.setFont(new Font("Tahoma", Font.PLAIN, 13));
-			txtFecha.setBounds(398, 184, 89, 20);
+			txtFecha.setBounds(344, 255, 89, 20);
 			getContentPane().add(txtFecha);
 
 		} catch (Exception e) {
@@ -222,7 +225,7 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		JViewport viewport = new JViewport();
 		scrollPane.setRowHeaderView(viewport);
 		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		scrollPane.setBounds(10, 296, 561, 257);
+		scrollPane.setBounds(10, 368, 561, 185);
 		getContentPane().add(scrollPane);
 		
 		TablaEspecialista = new JTable();
@@ -234,16 +237,16 @@ public class MantenimientoEspecialista extends JDialog implements ActionListener
 		mostrarEspecialista();
 		
 		cboEstado = new JComboBox();
-		cboEstado.setBounds(398, 221, 149, 20);
+		cboEstado.setBounds(344, 292, 149, 20);
 		getContentPane().add(cboEstado);
 		
 		JLabel lblFoto = new JLabel("New label");
 		lblFoto.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		lblFoto.setBounds(424, 49, 124, 128);
+		lblFoto.setBounds(446, 145, 97, 97);
 		getContentPane().add(lblFoto);
 		
 		separator = new JSeparator();
-		separator.setBounds(10, 38, 561, 2);
+		separator.setBounds(20, 132, 561, 2);
 		getContentPane().add(separator);
 		
 		lblmensaje01 = new JLabel("");

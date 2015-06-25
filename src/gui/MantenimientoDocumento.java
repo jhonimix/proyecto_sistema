@@ -113,7 +113,7 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		
 		JLabel lblMantenimientoTipoDe = new JLabel("");
 		lblMantenimientoTipoDe.setIcon(img.getIcon("documentos.png", "fondos"));
-		lblMantenimientoTipoDe.setBounds(0, 0, 547, 150);
+		lblMantenimientoTipoDe.setBounds(0, 0, 547, 142);
 		getContentPane().add(lblMantenimientoTipoDe);
 		
 		JLabel lblCodigo = new JLabel("Codigo :");
@@ -202,6 +202,10 @@ public class MantenimientoDocumento extends JDialog implements ActionListener, M
 		//COMBO ESTADO
 		cboEstado.addItem(obje.getNombre0());
 		cboEstado.addItem(obje.getNombre1());
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 151, 526, 8);
+		getContentPane().add(separator);
 	}
 
 	/*-------------------------------------

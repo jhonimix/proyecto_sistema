@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import clases.Estado;
+import clases.general;
 import controlador.ArrayTipoIncidencia;
 import entidades.TipoIncidencia;
 
@@ -43,7 +44,8 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 	 * -----------------------------*/
 	/*------------------------------*/
 	
-	ArrayTipoIncidencia e = new ArrayTipoIncidencia();	
+	ArrayTipoIncidencia e = new ArrayTipoIncidencia();
+	general img = new general();
 	
 	DefaultTableModel tabla = new DefaultTableModel();	
 	Estado obje = new Estado();
@@ -92,62 +94,62 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		setResizable(false);
 		setType(Type.POPUP);
 		setTitle("Mantenimiento de los Tipos de Incidencias");
-		setBounds(100, 100, 542, 534);
+		setBounds(100, 100, 542, 522);
 		getContentPane().setLayout(null);
 		
-		JLabel lblMantenimientoTipoDe = new JLabel("MANTENIMIENTO TIPO DE INCIDENCIA");
-		lblMantenimientoTipoDe.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblMantenimientoTipoDe.setBounds(84, 11, 393, 34);
+		JLabel lblMantenimientoTipoDe = new JLabel("");
+		lblMantenimientoTipoDe.setIcon(img.getIcon("incidencias.png", "fondos"));
+		lblMantenimientoTipoDe.setBounds(0, 0, 536, 150);
 		getContentPane().add(lblMantenimientoTipoDe);
 		
 		JLabel lblCodigo = new JLabel("Codigo :");
 		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCodigo.setBounds(10, 63, 94, 24);
+		lblCodigo.setBounds(20, 172, 84, 24);
 		getContentPane().add(lblCodigo);
 		
 		JLabel lblNewLabel = new JLabel("Descripcion :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setBounds(10, 105, 94, 24);
+		lblNewLabel.setBounds(20, 207, 84, 24);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblAbreviacion = new JLabel("Abreviacion :");
 		lblAbreviacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblAbreviacion.setBounds(10, 140, 94, 32);
+		lblAbreviacion.setBounds(20, 242, 84, 24);
 		getContentPane().add(lblAbreviacion);
 		
 		JLabel lblEstado = new JLabel("Estado :");
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEstado.setBounds(10, 183, 94, 34);
+		lblEstado.setBounds(247, 242, 94, 24);
 		getContentPane().add(lblEstado);
 		
 		txtCodigo = new JTextField();
 		txtCodigo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCodigo.setEditable(false);
-		txtCodigo.setBounds(100, 66, 94, 20);
+		txtCodigo.setBounds(110, 175, 94, 20);
 		getContentPane().add(txtCodigo);
 		txtCodigo.setColumns(10);
 		
 		txtDescripcion = new JTextField();
 		txtDescripcion.addKeyListener(this);
-		txtDescripcion.setBounds(100, 108, 278, 20);
+		txtDescripcion.setBounds(110, 207, 278, 20);
 		getContentPane().add(txtDescripcion);
 		txtDescripcion.setColumns(10);
 		
 		txtAbrev = new JTextField();
 		txtAbrev.addKeyListener(this);
-		txtAbrev.setBounds(100, 147, 127, 20);
+		txtAbrev.setBounds(110, 245, 127, 20);
 		getContentPane().add(txtAbrev);
 		txtAbrev.setColumns(10);
 		
 		cboEstado = new JComboBox();
-		cboEstado.setBounds(100, 191, 127, 20);
+		cboEstado.setBounds(309, 245, 127, 20);
 		getContentPane().add(cboEstado);
 		
 		JScrollPane scrollPane = new JScrollPane(tablaTipoIncidencia);
 		JViewport viewport = new JViewport();
 		scrollPane.setRowHeaderView(viewport);
 		scrollPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		scrollPane.setBounds(10, 237, 516, 243);
+		scrollPane.setBounds(10, 330, 516, 150);
 		getContentPane().add(scrollPane);
 		
 		tablaTipoIncidencia = new JTable(tabla);
@@ -159,32 +161,32 @@ public class MantenimientoIncidencia extends JDialog implements ActionListener, 
 		mostrarTipoIncidencia();
 		
 		btnNuevo = new JButton("Nuevo");
-		btnNuevo.setBounds(422, 63, 94, 31);
+		btnNuevo.setBounds(11, 278, 84, 31);
 		btnNuevo.addActionListener(this);
 		getContentPane().add(btnNuevo);
 		
 		btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setBounds(298, 141, 104, 32);
+		btnRegistrar.setBounds(211, 277, 99, 32);
 		btnRegistrar.addActionListener(this);
 		getContentPane().add(btnRegistrar);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(412, 141, 104, 32);
+		btnModificar.setBounds(106, 277, 94, 32);
 		btnModificar.addActionListener(this);
 		getContentPane().add(btnModificar);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(298, 185, 104, 32);
+		btnBuscar.setBounds(321, 277, 94, 32);
 		btnBuscar.addActionListener(this);
 		getContentPane().add(btnBuscar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(412, 185, 104, 32);
+		btnEliminar.setBounds(426, 277, 94, 32);
 		btnEliminar.addActionListener(this);
 		getContentPane().add(btnEliminar);
 		
 		separator = new JSeparator();
-		separator.setBounds(10, 43, 516, 2);
+		separator.setBounds(10, 161, 516, 2);
 		getContentPane().add(separator);
 		
 		//COMBO ESTADO
