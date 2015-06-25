@@ -117,7 +117,8 @@ public class MantenimientoUsuarios extends JDialog implements ActionListener, Mo
 		try {
 			MantenimientoUsuarios dialog = new MantenimientoUsuarios();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);			
+			dialog.setVisible(true);
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

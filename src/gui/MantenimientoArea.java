@@ -80,6 +80,7 @@ public class MantenimientoArea extends JDialog implements ActionListener,MouseLi
 			MantenimientoArea dialog = new MantenimientoArea();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

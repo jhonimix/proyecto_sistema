@@ -209,20 +209,26 @@ public class principalForm extends JFrame implements ActionListener {
 		else if(obj == mntmUser){
 			MantenimientoUsuarios frmUsuario = new MantenimientoUsuarios();
 			frmUsuario.setVisible(true);
+			frmUsuario.setLocationRelativeTo(null);
 		}	
 		else if(obj==mntmArea){
-			
+			MantenimientoArea frmArea = new MantenimientoArea();
+			frmArea.setVisible(true);
+			frmArea.setLocationRelativeTo(null);
 		}
 		else if (obj == mntmTipoDocumento) {
 			MantenimientoDocumento frmDocumento = new MantenimientoDocumento();
+			frmDocumento.setLocationRelativeTo(null);
 			frmDocumento.setVisible(true);
 		}
 		else if (obj == mntmTipoIncidencia) {
 			MantenimientoIncidencia frmTipoIncidencia = new MantenimientoIncidencia();
+			frmTipoIncidencia.setLocationRelativeTo(null);
 			frmTipoIncidencia.setVisible(true);
 		}
 		else if (obj == mntmEspecialista) {
 			MantenimientoEspecialista frmEspecialista = new MantenimientoEspecialista();
+			frmEspecialista.setLocationRelativeTo(null);
 			frmEspecialista.setVisible(true);
 		}
 		else if (obj == mntmIngreso) {
